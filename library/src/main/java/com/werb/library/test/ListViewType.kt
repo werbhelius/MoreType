@@ -3,6 +3,7 @@ package com.werb.library.test
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
 import com.werb.library.R
@@ -17,20 +18,22 @@ class ListViewType: MoreViewType<String, ListViewType.ListViewHolder>() {
     }
 
     override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): ListViewHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val layout = inflater.inflate(getViewLayout(), parent, false)
+        return ListViewHolder(layout)
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, t: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        holder.bindData(t)
     }
 
-    override fun build(holder: ListViewHolder) {
-        super.build(holder)
-    }
+    class ListViewHolder(itemView: View) : MoreViewHolder(itemView){
 
-    class ListViewHolder(itemView: View?) : MoreViewHolder(itemView){
+        private var button:Button = itemView.findViewById(R.id.button)
 
+        fun bindData(t: String){
+            addOnClickListener(R.id.button)
 
+        }
 
     }
 

@@ -8,14 +8,20 @@ import com.werb.library.MoreViewHolder
  * [MoreAction] action of ViewHolder
  * Created by wanbo on 2017/7/2.
  */
-abstract class MoreAction {
+abstract class MoreAction: Action{
 
-    var listener: MoreClickListener? = null
+    var holder: MoreViewHolder? = null
+    var moreListener: MoreClickListener? = null
 
-    fun setMoreClickListener(listener: MoreClickListener?){
-        this.listener = listener
+    override fun setMoreClickListener(listener: MoreClickListener?) {
+        this.moreListener = listener
     }
 
-    open fun getChildView(viewId: Int) : View? = null
+    override fun buildHolder(holder: MoreViewHolder) {
+        this.holder = holder
+        holder.setActionListener(this)
+    }
+
+    override fun getChildView(viewId: Int): View?  = holder?.getChildView(viewId)
 
 }

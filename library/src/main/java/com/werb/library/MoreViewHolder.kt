@@ -5,9 +5,10 @@ import android.view.View
 import com.werb.library.action.MoreAction
 
 /**
+ * [MoreViewHolder] Base ViewHolder implement Action fun
  * Created by wanbo on 2017/7/2.
  */
-abstract class MoreViewHolder(itemView: View?) : ViewHolder(itemView) {
+abstract class MoreViewHolder(itemView: View) : ViewHolder(itemView) {
 
     private var action: MoreAction? = null
 
@@ -18,14 +19,21 @@ abstract class MoreViewHolder(itemView: View?) : ViewHolder(itemView) {
     }
 
     fun addOnClickListener(viewId: Int) {
-         itemView.findViewById<View>(viewId).setOnClickListener { action?.listener?.onItemClick(it, adapterPosition) }
+         itemView.findViewById<View>(viewId).setOnClickListener { action?.moreListener?.onItemClick(it, adapterPosition) }
+    }
+
+    fun addOnClickListener(view: View) {
+        view.setOnClickListener { action?.moreListener?.onItemClick(it, adapterPosition) }
     }
 
     fun addOnLongClickListener(viewId: Int) {
-        itemView.findViewById<View>(viewId).setOnClickListener { action?.listener?.onItemLongClick(it, adapterPosition) }
+        itemView.findViewById<View>(viewId).setOnClickListener { action?.moreListener?.onItemLongClick(it, adapterPosition) }
+    }
+
+    fun addOnLongClickListener(view: View) {
+        view.setOnClickListener { action?.moreListener?.onItemLongClick(it, adapterPosition) }
     }
 
     fun getChildView(viewId: Int) : View = itemView.findViewById(viewId)
-
 
 }

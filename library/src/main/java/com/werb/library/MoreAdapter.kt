@@ -28,4 +28,6 @@ class MoreAdapter : Adapter<ViewHolder>() {
     override fun getItemViewType(position: Int): Int {
         return super.getItemViewType(position)
     }
+
+
 }
