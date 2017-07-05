@@ -7,11 +7,16 @@ import android.widget.Button
 import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
 import com.werb.library.R
+import kotlin.reflect.KClass
 
 /**
  * Created by wanbo on 2017/7/2.
  */
 class ListViewType: MoreViewType<String, ListViewType.ListViewHolder>() {
+
+    override fun getViewModel(): KClass<out String> {
+        return String::class
+    }
 
     override fun getViewLayout(): Int {
         return R.layout.widget_view_item_test

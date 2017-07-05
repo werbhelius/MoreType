@@ -13,13 +13,13 @@ abstract class MoreAction: Action{
     var holder: MoreViewHolder? = null
     var moreListener: MoreClickListener? = null
 
-    override fun setMoreClickListener(listener: MoreClickListener?) {
-        this.moreListener = listener
-    }
-
     override fun buildHolder(holder: MoreViewHolder) {
         this.holder = holder
         holder.setActionListener(this)
+    }
+
+    override fun setMoreClickListener(listener: MoreClickListener?) {
+        this.moreListener = listener
     }
 
     override fun getChildView(viewId: Int): View?  = holder?.getChildView(viewId)

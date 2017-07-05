@@ -6,6 +6,7 @@ package com.werb.library
  */
 interface MoreLink {
 
-    fun <T, V: MoreViewHolder> register(clazz: Class<Any>, viewType: MoreViewType<T, V>)
+    /** [register]  register viewType when we use */
+    fun <T : Any, V: MoreViewHolder> register(viewType: MoreViewType<T, V>): MoreLink
 
 }
