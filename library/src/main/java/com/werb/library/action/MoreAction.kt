@@ -22,6 +22,4 @@ abstract class MoreAction: Action{
         this.moreListener = listener
     }
 
-    override fun getChildView(viewId: Int): View?  = holder?.getChildView(viewId)
-
 }

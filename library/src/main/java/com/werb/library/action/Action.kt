@@ -13,6 +13,4 @@ interface Action {
 
     fun setMoreClickListener(listener: MoreClickListener?)
 
-    fun getChildView(viewId: Int) : View?
-
 }

@@ -15,7 +15,6 @@ class TextViewType: MoreViewType<String, TextViewType.TextViewHolder>() {
 
     override fun getViewLayout(): Int = R.layout.item_view_string
 
-
     override fun getViewModel(): KClass<String> {
         return String::class
     }

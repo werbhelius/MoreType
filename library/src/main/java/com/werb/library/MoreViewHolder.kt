@@ -32,6 +32,4 @@ abstract class MoreViewHolder(itemView: View) : ViewHolder(itemView) {
         view.setOnClickListener { action?.moreListener?.onItemLongClick(it, adapterPosition) }
     }
 
-    fun getChildView(viewId: Int) : View = itemView.findViewById(viewId)
-
 }
