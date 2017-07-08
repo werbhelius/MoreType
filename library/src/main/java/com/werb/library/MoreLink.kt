@@ -1,5 +1,6 @@
 package com.werb.library
 
+import android.support.v7.widget.RecyclerView
 import kotlin.reflect.KClass
 
 

@@ -1,5 +1,6 @@
 package com.werb.library
 
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.Adapter
 import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.LayoutInflater
@@ -17,14 +18,16 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink {
     private val linkManager: MoreLink = MoreLinkManager()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        return buildViewType(viewType).onCreateViewHolder(LayoutInflater.from(parent?.context), parent as ViewGroup)
+        val moreViewType = buildViewType(viewType)
+        val viewHolder = moreViewType.onCreateViewHolder(LayoutInflater.from(parent?.context), parent as ViewGroup)
+        moreViewType.buildHolder(viewHolder)
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         val any = list[position]
         val attachViewType = attachViewType(any::class)
-        attachViewType.buildHolder(holder as MoreViewHolder)
-        attachViewType.onBindViewHolder(holder, any)
+        attachViewType.onBindViewHolder(holder as MoreViewHolder, any)
     }
 
     fun loadData(data: Any) {
@@ -39,6 +42,11 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink {
             list.add(data)
             notifyItemChanged(list.indexOf(data))
         }
+    }
+
+    fun attachTo(view: RecyclerView): MoreLink{
+        view.adapter = this
+        return this
     }
 
     override fun getItemCount(): Int = list.size
