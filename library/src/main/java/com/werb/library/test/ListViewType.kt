@@ -14,7 +14,7 @@ import kotlin.reflect.KClass
  */
 class ListViewType: MoreViewType<String, ListViewType.ListViewHolder>() {
 
-    override fun getViewModel(): KClass<out String> {
+    override fun getViewModel(): KClass<String> {
         return String::class
     }
 

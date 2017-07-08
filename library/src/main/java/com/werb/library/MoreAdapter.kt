@@ -2,7 +2,9 @@ package com.werb.library
 
 import android.support.v7.widget.RecyclerView.Adapter
 import android.support.v7.widget.RecyclerView.ViewHolder
+import android.view.LayoutInflater
 import android.view.ViewGroup
+import kotlin.reflect.KClass
 
 /**
  * [MoreAdapter] build viewHolder with data
@@ -10,30 +12,48 @@ import android.view.ViewGroup
  */
 class MoreAdapter : Adapter<ViewHolder>(), MoreLink {
 
-    var list: List<Any> = mutableListOf()
-        private set
+    private var list: MutableList<Any> = mutableListOf()
 
     private val linkManager: MoreLink = MoreLinkManager()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return buildViewType(viewType).onCreateViewHolder(LayoutInflater.from(parent?.context), parent as ViewGroup)
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val any = list[position]
+        val attachViewType = attachViewType(any::class)
+        attachViewType.buildHolder(holder as MoreViewHolder)
+        attachViewType.onBindViewHolder(holder, any)
+    }
+
+    fun loadData(data: Any) {
+        if (data is List<*>) {
+            for (d in data){
+                d?.let {
+                    list.add(it)
+                    notifyItemChanged(list.indexOf(d))
+                }
+            }
+        } else {
+            list.add(data)
+            notifyItemChanged(list.indexOf(data))
+        }
     }
 
     override fun getItemCount(): Int = list.size
 
     override fun getItemViewType(position: Int): Int {
         val any = list[position]
-        return attachViewType<Any, MoreViewHolder>(any.javaClass).getViewLayout()
+        return attachViewType(any::class).getViewLayout()
     }
 
-    override fun <T : Any, V : MoreViewHolder> register(viewType: MoreViewType<T, V>): MoreLink {
+    override fun register(viewType: MoreViewType<*, *>): MoreLink {
         linkManager.register(viewType)
         return this
     }
 
-    override fun <T : Any, V : MoreViewHolder> attachViewType(clazz: Class<Any>): MoreViewType<T, V> = linkManager.attachViewType(clazz)
+    override fun attachViewType(clazz: KClass<out Any>): MoreViewType<Any, MoreViewHolder> = linkManager.attachViewType(clazz)
+
+    override fun buildViewType(type: Int): MoreViewType<Any, MoreViewHolder> = linkManager.buildViewType(type)
 }

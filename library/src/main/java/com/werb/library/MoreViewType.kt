@@ -3,6 +3,7 @@ package com.werb.library
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.werb.library.action.MoreAction
+import kotlin.reflect.KClass
 
 
 /**
@@ -12,16 +13,15 @@ import com.werb.library.action.MoreAction
 abstract class MoreViewType<T : Any, V: MoreViewHolder>: MoreAction() {
 
     /** [getViewLayout] is unique and will help to build link */
-    internal abstract fun getViewLayout(): Int
+    abstract fun getViewLayout(): Int
 
     /** [getViewModel] model link with viewType */
-    abstract fun  getViewModel(): Class<out T>
+    abstract fun  getViewModel(): KClass<T>
 
     /** [onCreateViewHolder] just list onCreateViewHolder() in RecyclerView.Adapter  */
     abstract fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): V
 
     /** [onBindViewHolder] just list onBindViewHolder() in RecyclerView.Adapter  */
     abstract fun onBindViewHolder(holder: V, t: T)
-
 
 }
