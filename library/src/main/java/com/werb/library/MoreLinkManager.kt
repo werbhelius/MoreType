@@ -10,25 +10,31 @@ import kotlin.reflect.KClass
  */
 class MoreLinkManager : MoreLink {
 
-    private val TAG = "MoreLinkManager"
+    private val TAG = "MoreType"
 
-    private var viewTypeMap = SparseArrayCompat<MoreViewType<Any, MoreViewHolder>>()
+    private var viewTypeMap = SparseArrayCompat<MoreViewType<Any>>()
     private var modelTypeMap = SparseArrayCompat<KClass<out Any>>()
 
-    override fun register(viewType: MoreViewType<*, *>): MoreLink {
+    override fun register(viewType: MoreViewType<*>): MoreLink {
         val type = viewType.getViewLayout()
         val model = viewType.getViewModel()
-        if(modelTypeMap[type] != null){
+        if(modelTypeMap.indexOfValue(model) != -1){
+            val index = modelTypeMap.indexOfValue(model)
+            val key = viewTypeMap.keyAt(index)
+            val oldViewType = viewTypeMap[key]
             val modelName = model.simpleName
-            val typeName = type.javaClass.simpleName
-            Log.d(TAG, "model: $modelName will replace link with $typeName")
+            val newTypeName = viewType.javaClass.simpleName
+            val oldViewTypeName = oldViewType.javaClass.simpleName
+            viewTypeMap.removeAt(index)
+            modelTypeMap.removeAt(index)
+            Log.w(TAG, "model repeated! $modelName.class will replace $oldViewTypeName to $newTypeName")
         }
-        viewTypeMap.put(type, viewType as MoreViewType<Any, MoreViewHolder>?)
+        viewTypeMap.put(type, viewType as MoreViewType<Any>?)
         modelTypeMap.put(type, model)
         return this
     }
 
-    override fun attachViewType(clazz: KClass<out Any>): MoreViewType<Any, MoreViewHolder> {
+    override fun attachViewType(clazz: KClass<out Any>): MoreViewType<Any> {
         val type = modelTypeMap.indexOfValue(clazz)
         if (type == -1){
             throw ModelNotRegisterException(clazz.simpleName as String)
@@ -37,7 +43,7 @@ class MoreLinkManager : MoreLink {
         return viewTypeMap[key]
     }
 
-    override fun buildViewType(type: Int): MoreViewType<Any, MoreViewHolder> {
+    override fun buildViewType(type: Int): MoreViewType<Any> {
         if (type == -1) {
             throw  NullPointerException("no such type!")
         }

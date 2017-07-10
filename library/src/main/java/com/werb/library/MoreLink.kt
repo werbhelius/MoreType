@@ -11,10 +11,10 @@ import kotlin.reflect.KClass
 interface MoreLink {
 
     /** [register]  register viewType when we use */
-    fun register(viewType: MoreViewType<*, *>): MoreLink
+    fun register(viewType: MoreViewType<*>): MoreLink
 
-    fun attachViewType(clazz: KClass<out Any>) : MoreViewType<Any, MoreViewHolder>
+    fun attachViewType(clazz: KClass<out Any>) : MoreViewType<Any>
 
-    fun buildViewType(type: Int) : MoreViewType<Any, MoreViewHolder>
+    fun buildViewType(type: Int) : MoreViewType<Any>
 
 }

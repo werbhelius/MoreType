@@ -8,9 +8,9 @@ import kotlin.reflect.KClass
 /**
  * Created by wanbo on 2017/7/8.
  */
-class TextViewType: MoreViewType<String>() {
+class TextViewType2: MoreViewType<String>() {
 
-    override fun getViewLayout(): Int = R.layout.item_view_string
+    override fun getViewLayout(): Int = R.layout.item_view_string2
 
     override fun getViewModel(): KClass<String> {
         return String::class

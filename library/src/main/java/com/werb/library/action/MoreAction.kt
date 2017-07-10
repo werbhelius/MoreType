@@ -1,6 +1,5 @@
 package com.werb.library.action
 
-import android.view.View
 import com.werb.library.MoreViewHolder
 
 
@@ -10,11 +9,9 @@ import com.werb.library.MoreViewHolder
  */
 abstract class MoreAction: Action{
 
-    var holder: MoreViewHolder? = null
     var moreListener: MoreClickListener? = null
 
     override fun buildHolder(holder: MoreViewHolder) {
-        this.holder = holder
         holder.setActionListener(this)
     }
 

@@ -8,7 +8,7 @@ import com.werb.library.action.MoreAction
  * [MoreViewHolder] Base ViewHolder implement Action fun
  * Created by wanbo on 2017/7/2.
  */
-abstract class MoreViewHolder(itemView: View) : ViewHolder(itemView) {
+class MoreViewHolder(itemView: View) : ViewHolder(itemView) {
 
     private var action: MoreAction? = null
 

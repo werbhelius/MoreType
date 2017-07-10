@@ -1,6 +1,5 @@
 package com.werb.moretype
 
-import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -21,12 +20,23 @@ class MainActivity : AppCompatActivity() {
         val viewType = buildTextViewType()
         adapter.attachTo(list)
                 .register(viewType)
+                .register(TextViewType2())
 
         adapter.loadData("1")
         adapter.loadData("2")
         adapter.loadData("3")
         adapter.loadData("4")
         adapter.loadData("5")
+        adapter.loadData("6")
+        adapter.loadData("7")
+        adapter.loadData("8")
+        adapter.loadData("9")
+        adapter.loadData("10")
+        adapter.loadData("11")
+        adapter.loadData("12")
+        adapter.loadData("13")
+        adapter.loadData("14")
+        adapter.loadData("15")
 
     }
 

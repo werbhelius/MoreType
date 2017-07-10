@@ -20,14 +20,14 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink {
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val moreViewType = buildViewType(viewType)
         val viewHolder = moreViewType.onCreateViewHolder(LayoutInflater.from(parent?.context), parent as ViewGroup)
-        moreViewType.buildHolder(viewHolder)
         return viewHolder
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         val any = list[position]
         val attachViewType = attachViewType(any::class)
-        attachViewType.onBindViewHolder(holder as MoreViewHolder, any)
+        attachViewType.buildHolder(holder as MoreViewHolder)
+        attachViewType.bindData(any, holder)
     }
 
     fun loadData(data: Any) {
@@ -56,12 +56,12 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink {
         return attachViewType(any::class).getViewLayout()
     }
 
-    override fun register(viewType: MoreViewType<*, *>): MoreLink {
+    override fun register(viewType: MoreViewType<*>): MoreLink {
         linkManager.register(viewType)
         return this
     }
 
-    override fun attachViewType(clazz: KClass<out Any>): MoreViewType<Any, MoreViewHolder> = linkManager.attachViewType(clazz)
+    override fun attachViewType(clazz: KClass<out Any>): MoreViewType<Any> = linkManager.attachViewType(clazz)
 
-    override fun buildViewType(type: Int): MoreViewType<Any, MoreViewHolder> = linkManager.buildViewType(type)
+    override fun buildViewType(type: Int): MoreViewType<Any> = linkManager.buildViewType(type)
 }
