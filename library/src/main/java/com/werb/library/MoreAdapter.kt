@@ -14,18 +14,20 @@ import kotlin.reflect.KClass
 class MoreAdapter : Adapter<ViewHolder>(), MoreLink {
 
     private var list: MutableList<Any> = mutableListOf()
-
     private val linkManager: MoreLink = MoreLinkManager()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val moreViewType = buildViewType(viewType)
-        val viewHolder = moreViewType.onCreateViewHolder(LayoutInflater.from(parent?.context), parent as ViewGroup)
-        return viewHolder
+        if (moreViewType == null){
+            return attachViewType(list[viewType]).onCreateViewHolder(LayoutInflater.from(parent?.context), parent as ViewGroup)
+        }else {
+            return moreViewType.onCreateViewHolder(LayoutInflater.from(parent?.context), parent as ViewGroup)
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         val any = list[position]
-        val attachViewType = attachViewType(any::class)
+        val attachViewType = attachViewType(any)
         attachViewType.buildHolder(holder as MoreViewHolder)
         attachViewType.bindData(any, holder)
     }
@@ -53,7 +55,12 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink {
 
     override fun getItemViewType(position: Int): Int {
         val any = list[position]
-        return attachViewType(any::class).getViewLayout()
+        val viewLayout = attachViewTypeLayout(any)
+        if (viewLayout == -1){
+            return position
+        }else {
+            return viewLayout
+        }
     }
 
     override fun register(viewType: MoreViewType<*>): MoreLink {
@@ -61,7 +68,14 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink {
         return this
     }
 
-    override fun attachViewType(clazz: KClass<out Any>): MoreViewType<Any> = linkManager.attachViewType(clazz)
+    override fun multiWith(clazz: KClass<out Any>, link: MultiLink<*>): MoreLink {
+        linkManager.multiWith(clazz, link)
+        return this
+    }
 
-    override fun buildViewType(type: Int): MoreViewType<Any> = linkManager.buildViewType(type)
+    override fun attachViewType(any: Any): MoreViewType<Any> = linkManager.attachViewType(any)
+
+    override fun attachViewTypeLayout(any: Any): Int = linkManager.attachViewTypeLayout(any)
+
+    override fun buildViewType(type: Int): MoreViewType<Any>? = linkManager.buildViewType(type)
 }
