@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         val viewType = buildTextViewType()
         adapter.attachTo(list)
                 .register(TextViewType())
-                .multiWith(People::class, object : MultiLink<People> {
+                .multiRegister(People::class, object : MultiLink<People> {
                     override fun link(data: People): MoreViewType<People>? {
                         if (data.name == "zhangsan") {
                             return MessageInViewType()
