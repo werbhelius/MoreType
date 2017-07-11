@@ -36,7 +36,7 @@ class MoreLinkManager : MoreLink {
         return this
     }
 
-    override fun multiWith(clazz: KClass<*>, link: MultiLink<*>): MoreLink {
+    override fun multiRegister(clazz: KClass<*>, link: MultiLink<*>): MoreLink {
         @Suppress("UNCHECKED_CAST")
         multiModelMap.put(clazz, link as MultiLink<Any>)
         return this

@@ -13,7 +13,7 @@ interface MoreLink {
     /** [register]  register viewType when we use */
     fun register(viewType: MoreViewType<*>): MoreLink
 
-    fun multiWith(clazz: KClass<*> ,link: MultiLink<*>) : MoreLink
+    fun multiRegister(clazz: KClass<*> ,link: MultiLink<*>) : MoreLink
 
     fun attachViewType(any: Any) : MoreViewType<Any>
 

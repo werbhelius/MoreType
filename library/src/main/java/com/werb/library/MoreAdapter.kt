@@ -68,8 +68,8 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink {
         return this
     }
 
-    override fun multiWith(clazz: KClass<out Any>, link: MultiLink<*>): MoreLink {
-        linkManager.multiWith(clazz, link)
+    override fun multiRegister(clazz: KClass<out Any>, link: MultiLink<*>): MoreLink {
+        linkManager.multiRegister(clazz, link)
         return this
     }
 
