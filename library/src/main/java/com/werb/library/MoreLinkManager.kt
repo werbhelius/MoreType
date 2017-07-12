@@ -2,6 +2,8 @@ package com.werb.library
 
 import android.support.v4.util.SparseArrayCompat
 import android.util.Log
+import com.werb.library.exception.ModelNotRegisterException
+import com.werb.library.exception.MultiModelNotRegisterException
 import kotlin.reflect.KClass
 
 
@@ -57,15 +59,14 @@ class MoreLinkManager : MoreLink {
         return viewTypeMap[key].getViewLayout()
     }
 
-    override fun attachViewType(any: Any): MoreViewType<Any> {
+    override fun attachViewType(any: Any): MoreViewType<Any>{
         val clazz = any::class
         val type = modelTypeMap.indexOfValue(clazz)
         if (type == -1){
             val multiClazz = multiModelMap.containsKey(clazz)
             if(multiClazz){
                 val multiLink = multiModelMap[clazz]
-                val moreViewType = multiLink?.link(any) as MoreViewType<Any>
-                return moreViewType
+                return  multiLink?.link(any)?.let { it } ?: throw MultiModelNotRegisterException(clazz.simpleName as String)
             }else {
                 throw ModelNotRegisterException(clazz.simpleName as String)
             }

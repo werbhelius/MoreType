@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView.Adapter
 import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.werb.library.exception.MultiModelNotRegisterException
 import kotlin.reflect.KClass
 
 /**
