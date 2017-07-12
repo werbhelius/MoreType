@@ -5,7 +5,10 @@ import android.support.v7.widget.RecyclerView.Adapter
 import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.werb.library.exception.MultiModelNotRegisterException
+import com.werb.library.link.MoreLink
+import com.werb.library.link.MoreLinkManager
+import com.werb.library.link.MultiLink
+import com.werb.library.link.SoleLinkManager
 import kotlin.reflect.KClass
 
 /**
@@ -38,16 +41,16 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink {
             for (d in data){
                 d?.let {
                     list.add(it)
-                    notifyItemChanged(list.indexOf(d))
+                    notifyItemInserted(list.indexOf(d))
                 }
             }
         } else {
             list.add(data)
-            notifyItemChanged(list.indexOf(data))
+            notifyItemInserted(list.indexOf(data))
         }
     }
 
-    fun attachTo(view: RecyclerView): MoreLink{
+    fun attachTo(view: RecyclerView): MoreLink {
         view.adapter = this
         return this
     }
@@ -79,4 +82,6 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink {
     override fun attachViewTypeLayout(any: Any): Int = linkManager.attachViewTypeLayout(any)
 
     override fun buildViewType(type: Int): MoreViewType<Any>? = linkManager.buildViewType(type)
+
+    override fun userSoleRegister(): MoreLink = linkManager.userSoleRegister()
 }

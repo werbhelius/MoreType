@@ -1,5 +1,6 @@
-package com.werb.library
+package com.werb.library.link
 
+import com.werb.library.MoreViewType
 import kotlin.reflect.KClass
 
 
@@ -20,5 +21,7 @@ interface MoreLink {
     fun attachViewTypeLayout(any: Any) : Int
 
     fun buildViewType(type: Int) : MoreViewType<Any>?
+
+    fun userSoleRegister(): MoreLink
 
 }

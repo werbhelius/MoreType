@@ -18,6 +18,7 @@ class MessageInViewType : MoreViewType<People>() {
         holder?.let {
             it.itemView.name.text = t.name
             it.itemView.age.text = t.age.toString()
+            it.addOnClickListener(it.itemView)
         }
     }
 }

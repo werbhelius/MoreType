@@ -1,7 +1,8 @@
-package com.werb.library
+package com.werb.library.link
 
 import android.support.v4.util.SparseArrayCompat
 import android.util.Log
+import com.werb.library.MoreViewType
 import com.werb.library.exception.ModelNotRegisterException
 import com.werb.library.exception.MultiModelNotRegisterException
 import kotlin.reflect.KClass
@@ -59,7 +60,7 @@ class MoreLinkManager : MoreLink {
         return viewTypeMap[key].getViewLayout()
     }
 
-    override fun attachViewType(any: Any): MoreViewType<Any>{
+    override fun attachViewType(any: Any): MoreViewType<Any> {
         val clazz = any::class
         val type = modelTypeMap.indexOfValue(clazz)
         if (type == -1){
@@ -81,6 +82,14 @@ class MoreLinkManager : MoreLink {
             throw  NullPointerException("no such type!")
         }
         return viewTypeMap[type]
+    }
+
+    override fun userSoleRegister(): MoreLink {
+        val viewTypes = SoleLinkManager.viewTypes
+        for (viewType in viewTypes){
+            register(viewType)
+        }
+        return this
     }
 
 
