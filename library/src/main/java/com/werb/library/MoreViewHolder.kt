@@ -17,19 +17,19 @@ class MoreViewHolder(itemView: View) : ViewHolder(itemView) {
     }
 
     fun addOnClickListener(viewId: Int) {
-         itemView.findViewById<View>(viewId).setOnClickListener { action?.moreListener?.onItemClick(it, adapterPosition) }
+         itemView.findViewById<View>(viewId).setOnClickListener { action?.moreListener?.onItemClick(it, layoutPosition) }
     }
 
     fun addOnClickListener(view: View) {
-        view.setOnClickListener { action?.moreListener?.onItemClick(it, adapterPosition) }
+        view.setOnClickListener { action?.moreListener?.onItemClick(it, layoutPosition) }
     }
 
     fun addOnLongClickListener(viewId: Int) {
-        itemView.findViewById<View>(viewId).setOnClickListener { action?.moreListener?.onItemLongClick(it, adapterPosition) }
+        itemView.findViewById<View>(viewId).setOnClickListener { action?.moreListener?.onItemLongClick(it, layoutPosition) }
     }
 
     fun addOnLongClickListener(view: View) {
-        view.setOnClickListener { action?.moreListener?.onItemLongClick(it, adapterPosition) }
+        view.setOnClickListener { action?.moreListener?.onItemLongClick(it, layoutPosition) }
     }
 
 }

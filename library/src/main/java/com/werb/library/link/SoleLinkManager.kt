@@ -3,9 +3,10 @@ package com.werb.library.link
 import com.werb.library.MoreViewType
 
 /**
+ * [SoleLinkManager] help to register global viewType
  * Created by wanbo on 2017/7/12.
  */
-object SoleLinkManager {
+internal object SoleLinkManager {
 
     var viewTypes = arrayOf<MoreViewType<*>>()
 

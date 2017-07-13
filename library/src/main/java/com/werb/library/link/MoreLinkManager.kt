@@ -17,7 +17,6 @@ class MoreLinkManager : MoreLink {
     private var viewTypeMap = SparseArrayCompat<MoreViewType<Any>>()
     private var modelTypeMap = SparseArrayCompat<KClass<out Any>>()
     private var multiModelMap = mutableMapOf<KClass<*>, MultiLink<Any>>()
-        private set
 
     override fun register(viewType: MoreViewType<*>): MoreLink {
         val type = viewType.getViewLayout()

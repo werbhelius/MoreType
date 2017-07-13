@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import com.werb.library.link.MoreLink
 import com.werb.library.link.MoreLinkManager
 import com.werb.library.link.MultiLink
-import com.werb.library.link.SoleLinkManager
 import kotlin.reflect.KClass
 
 /**
@@ -18,7 +17,7 @@ import kotlin.reflect.KClass
 class MoreAdapter : Adapter<ViewHolder>(), MoreLink {
 
     private var list: MutableList<Any> = mutableListOf()
-    private val linkManager: MoreLink = MoreLinkManager()
+    private val linkManager = MoreLinkManager()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val moreViewType = buildViewType(viewType)
@@ -36,14 +35,12 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink {
         attachViewType.bindData(any, holder)
     }
 
+    @Suppress("UNCHECKED_CAST")
     fun loadData(data: Any) {
         if (data is List<*>) {
-            for (d in data){
-                d?.let {
-                    list.add(it)
-                    notifyItemInserted(list.indexOf(d))
-                }
-            }
+            val position = list.size - 1
+            list.addAll(position, data as Collection<Any>)
+            notifyItemRangeInserted(position, data.size)
         } else {
             list.add(data)
             notifyItemInserted(list.indexOf(data))
