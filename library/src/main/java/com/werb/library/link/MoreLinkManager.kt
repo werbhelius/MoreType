@@ -2,6 +2,7 @@ package com.werb.library.link
 
 import android.support.v4.util.SparseArrayCompat
 import android.util.Log
+import com.werb.library.MoreAdapter
 import com.werb.library.MoreViewType
 import com.werb.library.exception.ModelNotRegisterException
 import com.werb.library.exception.MultiModelNotRegisterException
@@ -11,14 +12,14 @@ import kotlin.reflect.KClass
 /**
  * Created by wanbo on 2017/7/5.
  */
-class MoreLinkManager : MoreLink {
+class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
 
     private val TAG = "MoreType"
     private var viewTypeMap = SparseArrayCompat<MoreViewType<Any>>()
     private var modelTypeMap = SparseArrayCompat<KClass<out Any>>()
     private var multiModelMap = mutableMapOf<KClass<*>, MultiLink<Any>>()
 
-    override fun register(viewType: MoreViewType<*>): MoreLink {
+    override fun register(viewType: MoreViewType<*>): MoreAdapter {
         val type = viewType.getViewLayout()
         val model = viewType.getViewModel()
         if(modelTypeMap.indexOfValue(model) != -1){
@@ -35,13 +36,13 @@ class MoreLinkManager : MoreLink {
         @Suppress("UNCHECKED_CAST")
         viewTypeMap.put(type, viewType as MoreViewType<Any>?)
         modelTypeMap.put(type, model)
-        return this
+        return adapter
     }
 
-    override fun multiRegister(clazz: KClass<*>, link: MultiLink<*>): MoreLink {
+    override fun multiRegister(clazz: KClass<*>, link: MultiLink<*>): MoreAdapter {
         @Suppress("UNCHECKED_CAST")
         multiModelMap.put(clazz, link as MultiLink<Any>)
-        return this
+        return adapter
     }
 
     override fun attachViewTypeLayout(any: Any): Int {
@@ -83,12 +84,12 @@ class MoreLinkManager : MoreLink {
         return viewTypeMap[type]
     }
 
-    override fun userSoleRegister(): MoreLink {
+    override fun userSoleRegister(): MoreAdapter {
         val viewTypes = SoleLinkManager.viewTypes
         for (viewType in viewTypes){
             register(viewType)
         }
-        return this
+        return adapter
     }
 
 

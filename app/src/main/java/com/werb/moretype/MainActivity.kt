@@ -8,6 +8,9 @@ import android.widget.Toast
 import com.werb.library.action.MoreClickListener
 import com.werb.library.MoreAdapter
 import com.werb.library.MoreViewType
+import com.werb.library.extension.AlphaAnimation
+import com.werb.library.extension.ScaleInAnimation
+import com.werb.library.extension.SlideInLeftAnimation
 import com.werb.library.link.MultiLink
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -19,8 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         list.layoutManager = LinearLayoutManager(this)
-        adapter.attachTo(list)
-                .userSoleRegister()
+        adapter.userSoleRegister()
                 .register(buildTextViewType())
                 .multiRegister(People::class, object : MultiLink<People> {
                     override fun link(data: People): MoreViewType<People>? {
@@ -31,8 +33,29 @@ class MainActivity : AppCompatActivity() {
                         } else return null
                     }
                 })
+                .renderWithAnimation(SlideInLeftAnimation())
+                .duration(300)
+                .firstShowAnim(true)
+                .attachTo(list)
 
 
+
+        adapter.loadData(People("zhangsan", 10))
+        adapter.loadData(People("lisi", 20))
+        adapter.loadData("1")
+        adapter.loadData("2")
+        adapter.loadData(People("zhangsan", 10))
+        adapter.loadData(People("lisi", 20))
+        adapter.loadData("3")
+        adapter.loadData("4")
+        adapter.loadData("5")
+        adapter.loadData(People("zhangsan", 10))
+        adapter.loadData(People("lisi", 20))
+        adapter.loadData("6")
+        adapter.loadData("7")
+        adapter.loadData(People("zhangsan", 10))
+        adapter.loadData(People("lisi", 20))
+        adapter.loadData(Footer())
         adapter.loadData(People("zhangsan", 10))
         adapter.loadData(People("lisi", 20))
         adapter.loadData("1")

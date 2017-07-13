@@ -8,10 +8,7 @@ import com.werb.library.link.SoleLinkManager
  */
 object MoreType {
 
-    /**
-     * [soleRegister] register global viewType
-     * [viewTypes] MoreViewType Array
-     */
+    /** [soleRegister] register global viewType [viewTypes] MoreViewType Array */
     fun soleRegister(vararg viewTypes: MoreViewType<*>) {
         SoleLinkManager.globalRegister(*viewTypes)
     }
