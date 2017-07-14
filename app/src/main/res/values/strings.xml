@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MoreType</string>
+    <string name="app_desc">new method to build data in RecyclerView with Kotlin!</string>
 </resources>
