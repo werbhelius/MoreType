@@ -19,7 +19,7 @@ abstract class MoreViewType<T : Any>: MoreAction() {
     abstract fun  getViewModel(): KClass<T>
 
     /** [bindData] bind data with T  */
-    abstract fun bindData(data: T, holder: MoreViewHolder?)
+    abstract fun bindData(data: T, holder: MoreViewHolder)
 
     /** [onCreateViewHolder] just like onCreateViewHolder() in RecyclerView.Adapter  */
     fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): MoreViewHolder{

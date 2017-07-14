@@ -1,6 +1,7 @@
 package com.werb.moretype
 
 import android.app.Application
+import com.facebook.drawee.backends.pipeline.Fresco
 import com.werb.library.MoreType
 
 /**
@@ -8,9 +9,15 @@ import com.werb.library.MoreType
  */
 class MyApp: Application() {
 
+   companion object {
+       @Volatile lateinit var myApp: MyApp
+           private set
+   }
+
     override fun onCreate() {
         super.onCreate()
-        MoreType.soleRegister(FooterViewType())
+        myApp = this
+        Fresco.initialize(myApp)
     }
 
 }

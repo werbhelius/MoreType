@@ -47,7 +47,10 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension {
     @Suppress("UNCHECKED_CAST")
     fun loadData(data: Any) {
         if (data is List<*>) {
-            val position = list.size - 1
+            var position = 0
+            if (list.size > 0){
+                position = list.size -1
+            }
             list.addAll(position, data as Collection<Any>)
             notifyItemRangeInserted(position, data.size)
         } else {
@@ -55,6 +58,8 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension {
             notifyItemInserted(list.indexOf(data))
         }
     }
+
+    fun getData(position: Int): Any = list[position]
 
     fun attachTo(view: RecyclerView): MoreLink {
         view.adapter = this

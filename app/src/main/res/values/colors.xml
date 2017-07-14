@@ -5,5 +5,6 @@
     <color name="colorAccent">#262626</color>
     <color name="colorBackground">#F5F5F5</color>
     <color name="colorTextLight">#FFFFFF</color>
+    <color name="colorTextLightGary">#FAFAFA</color>
     <color name="colorTextGary">#999999</color>
 </resources>
