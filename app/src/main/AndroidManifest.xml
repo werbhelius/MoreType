@@ -3,6 +3,10 @@
     package="com.werb.moretype">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".MyApp"
@@ -20,6 +24,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".single.SingleRegisterActivity" />
+        <activity android:name=".multi.MultiRegisterActivity" />
+
+        <provider
+            android:name="com.werb.pickphotoview.provider.PickProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/pick_file_paths"/>
+        </provider>
     </application>
 
 </manifest>

@@ -3,4 +3,6 @@
     <string name="app_desc">new method to build data in RecyclerView with Kotlin!</string>
     <string name="single_register">Single Register</string>
     <string name="single_register_desc">Register one2one ViewType</string>
+    <string name="send_message">Send Message…</string>
+    <string name="send">Send</string>
 </resources>

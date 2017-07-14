@@ -7,4 +7,6 @@
     <color name="colorTextLight">#FFFFFF</color>
     <color name="colorTextLightGary">#FAFAFA</color>
     <color name="colorTextGary">#999999</color>
+    <color name="colorTopLine">#DBDBDB</color>
+    <color name="colorMessageBackground">#F0F0F0</color>
 </resources>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/input_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:background="@drawable/widget_input_bg"
+    android:minHeight="?attr/actionBarSize"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:id="@+id/input_image_layout"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:background="@mipmap/ic_camera_black_24dp" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <EditText
+            android:id="@+id/input_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/widget_input_edit_bg"
+            android:gravity="center_vertical"
+            android:hint="@string/send_message"
+            android:minHeight="36dp"
+            android:paddingLeft="5dp"
+            android:textColor="@color/colorAccent"
+            android:textSize="12sp" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_send"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/input_send_layout"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/send"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp" />
+    </FrameLayout>
+
+
+</LinearLayout>

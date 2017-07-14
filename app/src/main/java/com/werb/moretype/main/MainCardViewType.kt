@@ -4,6 +4,7 @@ import android.content.Intent
 import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
 import com.werb.moretype.R
+import com.werb.moretype.multi.MultiRegisterActivity
 import com.werb.moretype.single.SingleRegisterActivity
 import kotlin.reflect.KClass
 import kotlinx.android.synthetic.main.item_view_main.view.*
@@ -32,6 +33,8 @@ class MainCardViewType : MoreViewType<MainCard>() {
                 content.startActivity(intent)
             }
             1 -> {
+                intent.setClass(content, MultiRegisterActivity::class.java)
+                content.startActivity(intent)
             }
             2 -> {
             }
