@@ -116,7 +116,7 @@ class MultiRegisterActivity : AppCompatActivity() {
         )
     }
 
-    private fun buildSendMessageImage(url: String): Message {
+    private fun buildSendMessageImage(url: String, size: ImageSize): Message {
         return Message(
                 "",
                 "image",
@@ -124,8 +124,8 @@ class MultiRegisterActivity : AppCompatActivity() {
                 input_edit.text.toString(),
                 url,
                 "",
-                "736",
-                "613",
+                size.width.toString(),
+                size.height.toString(),
                 false
         )
     }
@@ -156,8 +156,12 @@ class MultiRegisterActivity : AppCompatActivity() {
         if (requestCode == PickConfig.PICK_PHOTO_DATA) {
             val selectPaths = data.getSerializableExtra(PickConfig.INTENT_IMG_LIST_SELECT) as ArrayList<*>
             // do something u want
-            adapter.loadData(buildSendMessageImage(selectPaths[0] as String))
-            multi_register_list.smoothScrollToPosition(adapter.itemCount)
+            val path = selectPaths[0] as String
+            val imageSize = Utils.readImageSize(path)
+            imageSize?.let {
+                adapter.loadData(buildSendMessageImage(path, imageSize))
+                multi_register_list.smoothScrollToPosition(adapter.itemCount)
+            }
         }
     }
 

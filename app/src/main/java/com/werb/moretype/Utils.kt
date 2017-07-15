@@ -6,6 +6,12 @@ import android.text.TextUtils
 import com.werb.moretype.multi.ImageSize
 import java.text.SimpleDateFormat
 import java.util.*
+import android.graphics.Bitmap
+import android.R.attr.path
+import java.io.File
+import java.nio.file.Files.exists
+
+
 
 
 /**
@@ -43,6 +49,17 @@ object Utils {
             fixWidth = (ratio * fixHeight).toInt()
         }
         return ImageSize(fixWidth, fixHeight)
+    }
+
+    fun readImageSize(path: String): ImageSize?{
+        val orFile = File(path)
+        if (!orFile.exists()) {
+            return null
+        }
+        val options = BitmapFactory.Options()
+        options.inJustDecodeBounds = true
+        BitmapFactory.decodeFile(orFile.absolutePath, options)
+        return ImageSize(options.outWidth, options.outHeight )
     }
 
 }
