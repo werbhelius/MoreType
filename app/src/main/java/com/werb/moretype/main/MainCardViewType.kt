@@ -7,6 +7,7 @@ import com.werb.moretype.R
 import com.werb.moretype.anim.AnimActivity
 import com.werb.moretype.click.ItemClickActivity
 import com.werb.moretype.complete.CompleteActivity
+import com.werb.moretype.me.AboutMeActivity
 import com.werb.moretype.multi.MultiRegisterActivity
 import com.werb.moretype.single.SingleRegisterActivity
 import kotlin.reflect.KClass
@@ -36,8 +37,7 @@ class MainCardViewType : MoreViewType<MainCard>() {
             2 -> { intent.setClass(content, AnimActivity::class.java) }
             3 -> { intent.setClass(content, ItemClickActivity::class.java) }
             4 -> { intent.setClass(content, CompleteActivity::class.java) }
-            5 -> {
-            }
+            5 -> { intent.setClass(content, AboutMeActivity::class.java) }
             else -> {
 
             }

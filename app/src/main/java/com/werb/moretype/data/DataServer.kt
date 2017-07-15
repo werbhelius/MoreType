@@ -6,6 +6,9 @@ import com.werb.moretype.anim.AnimType
 import com.werb.moretype.click.ItemClick
 import com.werb.moretype.complete.Complete
 import com.werb.moretype.main.MainCard
+import com.werb.moretype.me.MeInfo
+import com.werb.moretype.me.MeMessage
+import com.werb.moretype.me.MeThanks
 import com.werb.moretype.multi.Message
 import com.werb.moretype.single.SingleImage
 import com.werb.moretype.single.SingleText
@@ -15,7 +18,7 @@ import com.werb.moretype.single.SingleText
  */
 object DataServer {
 
-    fun getMainCardData(): List<MainCard>{
+    fun getMainCardData(): List<MainCard> {
         val mainCardList = arrayListOf<MainCard>()
         mainCardList.add(MainCard("Single Register", "Register one2one ViewType"))
         mainCardList.add(MainCard("Multi Register", "Register one2more ViewType"))
@@ -26,37 +29,37 @@ object DataServer {
         return mainCardList
     }
 
-    fun getSingleRegisterData() : List<Any> {
+    fun getSingleRegisterData(): List<Any> {
         val singleRegisterList = arrayListOf<Any>()
         singleRegisterList.add(MainCard("Single Register", "Register one2one ViewType"))
-        singleRegisterList.add(SingleText(MyApp.myApp.getString(R.string.app_name),MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
+        singleRegisterList.add(SingleText(MyApp.myApp.getString(R.string.app_name), MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
         singleRegisterList.add(SingleImage(MyApp.myApp.getString(R.string.app_name), "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"))
         singleRegisterList.add(SingleImage(MyApp.myApp.getString(R.string.app_name), "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"))
         singleRegisterList.add(SingleImage(MyApp.myApp.getString(R.string.app_name), "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"))
-        singleRegisterList.add(SingleText(MyApp.myApp.getString(R.string.app_name),MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
+        singleRegisterList.add(SingleText(MyApp.myApp.getString(R.string.app_name), MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
         singleRegisterList.add(SingleImage(MyApp.myApp.getString(R.string.app_name), "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"))
         singleRegisterList.add(SingleImage(MyApp.myApp.getString(R.string.app_name), "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"))
         singleRegisterList.add(SingleImage(MyApp.myApp.getString(R.string.app_name), "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"))
-        singleRegisterList.add(SingleText(MyApp.myApp.getString(R.string.app_name),MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
+        singleRegisterList.add(SingleText(MyApp.myApp.getString(R.string.app_name), MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
         singleRegisterList.add(SingleImage(MyApp.myApp.getString(R.string.app_name), "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"))
         singleRegisterList.add(SingleImage(MyApp.myApp.getString(R.string.app_name), "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"))
         singleRegisterList.add(SingleImage(MyApp.myApp.getString(R.string.app_name), "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"))
-        singleRegisterList.add(SingleText(MyApp.myApp.getString(R.string.app_name),MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
+        singleRegisterList.add(SingleText(MyApp.myApp.getString(R.string.app_name), MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
         singleRegisterList.add(SingleImage(MyApp.myApp.getString(R.string.app_name), "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"))
         singleRegisterList.add(SingleImage(MyApp.myApp.getString(R.string.app_name), "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"))
         singleRegisterList.add(SingleImage(MyApp.myApp.getString(R.string.app_name), "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"))
-        singleRegisterList.add(SingleText(MyApp.myApp.getString(R.string.app_name),MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
+        singleRegisterList.add(SingleText(MyApp.myApp.getString(R.string.app_name), MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
         singleRegisterList.add(SingleImage(MyApp.myApp.getString(R.string.app_name), "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"))
         singleRegisterList.add(SingleImage(MyApp.myApp.getString(R.string.app_name), "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"))
         singleRegisterList.add(SingleImage(MyApp.myApp.getString(R.string.app_name), "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"))
-        singleRegisterList.add(SingleText(MyApp.myApp.getString(R.string.app_name),MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
+        singleRegisterList.add(SingleText(MyApp.myApp.getString(R.string.app_name), MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
         singleRegisterList.add(SingleImage(MyApp.myApp.getString(R.string.app_name), "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"))
         singleRegisterList.add(SingleImage(MyApp.myApp.getString(R.string.app_name), "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"))
         singleRegisterList.add(SingleImage(MyApp.myApp.getString(R.string.app_name), "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"))
         return singleRegisterList
     }
 
-    fun getMultiRegisterData() : List<Any> {
+    fun getMultiRegisterData(): List<Any> {
         val multiRegisterList = arrayListOf<Any>()
         multiRegisterList.add(MainCard("Multi Register", "Register one2more ViewType"))
         multiRegisterList.add(Message(
@@ -296,5 +299,35 @@ object DataServer {
                 "358"
         ))
         return completeDataList
+    }
+
+    fun getAboutMeData(): List<Any> {
+        val aboutMeDataList = arrayListOf<Any>()
+        aboutMeDataList.add(MainCard("About Me", "Developer & Designer"))
+        aboutMeDataList.add(MeInfo(
+                "wanbo", "Developer & Designer", "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
+                "werbhelius@gmail.com", "https://github.com/Werb", "http://weibo.com/singerwannber "
+        ))
+        aboutMeDataList.add("设计初衷")
+        aboutMeDataList.add(MeMessage(MyApp.myApp.getString(R.string.origin)))
+        aboutMeDataList.add("MoreType 特性")
+        aboutMeDataList.add(MeMessage(MyApp.myApp.getString(R.string.character)))
+        aboutMeDataList.add("感谢")
+        aboutMeDataList.add(MeThanks(
+                "drakeet & MultiType",
+                "在上学的时候，第一个关注的博客和 Github 就是 drakeet，他的项目无论是从代码结构还是设计模式上，都特别清晰，易懂，看完之后总有一种说不出的畅快，太棒了，一路跟着 drakeet 后面学习，感觉每一天都在飞速进步。",
+                "http://ww4.sinaimg.cn/mw690/86e2ff85jw8esy5u72xzyg2050069jrv.gif",
+                "https://github.com/drakeet/MultiType"
+        ))
+        aboutMeDataList.add(MeThanks(
+                "wasabeef & recyclerview-animators",
+                "MoreType 中对 Recyclerview 动画操作参考了这个非常棒的库，感谢开源的世界。",
+                "https://raw.githubusercontent.com/wasabeef/recyclerview-animators/master/art/logo.jpg",
+                "https://github.com/wasabeef/recyclerview-animators"
+        ))
+        aboutMeDataList.add("喜欢的一些话")
+        aboutMeDataList.add(MeMessage(MyApp.myApp.getString(R.string.like_words_one)))
+        aboutMeDataList.add(MeMessage(MyApp.myApp.getString(R.string.like_words_two)))
+        return aboutMeDataList
     }
 }

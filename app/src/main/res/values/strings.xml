@@ -5,4 +5,17 @@
     <string name="single_register_desc">Register one2one ViewType</string>
     <string name="send_message">Send Message…</string>
     <string name="send">Send</string>
+
+    <string name="origin">之前在写公司的项目的时候，需要写大量的界面，这就意味着每一个界面都要写一个 Adapter，同时还要对不同的视图写不同的 ViewHolder，在存在多种试图的时候，一个 Adapter 中的代码就会很冗余，
+而且耦合度很低，对后续的修改很不友好。我们任意一个界面都是依靠服务器返回的数据构建的，所以我就在想，能不能简单的使用数据来驱动试图，这就也是 MoreType 的核心所在【数据驱动试图】。我并不是
+第一个想到这个概念的人，我最早看到这个概念的实践，是 drakeet 的 MultiType，地址：https://github.com/drakeet/MultiType 。当时看完他的项目之后，有一种醍醐灌顶的畅快，这就是我所希望
+的【数据驱动试图】。大概在一个月前，开始接触 Kotlin，Kotlin 是一个让开发者用起来很爽的语言，不必深陷烦人的空指针异常，简洁的代码风格，在初次尝时候我就喜欢上了它，所以我决定用 Kotlin 来
+开发一个【数据驱动试图】的第三方库，从而就有了 MoreType 的产生【给你更多的可能】。</string>
+    
+    <string name="character">MoreType 核心是【数据驱动试图】，通过继承 MoreViewType 来实现试图，重写三个方法来确定布局、数据模型和绑定数据，内置 MoreViewHolder 不必重写 ViewHolder。通过 Kotlin 安全的 MutableList 来对数据
+进行操作，内置点击事件的处理，支持5种列表加载动画同时支持自定义，支持单一数据视图的绑定，也支持数据视图一对多的绑定。通过链式调用清晰直接的操作数据和试图，项目中的例子完美而简洁的实现了常见的需求，例如瀑布流显示、
+私信聊天界面、下拉刷新和上滑加载更多。当然就想它的名字一样 MoreType，它可以给你更多的可能，当然这就取决去你如何去构建数据与试图的关系了。</string>
+    
+    <string name="like_words_one">有时候啊 你总是在追赶前面的人\r\n总是抱怨自己为什么不能再努力一点\r\n累了你可以停下来 看看原来的自己\r\n其实你已经很了不起了。</string>
+    <string name="like_words_two">如果我注定平凡\r\n我会把他当做上天的恩赐而无奈的叩谢平凡至死\r\n如果这注定中还有那么一丝不确定\r\n我愿意为那缥缈的不确定拼搏至死。</string>
 </resources>

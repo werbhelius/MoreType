@@ -36,6 +36,8 @@
 
         <activity android:name=".complete.CompleteActivity" />
 
+        <activity android:name=".me.AboutMeActivity"/>
+
         <provider
             android:name="com.werb.pickphotoview.provider.PickProvider"
             android:authorities="${applicationId}.provider"
