@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:clickable="true"
+    android:layout_margin="5dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    app:contentPadding="8dp"
+    app:cardElevation="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/icon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="6dp"
+            android:layout_below="@+id/message_time"
+            app:actualImageScaleType="focusCrop"
+            app:fadeDuration="200"
+            app:failureImage="@color/colorPrimary"
+            app:failureImageScaleType="centerCrop"
+            app:placeholderImage="@color/colorPrimary"
+            app:placeholderImageScaleType="centerCrop"
+            app:roundingBorderWidth="1px"
+            app:roundingBorderColor="@color/colorTextGary"
+            app:roundAsCircle="true"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/icon"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="wanbo"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/icon"
+            android:layout_below="@+id/name"
+            android:textColor="@color/colorTextGary"
+            android:textSize="12sp"
+            tools:text="Developer &amp; Designer"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/colorTextGary"
+            android:textSize="12sp"
+            tools:text="17/15"/>
+
+        <LinearLayout
+            android:id="@+id/complete_content_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/desc"
+            android:layout_toRightOf="@+id/icon"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"/>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

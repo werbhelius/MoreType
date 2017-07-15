@@ -3,6 +3,7 @@ package com.werb.moretype
 import android.app.Application
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.werb.library.MoreType
+import com.werb.moretype.complete.FoorViewType
 
 /**
  * Created by wanbo on 2017/7/12.
@@ -18,6 +19,7 @@ class MyApp: Application() {
         super.onCreate()
         myApp = this
         Fresco.initialize(myApp)
+        MoreType.soleRegister(FoorViewType())
     }
 
 }

@@ -16,6 +16,7 @@
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,11 +24,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".single.SingleRegisterActivity" />
+
         <activity android:name=".multi.MultiRegisterActivity"/>
+
         <activity android:name=".anim.AnimActivity"
             android:theme="@style/AnimTheme"/>
+
         <activity android:name=".click.ItemClickActivity" />
+
+        <activity android:name=".complete.CompleteActivity" />
 
         <provider
             android:name="com.werb.pickphotoview.provider.PickProvider"

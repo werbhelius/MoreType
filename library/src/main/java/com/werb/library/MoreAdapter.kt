@@ -57,7 +57,7 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
         if (data is List<*>) {
             var position = 0
             if (list.size > 0){
-                position = list.size -1
+                position = list.size
             }
             list.addAll(position, data as Collection<Any>)
             notifyItemRangeInserted(position, data.size)
@@ -87,7 +87,7 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
             return
         }
         if (position > 0 && position <= list.size - 1){
-            list.remove(position)
+            list.removeAt(position)
             notifyItemRemoved(position)
         }
     }

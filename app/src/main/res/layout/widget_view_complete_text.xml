@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/complete_text_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorTextLight"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/complete_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:lineSpacingExtra="1.2dp"
+        android:textIsSelectable="true"
+        android:textColor="@color/colorAccent"
+        android:textSize="16sp"
+        tools:text="你会看这段字吗？其实是我随笔写的，一直以来我的梦想是做音乐，我的偶像是周杰伦，我想像他一样站在舞台上，为喜欢的人唱歌"/>
+
+</RelativeLayout>
