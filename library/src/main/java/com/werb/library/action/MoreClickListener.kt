@@ -9,5 +9,5 @@ interface MoreClickListener {
 
     fun onItemClick(view: View, position: Int)
 
-    fun onItemLongClick(view: View, position: Int)
+    fun onItemLongClick(view: View, position: Int): Boolean
 }

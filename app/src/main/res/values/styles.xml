@@ -6,11 +6,14 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textColorPrimary">@color/colorTextLight</item>
     </style>
 
     <style name="SpinnerStyle">
         <item name="colorControlNormal">@color/colorTextLight</item>
+    </style>
+
+    <style name="AnimTheme" parent="AppTheme">
+        <item name="android:textColorPrimary">@color/colorTextLight</item>
     </style>
 
 </resources>

@@ -25,11 +25,24 @@ class MoreViewHolder(itemView: View) : ViewHolder(itemView) {
     }
 
     fun addOnLongClickListener(viewId: Int) {
-        itemView.findViewById<View>(viewId).setOnClickListener { action?.moreListener?.onItemLongClick(it, layoutPosition) }
+        action?.let {
+            it.moreListener?.let {
+                val _this = it
+                itemView.findViewById<View>(viewId).setOnLongClickListener {
+                    _this.onItemLongClick(it, layoutPosition)
+                }
+            }
+        }
     }
 
     fun addOnLongClickListener(view: View) {
-        view.setOnClickListener { action?.moreListener?.onItemLongClick(it, layoutPosition) }
+        action?.let {
+            it.moreListener?.let {
+                val _this = it
+                view.setOnLongClickListener {
+                    _this.onItemLongClick(view, layoutPosition)
+                }
+            }
+        }
     }
-
 }

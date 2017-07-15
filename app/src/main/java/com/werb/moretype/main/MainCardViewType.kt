@@ -5,6 +5,7 @@ import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
 import com.werb.moretype.R
 import com.werb.moretype.anim.AnimActivity
+import com.werb.moretype.click.ItemClickActivity
 import com.werb.moretype.multi.MultiRegisterActivity
 import com.werb.moretype.single.SingleRegisterActivity
 import kotlin.reflect.KClass
@@ -29,27 +30,17 @@ class MainCardViewType : MoreViewType<MainCard>() {
         val content = holder.itemView.context
         val intent = Intent()
         when (holder.layoutPosition) {
-            0 -> {
-                intent.setClass(content, SingleRegisterActivity::class.java)
-                content.startActivity(intent)
-            }
-            1 -> {
-                intent.setClass(content, MultiRegisterActivity::class.java)
-                content.startActivity(intent)
-            }
-            2 -> {
-                intent.setClass(content, AnimActivity::class.java)
-                content.startActivity(intent)
-            }
-            3 -> {
-            }
-            4 -> {
-            }
+            0 -> { intent.setClass(content, SingleRegisterActivity::class.java) }
+            1 -> { intent.setClass(content, MultiRegisterActivity::class.java) }
+            2 -> { intent.setClass(content, AnimActivity::class.java) }
+            3 -> { intent.setClass(content, ItemClickActivity::class.java) }
+            4 -> {  }
             5 -> {
             }
             else -> {
 
             }
         }
+        content.startActivity(intent)
     }
 }

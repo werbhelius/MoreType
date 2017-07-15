@@ -3,6 +3,7 @@ package com.werb.moretype.data
 import com.werb.moretype.MyApp
 import com.werb.moretype.R
 import com.werb.moretype.anim.AnimType
+import com.werb.moretype.click.ItemClick
 import com.werb.moretype.main.MainCard
 import com.werb.moretype.multi.Message
 import com.werb.moretype.single.SingleImage
@@ -167,6 +168,28 @@ object DataServer {
         animDataList.add(AnimType("诺兰表示，《敦刻尔克》的叙事结构可能是他所有作品中最复杂的。？", "娱乐", "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
                 "http://img.qdaily.com/article/article_show/20170714133142RYHh7qjSKcUPa9wp.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
         return animDataList
+    }
+
+    fun getItemClickData(): List<Any> {
+        val itemClickDataList = arrayListOf<Any>()
+        itemClickDataList.add(MainCard("ItemClick", "Support onItemClick and onItemLongClick"))
+        itemClickDataList.add(ItemClick("MoreType ItemClick", "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782", true))
+        itemClickDataList.add(ItemClick("MoreType ItemClick", "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9", false))
+        itemClickDataList.add(ItemClick("MoreType ItemClick", "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782", true))
+        itemClickDataList.add(ItemClick("MoreType ItemClick", "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9", false))
+        itemClickDataList.add(ItemClick("MoreType ItemClick", "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782", true))
+        itemClickDataList.add(ItemClick("MoreType ItemClick", "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9", false))
+        itemClickDataList.add(ItemClick("MoreType ItemClick", "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782", true))
+        itemClickDataList.add(ItemClick("MoreType ItemClick", "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9", false))
+        itemClickDataList.add(ItemClick("MoreType ItemClick", "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782", true))
+        itemClickDataList.add(ItemClick("MoreType ItemClick", "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9", false))
+        itemClickDataList.add(ItemClick("MoreType ItemClick", "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782", true))
+        itemClickDataList.add(ItemClick("MoreType ItemClick", "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9", false))
+        itemClickDataList.add(ItemClick("MoreType ItemClick", "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782", true))
+        itemClickDataList.add(ItemClick("MoreType ItemClick", "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9", false))
+        itemClickDataList.add(ItemClick("MoreType ItemClick", "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782", true))
+        itemClickDataList.add(ItemClick("MoreType ItemClick", "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9", false))
+        return itemClickDataList
     }
 
 }

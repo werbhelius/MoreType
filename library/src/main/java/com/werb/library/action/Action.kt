@@ -11,6 +11,6 @@ interface Action {
 
     fun buildHolder(holder: MoreViewHolder)
 
-    fun setMoreClickListener(listener: MoreClickListener?)
+    fun setMoreClickListener(listener: MoreClickListener)
 
 }
