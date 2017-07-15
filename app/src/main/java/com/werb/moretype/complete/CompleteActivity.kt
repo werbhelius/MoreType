@@ -29,6 +29,7 @@ class CompleteActivity: AppCompatActivity() {
         adapter.userSoleRegister()
                 .register(TitleViewType())
                 .register(CompleteViewType())
+                .register(HorizontalViewType())
                 .renderWithAnimation()
                 .startAnimPosition(1)
                 .attachTo(complete_list)

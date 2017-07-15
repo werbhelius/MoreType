@@ -5,6 +5,7 @@ import com.werb.moretype.R
 import com.werb.moretype.anim.AnimType
 import com.werb.moretype.click.ItemClick
 import com.werb.moretype.complete.Complete
+import com.werb.moretype.complete.HorizontalData
 import com.werb.moretype.main.MainCard
 import com.werb.moretype.me.MeInfo
 import com.werb.moretype.me.MeMessage
@@ -228,6 +229,11 @@ object DataServer {
                 "436",
                 "600"
         ))
+        completeDataList.add(HorizontalData(
+                "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "MoreType",
+                buildSingTextDataList()
+        ))
         completeDataList.add(Complete(
                 "wanbo",
                 "Try all kinds of things",
@@ -257,6 +263,11 @@ object DataServer {
                 "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782",
                 "467",
                 "292"
+        ))
+        completeDataList.add(HorizontalData(
+                "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "MoreType",
+                buildSingTextDataList()
         ))
         completeDataList.add(Complete(
                 "wanbo",
@@ -288,6 +299,11 @@ object DataServer {
                 "1890",
                 "850"
         ))
+        completeDataList.add(HorizontalData(
+                "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "MoreType",
+                buildSingTextDataList()
+        ))
         completeDataList.add(Complete(
                 "wanbo",
                 "Android Developer",
@@ -299,6 +315,21 @@ object DataServer {
                 "358"
         ))
         return completeDataList
+    }
+
+    private fun buildSingTextDataList(): List<SingleText> {
+        val singTextDataList = arrayListOf<SingleText>()
+        singTextDataList.add(SingleText(MyApp.myApp.getString(R.string.app_name), MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
+        singTextDataList.add(SingleText(MyApp.myApp.getString(R.string.app_name), MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
+        singTextDataList.add(SingleText(MyApp.myApp.getString(R.string.app_name), MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
+        singTextDataList.add(SingleText(MyApp.myApp.getString(R.string.app_name), MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
+        singTextDataList.add(SingleText(MyApp.myApp.getString(R.string.app_name), MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
+        singTextDataList.add(SingleText(MyApp.myApp.getString(R.string.app_name), MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
+        singTextDataList.add(SingleText(MyApp.myApp.getString(R.string.app_name), MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
+        singTextDataList.add(SingleText(MyApp.myApp.getString(R.string.app_name), MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
+        singTextDataList.add(SingleText(MyApp.myApp.getString(R.string.app_name), MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
+        singTextDataList.add(SingleText(MyApp.myApp.getString(R.string.app_name), MyApp.myApp.getString(R.string.app_desc), "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782"))
+        return singTextDataList
     }
 
     fun getAboutMeData(): List<Any> {

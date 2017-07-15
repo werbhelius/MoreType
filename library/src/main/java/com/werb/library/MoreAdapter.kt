@@ -86,7 +86,7 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
         if(list.size == 0){
             return
         }
-        if (position > 0 && position <= list.size - 1){
+        if (position >= 0 && position <= list.size - 1){
             list.removeAt(position)
             notifyItemRemoved(position)
         }
