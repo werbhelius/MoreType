@@ -19,12 +19,13 @@
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/icon"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginLeft="5dp"
             app:actualImageScaleType="centerCrop"
             app:failureImage="@color/colorPrimary"
-            app:placeholderImage="@color/colorPrimary"/>
+            app:placeholderImage="@color/colorPrimary"
+            app:roundAsCircle="true"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/name"
