@@ -1,5 +1,6 @@
 package com.werb.moretype
 
+import android.view.View
 import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
 import com.werb.moretype.main.MainCard

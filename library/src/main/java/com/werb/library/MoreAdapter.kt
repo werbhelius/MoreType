@@ -13,18 +13,20 @@ import com.werb.library.link.MoreLinkManager
 import com.werb.library.link.MultiLink
 import kotlin.reflect.KClass
 import android.view.animation.LinearInterpolator
+import com.werb.library.action.DataAction
 
 
 /**
  * [MoreAdapter] build viewHolder with data
  * Created by wanbo on 2017/7/2.
  */
-class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension {
+class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
 
     private var list: MutableList<Any> = mutableListOf()
     private val linkManager = MoreLinkManager(this)
     private var animation: MoreAnimation? = null
     private var animDuration = 250L
+    private var startAnimPosition = 0
     private var firstShow = false
     private var lastAnimPosition = -1
 
@@ -44,8 +46,14 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension {
         attachViewType.bindData(any, holder)
     }
 
+    fun attachTo(view: RecyclerView): MoreLink {
+        view.adapter = this
+        return this
+    }
+
+
     @Suppress("UNCHECKED_CAST")
-    fun loadData(data: Any) {
+    override fun loadData(data: Any) {
         if (data is List<*>) {
             var position = 0
             if (list.size > 0){
@@ -59,11 +67,29 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension {
         }
     }
 
-    fun getData(position: Int): Any = list[position]
+    override fun getData(position: Int): Any = list[position]
 
-    fun attachTo(view: RecyclerView): MoreLink {
-        view.adapter = this
-        return this
+    override fun removeAllData() {
+        list.clear()
+        notifyDataSetChanged()
+    }
+
+    override fun removeData(data: Any) {
+        val contains = list.contains(data)
+        if (contains) {
+            val index = list.indexOf(data)
+            removeData(index)
+        }
+    }
+
+    override fun removeData(position: Int) {
+        if(list.size == 0){
+            return
+        }
+        if (position > 0 && position <= list.size - 1){
+            list.remove(position)
+            notifyItemRemoved(position)
+        }
     }
 
     override fun getItemCount(): Int = list.size
@@ -98,6 +124,9 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension {
     /** [addAnimation] addAnimation when view attached to windows */
     override fun addAnimation(holder: MoreViewHolder) {
         this.animation?.let {
+            if(holder.layoutPosition < startAnimPosition){
+                return
+            }
             if(!firstShow || holder.layoutPosition > lastAnimPosition) {
                 val animators = it.getItemAnimators(holder.itemView)
                 for (anim in animators) {
@@ -115,9 +144,16 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension {
         return this
     }
 
+    /** [firstShowAnim] set isShow animation when first display  */
     override fun firstShowAnim(firstShow: Boolean): MoreAdapter {
         this.firstShow = firstShow
         return  this
+    }
+
+    /** [startAnimPosition] set animation start position */
+    override fun startAnimPosition(position: Int): MoreAdapter {
+        this.startAnimPosition = position
+        return this
     }
 
     /** [register] register viewType which single link with model  */

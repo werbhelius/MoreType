@@ -4,6 +4,7 @@ import android.content.Intent
 import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
 import com.werb.moretype.R
+import com.werb.moretype.anim.AnimActivity
 import com.werb.moretype.multi.MultiRegisterActivity
 import com.werb.moretype.single.SingleRegisterActivity
 import kotlin.reflect.KClass
@@ -37,6 +38,8 @@ class MainCardViewType : MoreViewType<MainCard>() {
                 content.startActivity(intent)
             }
             2 -> {
+                intent.setClass(content, AnimActivity::class.java)
+                content.startActivity(intent)
             }
             3 -> {
             }

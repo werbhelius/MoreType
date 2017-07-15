@@ -30,6 +30,6 @@
 
     <include
         android:id="@+id/widget_input_layout"
-        layout="@layout/widget_view_input"/>
+        layout="@layout/widget_view_message_input"/>
 
 </RelativeLayout>

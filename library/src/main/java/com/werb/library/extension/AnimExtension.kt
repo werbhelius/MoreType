@@ -18,4 +18,6 @@ interface AnimExtension {
 
     fun firstShowAnim(firstShow: Boolean) : MoreAdapter
 
+    fun startAnimPosition(position: Int): MoreAdapter
+
 }

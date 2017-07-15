@@ -9,4 +9,8 @@
         <item name="android:textColorPrimary">@color/colorTextLight</item>
     </style>
 
+    <style name="SpinnerStyle">
+        <item name="colorControlNormal">@color/colorTextLight</item>
+    </style>
+
 </resources>

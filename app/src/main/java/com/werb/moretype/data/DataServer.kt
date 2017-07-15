@@ -2,6 +2,7 @@ package com.werb.moretype.data
 
 import com.werb.moretype.MyApp
 import com.werb.moretype.R
+import com.werb.moretype.anim.AnimType
 import com.werb.moretype.main.MainCard
 import com.werb.moretype.multi.Message
 import com.werb.moretype.single.SingleImage
@@ -112,6 +113,60 @@ object DataServer {
                 false
         ))
         return multiRegisterList
+    }
+
+    fun getAnimData(): List<Any> {
+        val animDataList = arrayListOf<Any>()
+        animDataList.add(MainCard("Animation", "Provides five types of Animation"))
+        animDataList.add(AnimType("看图：这里是过去24小时发生的重要的事", "城市", "http://img.qdaily.com/category/icon_yellow_app/20160606004533uFozK3xI4CHZjfSM.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170715103111KHrZm3894Ys7uGIB.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("盗版碟商贩，本周的时代预言家 | 好奇心辞典", "城市", "http://img.qdaily.com/category/icon_yellow_app/20160606004533uFozK3xI4CHZjfSM.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170714180204gKehPAICiFdx1Uwm.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("这部纪录片美极了，而且居然没有用到特效", "娱乐", "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170712164259UN4sqz2rogl0bWKY.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("诺兰表示，《敦刻尔克》的叙事结构可能是他所有作品中最复杂的。？", "娱乐", "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170714133142RYHh7qjSKcUPa9wp.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("看图：这里是过去24小时发生的重要的事", "城市", "http://img.qdaily.com/category/icon_yellow_app/20160606004533uFozK3xI4CHZjfSM.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170715103111KHrZm3894Ys7uGIB.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("盗版碟商贩，本周的时代预言家 | 好奇心辞典", "城市", "http://img.qdaily.com/category/icon_yellow_app/20160606004533uFozK3xI4CHZjfSM.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170714180204gKehPAICiFdx1Uwm.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("这部纪录片美极了，而且居然没有用到特效", "娱乐", "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170712164259UN4sqz2rogl0bWKY.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("诺兰表示，《敦刻尔克》的叙事结构可能是他所有作品中最复杂的。？", "娱乐", "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170714133142RYHh7qjSKcUPa9wp.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("看图：这里是过去24小时发生的重要的事", "城市", "http://img.qdaily.com/category/icon_yellow_app/20160606004533uFozK3xI4CHZjfSM.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170715103111KHrZm3894Ys7uGIB.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("盗版碟商贩，本周的时代预言家 | 好奇心辞典", "城市", "http://img.qdaily.com/category/icon_yellow_app/20160606004533uFozK3xI4CHZjfSM.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170714180204gKehPAICiFdx1Uwm.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("这部纪录片美极了，而且居然没有用到特效", "娱乐", "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170712164259UN4sqz2rogl0bWKY.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("诺兰表示，《敦刻尔克》的叙事结构可能是他所有作品中最复杂的。？", "娱乐", "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170714133142RYHh7qjSKcUPa9wp.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("看图：这里是过去24小时发生的重要的事", "城市", "http://img.qdaily.com/category/icon_yellow_app/20160606004533uFozK3xI4CHZjfSM.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170715103111KHrZm3894Ys7uGIB.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("盗版碟商贩，本周的时代预言家 | 好奇心辞典", "城市", "http://img.qdaily.com/category/icon_yellow_app/20160606004533uFozK3xI4CHZjfSM.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170714180204gKehPAICiFdx1Uwm.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("这部纪录片美极了，而且居然没有用到特效", "娱乐", "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170712164259UN4sqz2rogl0bWKY.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("诺兰表示，《敦刻尔克》的叙事结构可能是他所有作品中最复杂的。？", "娱乐", "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170714133142RYHh7qjSKcUPa9wp.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("看图：这里是过去24小时发生的重要的事", "城市", "http://img.qdaily.com/category/icon_yellow_app/20160606004533uFozK3xI4CHZjfSM.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170715103111KHrZm3894Ys7uGIB.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("盗版碟商贩，本周的时代预言家 | 好奇心辞典", "城市", "http://img.qdaily.com/category/icon_yellow_app/20160606004533uFozK3xI4CHZjfSM.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170714180204gKehPAICiFdx1Uwm.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("这部纪录片美极了，而且居然没有用到特效", "娱乐", "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170712164259UN4sqz2rogl0bWKY.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("诺兰表示，《敦刻尔克》的叙事结构可能是他所有作品中最复杂的。？", "娱乐", "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170714133142RYHh7qjSKcUPa9wp.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("看图：这里是过去24小时发生的重要的事", "城市", "http://img.qdaily.com/category/icon_yellow_app/20160606004533uFozK3xI4CHZjfSM.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170715103111KHrZm3894Ys7uGIB.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("盗版碟商贩，本周的时代预言家 | 好奇心辞典", "城市", "http://img.qdaily.com/category/icon_yellow_app/20160606004533uFozK3xI4CHZjfSM.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170714180204gKehPAICiFdx1Uwm.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("这部纪录片美极了，而且居然没有用到特效", "娱乐", "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170712164259UN4sqz2rogl0bWKY.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        animDataList.add(AnimType("诺兰表示，《敦刻尔克》的叙事结构可能是他所有作品中最复杂的。？", "娱乐", "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170714133142RYHh7qjSKcUPa9wp.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        return animDataList
     }
 
 }

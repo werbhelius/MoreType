@@ -15,7 +15,7 @@ import com.werb.moretype.data.DataServer
 import com.werb.permissionschecker.PermissionChecker
 import com.werb.pickphotoview.PickPhotoView
 import kotlinx.android.synthetic.main.activity_multi_register.*
-import kotlinx.android.synthetic.main.widget_view_input.*
+import kotlinx.android.synthetic.main.widget_view_message_input.*
 import com.werb.pickphotoview.util.PickConfig
 import android.content.Intent
 import com.werb.moretype.Utils
@@ -27,8 +27,8 @@ import com.werb.moretype.Utils
 class MultiRegisterActivity : AppCompatActivity() {
 
     val PERMISSIONS = arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE)
-    private val adapter = MoreAdapter()
     private var permissionChecker: PermissionChecker? = null
+    private val adapter = MoreAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
