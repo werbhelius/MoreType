@@ -109,7 +109,7 @@ adapter.register(TitleViewType())
         })
         .attachTo(multi_register_list)
 ```
-*Multi Register must explicit declare data class*
+**Multi Register must explicit declare data class**
 
 
 ### Animation: Provides five types of Animation
@@ -153,6 +153,7 @@ Two ways to achieve ItemClick: **In ViewType** and **In Activity**
 
 ### Refresh and loadMore
 **Refresh**: use `SwipeRefreshLayout`
+
 **LoadMore**: build `Footer.class` and `FootViewType` , when list smooth to last position - 1, show  `FootViewType` and remove `FootViewType`  when new data load successful
 
 [sample](https://github.com/Werb/MoreType/blob/master/app/src/main/java/com/werb/moretype/complete/CompleteActivity.kt)
@@ -178,7 +179,10 @@ class MyApp: Application() {
 
 and we can use it in any where with `adapter.userSoleRegister()`
 
+## Thanks
+[MultiType](https://github.com/drakeet/MultiType)
 
+[recyclerview-animators](https://github.com/wasabeef/recyclerview-animators)
 
 
 
