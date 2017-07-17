@@ -184,5 +184,8 @@ and we can use it in any where with `adapter.userSoleRegister()`
 
 [recyclerview-animators](https://github.com/wasabeef/recyclerview-animators)
 
+## LICENSE
+[Apache License](./LICENSE)
+
 
 
