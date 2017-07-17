@@ -16,6 +16,10 @@ I am not The first thought of this concept, I first saw the concept of practice,
 
 **Release Version will be published at the end of the month.**
 
+## Preview
+![more-type-one](./screenshot/type1.png)
+![more-type-two](./screenshot/type2.png)
+
 ## Dependency
 
 ## Usage
