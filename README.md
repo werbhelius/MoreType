@@ -90,7 +90,7 @@ class SingleRegisterActivity: AppCompatActivity() {
 ## Feature
 ### Multi Register: Register one2more ViewType
 
-Usually data and view are one-to-one relationships, like Feeds list, MoreType alse provide Multi Register like IM list, one data to Many views, MoreType can do it easily.
+Usually data and view are one-to-one relationships, like Feeds list, MoreType alse provide Multi Register like IM list, one data to Many views, MoreType can do it easily.
 
 ```kotlin
 adapter.register(TitleViewType())
@@ -139,82 +139,13 @@ class SlideInLeftAnimation : MoreAnimation {
 
 Two ways to achieve ItemClick: **In ViewType** and **In Activity**
 
-**In ViewType** : Just `view.setOnClickListener {}` 
+**In ViewType** : Just use `view.setOnClickListener {}` in ViewType
 
 **In Activity** : 
-```kotlin
-class ItemClickOneViewType: MoreViewType<ItemClick>() {
+1. use `holder.addOnClickListener(view: View)` or `holder.addOnClickListener(position: Int)` to bind event in ViewType
+2. use `viewType().setMoreClickListener()` to deal event in Activity
 
-    override fun getViewLayout(): Int = R.layout.item_view_click_one
-
-    override fun getViewModel(): KClass<ItemClick> = ItemClick::class
-
-    override fun bindData(data: ItemClick, holder: MoreViewHolder) {
-        val context = holder.itemView.context
-        holder.itemView.title.text = data.title
-        holder.itemView.icon.setImageURI(data.url)
-        /* click in viewType */
-        holder.itemView.setOnClickListener {
-            Toast.makeText(context, " click in ViewType position is " + holder.layoutPosition.toString(), Toast.LENGTH_SHORT).show()
-        }
-        holder.itemView.icon.tag = data.url
-        /* click in activity need use fun holder.addOnClickListener(view: View) or holder.addOnClickListener(viewId: Int)*/
-        holder.addOnClickListener(holder.itemView.icon)
-        holder.addOnClickListener(holder.itemView.button)
-    }
-
-}
-
-class ItemClickActivity : AppCompatActivity() {
-
-    private val adapter = MoreAdapter()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_item_click)
-
-        list.layoutManager = LinearLayoutManager(this)
-        adapter.register(TitleViewType())
-                .multiRegister(ItemClick::class, object : MultiLink<ItemClick> {
-                    override fun link(data: ItemClick): MoreViewType<ItemClick>? {
-                        if (data.click) {
-                            return buildItemClickOneViewType()
-                        } else {
-                            return ItemClickTwoViewType()
-                        }
-                    }
-                })
-                .attachTo(list)
-
-        adapter.loadData(DataServer.getItemClickData())
-    }
-
-    /* in Activity use setMoreClickListener() to deal with
- click events */
-    private fun buildItemClickOneViewType(): ItemClickOneViewType {
-        val viewType = ItemClickOneViewType()
-        viewType.setMoreClickListener(object : MoreClickListener {
-            override fun onItemClick(view: View, position: Int) {
-                when (view.id) {
-                    R.id.icon -> {
-                        val url = view.tag as String
-                        Toast.makeText(view.context, "click icon in Activity icon url is " + url, Toast.LENGTH_SHORT).show()
-                    }
-                    R.id.button -> {
-                        Toast.makeText(view.context, "click button in Activity position is " + position.toString(), Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-
-            override fun onItemLongClick(view: View, position: Int): Boolean {
-                return false
-            }
-        })
-        return viewType
-    }
-
-}
-```
+[sample](./app/src/main/java/werb/moretype/click)
 
 
 
