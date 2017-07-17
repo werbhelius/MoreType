@@ -2,7 +2,6 @@ package com.werb.moretype.single
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import com.werb.library.MoreAdapter
 import com.werb.moretype.R
 import com.werb.moretype.TitleViewType
@@ -36,13 +35,15 @@ class SingleRegisterActivity: AppCompatActivity() {
         gridLayoutManager.spanSizeLookup = spanSizeLookup
         single_register_list.layoutManager = gridLayoutManager
         single_register_list.addItemDecoration(SingleItemDecoration(12))
+
+        /* register viewType and attach to recyclerView */
         adapter.register(TitleViewType())
                 .register(SingleTypeOneViewType())
                 .register(SingleTypeTwoViewType())
                 .attachTo(single_register_list)
 
+        /* load any data List or model object */
         adapter.loadData(DataServer.getSingleRegisterData())
-
 
     }
 

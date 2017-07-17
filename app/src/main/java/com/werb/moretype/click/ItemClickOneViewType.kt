@@ -20,10 +20,12 @@ class ItemClickOneViewType: MoreViewType<ItemClick>() {
         val context = holder.itemView.context
         holder.itemView.title.text = data.title
         holder.itemView.icon.setImageURI(data.url)
+        /* click in viewType */
         holder.itemView.setOnClickListener {
             Toast.makeText(context, " click in ViewType position is " + holder.layoutPosition.toString(), Toast.LENGTH_SHORT).show()
         }
         holder.itemView.icon.tag = data.url
+        /* click in activity */
         holder.addOnClickListener(holder.itemView.icon)
         holder.addOnClickListener(holder.itemView.button)
     }
