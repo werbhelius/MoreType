@@ -2,6 +2,8 @@
 
 > new method to build data in RecyclerView with Kotlin!
 
+English|[中文版](https://github.com/Werb/MoreType/blob/master/README_ZH.md)
+
 Keyword: Data driven view 【数据驱动视图】
 
 Before writing a project in the company, we need to write a large number of recyclerViews to display data, which means that each recyclerView must write an Adapter, but also for different views according to getItemViewType () write different ViewHolder, in the presence of multiple views Time, an adapter in the code will be very redundant, And the coupling is very high, the follow-up changes are very friendly. 
@@ -10,7 +12,7 @@ Before writing a project in the company, we need to write a large number of recy
 
 I am not The first thought of this concept, I first saw the concept of practice, is [drakeet's MultiType](https://github.com/drakeet/MultiType). After watching his project, i know this is what I hope [Data driven view]. 
 
-**Kotlin on Android Now official.** Don't have to worry about the NullPointerException, simple code style, in the first time I like to like it, so I decided to use Kotlin to develop a [data-driven view] third-party library  of the , this was MoreType **【give you more likely】**.
+**Kotlin on Android Now official.** Don't have to worry about the NullPointerException, simple code style, in the first time I like to like it, so I decided to use Kotlin to develop a **【data-driven view】** third-party library  of the , this was MoreType **【Give you more likely】**.
 
 **This is a beta version, because it is based on the development of AS Preview, there may be some unknown Bug.**
 
