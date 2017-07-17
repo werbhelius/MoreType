@@ -6,15 +6,15 @@ Keyword: Data driven view 【数据驱动视图】
 
 Before writing a project in the company, we need to write a large number of recyclerViews to display data, which means that each recyclerView must write an Adapter, but also for different views according to getItemViewType () write different ViewHolder, in the presence of multiple views Time, an adapter in the code will be very redundant, And the coupling is very high, the follow-up changes are very friendly. 
 
-**Any of our recyclerViews are based on the data returned by the server to build, so I was wondering, can not simply use the data to drive the view, which is the core of the MoreType [data driven view].**
+**Any of our recyclerViews are based on the data returned by the server to build, so I was wondering, can not simply use the data to drive the view, which is the core of the MoreType 【data driven view】.**
 
 I am not The first thought of this concept, I first saw the concept of practice, is [drakeet's MultiType](https://github.com/drakeet/MultiType). After watching his project, i know this is what I hope [Data driven view]. 
 
-**Kotlin on Android Now official.** Don't have to worry about the NullPointerException, simple code style, in the first time I like to like it, so I decided to use Kotlin to develop a [data-driven view] third-party library  of the , this was MoreType [give you more likely].
+**Kotlin on Android Now official.** Don't have to worry about the NullPointerException, simple code style, in the first time I like to like it, so I decided to use Kotlin to develop a [data-driven view] third-party library  of the , this was MoreType **【give you more likely】**.
 
-**This is a beta version, because it is based on the development of AS Preview, there may be some unknown Bug**
+**This is a beta version, because it is based on the development of AS Preview, there may be some unknown Bug.**
 
-**Release Version will be published at the end of the month**
+**Release Version will be published at the end of the month.**
 
 ## Dependency
 
@@ -145,8 +145,34 @@ Two ways to achieve ItemClick: **In ViewType** and **In Activity**
 1. use `holder.addOnClickListener(view: View)` or `holder.addOnClickListener(position: Int)` to bind event in ViewType
 2. use `viewType().setMoreClickListener()` to deal event in Activity
 
-[sample](./app/src/main/java/werb/moretype/click)
+[sample](https://github.com/Werb/MoreType/tree/master/app/src/main/java/com/werb/moretype/click)
 
+### Refresh and loadMore
+**Refresh**: use `SwipeRefreshLayout`
+***LoadMore**: build `Footer.class` and `FootViewType` , when list smooth to last position - 1, show  `FootViewType` and remove `FootViewType`  when new data load successful
+
+[sample](https://github.com/Werb/MoreType/blob/master/app/src/main/java/com/werb/moretype/complete/CompleteActivity.kt)
+
+### Sole Global ViewType
+**Register global viewType in Custom Application**
+```kotlin
+class MyApp: Application() {
+
+   companion object {
+       @Volatile lateinit var myApp: MyApp
+           private set
+   }
+
+    override fun onCreate() {
+        super.onCreate()
+        myApp = this
+        // Sole Global Register, like footer , Cutting line
+        MoreType.soleRegister(FoorViewType())
+    }
+}
+```
+
+and we can use it in any where with `adapter.userSoleRegister()`
 
 
 
