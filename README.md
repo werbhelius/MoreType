@@ -153,7 +153,7 @@ Two ways to achieve ItemClick: **In ViewType** and **In Activity**
 
 ### Refresh and loadMore
 **Refresh**: use `SwipeRefreshLayout`
-***LoadMore**: build `Footer.class` and `FootViewType` , when list smooth to last position - 1, show  `FootViewType` and remove `FootViewType`  when new data load successful
+**LoadMore**: build `Footer.class` and `FootViewType` , when list smooth to last position - 1, show  `FootViewType` and remove `FootViewType`  when new data load successful
 
 [sample](https://github.com/Werb/MoreType/blob/master/app/src/main/java/com/werb/moretype/complete/CompleteActivity.kt)
 
