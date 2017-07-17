@@ -35,7 +35,7 @@ class SingleText {
 }
 ```
 
-#### Step 2. create a class (xxxViewType) extends abstract class `MoreViewType<T : Any>()` , like:
+### Step 2. create a class (xxxViewType) extends abstract class `MoreViewType<T : Any>()` , like:
 
 **For use with `kotlin-android-extensions` to replace findViewById()**
 
@@ -57,7 +57,7 @@ class SingleTypeOneViewType: MoreViewType<SingleText>() {
 }
 ```
 
-#### Step 3. `register` and `attach` to `recyclerview` in Any where you build list, like:
+### Step 3. `register` and `attach` to `recyclerview` in Any where you build list, like:
 
 **For use with `kotlin-android-extensions` to replace findViewById()**
 
@@ -88,7 +88,7 @@ class SingleRegisterActivity: AppCompatActivity() {
 ```
 
 ## Feature
-#### Multi Register: Register one2more ViewType
+### Multi Register: Register one2more ViewType
 
 Usually data and view are one-to-one relationships, like Feeds list, MoreType alse provide Multi Register like IM list, one data to Many views, MoreType can do it easily.
 
@@ -108,7 +108,7 @@ adapter.register(TitleViewType())
 *Multi Register must explicit declare data class*
 
 
-#### Animation: Provides five types of Animation
+### Animation: Provides five types of Animation
 
 Provide 5 animations: **Alpha** , **Scale** , **SlideInBottom** , **SlideInLeft** , **SlideInRight**
 
@@ -135,7 +135,7 @@ class SlideInLeftAnimation : MoreAnimation {
 }
 ```
 
-#### ItemClick: Support onItemClick and onItemLongClick
+### ItemClick: Support onItemClick and onItemLongClick
 
 Two ways to achieve ItemClick: **In ViewType** and **In Activity**
 
