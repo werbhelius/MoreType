@@ -21,6 +21,13 @@ I am not The first thought of this concept, I first saw the concept of practice,
 ![more-type-two](./screenshot/type2.png)
 
 ## Dependency
+```gradle
+compile 'com.werb.moretype:moretype:0.1.0-beta'
+```
+or
+```gradle
+implementation 'com.werb.moretype:moretype:0.1.0-beta'
+```
 
 ## Usage
 
