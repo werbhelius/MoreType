@@ -11,7 +11,7 @@ abstract class MoreAction: Action{
 
     var moreListener: MoreClickListener? = null
 
-    override fun buildHolder(holder: MoreViewHolder) {
+    override fun bindHolder(holder: MoreViewHolder) {
         holder.setActionListener(this)
     }
 

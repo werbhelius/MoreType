@@ -19,6 +19,7 @@ class MyApp: Application() {
         super.onCreate()
         myApp = this
         Fresco.initialize(myApp)
+        // Sole Global Register, like footer , Cutting line
         MoreType.soleRegister(FoorViewType())
     }
 

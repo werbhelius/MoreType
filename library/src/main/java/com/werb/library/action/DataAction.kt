@@ -2,14 +2,24 @@ package com.werb.library.action
 
 
 /**
+ * Action of Data in Adapter
  * Created by wanbo on 2017/7/15.
  */
 interface DataAction {
 
+    /** [loadData] add data */
     fun loadData(data: Any)
+
+    /** [getData] get data by position */
     fun getData(position: Int): Any
+
+    /** [removeAllData] remove all data */
     fun removeAllData()
+
+    /** [removeData] remove data by item object */
     fun removeData(data: Any)
+
+    /** [removeData] remove data by position */
     fun removeData(position: Int)
 
 }

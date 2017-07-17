@@ -1,6 +1,7 @@
 package com.werb.moretype.complete
 
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
@@ -49,6 +50,7 @@ class CompleteActivity: AppCompatActivity() {
         complete_list.addOnScrollListener(loadMoreListener)
     }
 
+    /** [OnLoadMoreListener] this is a sample by use OnScrollListener  to achieve loadMore Data*/
     private val loadMoreListener = object : OnLoadMoreListener(){
 
         override fun isHasMore(): Boolean  = true

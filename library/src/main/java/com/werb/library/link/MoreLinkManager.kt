@@ -10,15 +10,29 @@ import kotlin.reflect.KClass
 
 
 /**
+ * Data driven view
+ * layout is unique, so we uses layout to link data and view
+ * layout id is unique key
  * Created by wanbo on 2017/7/5.
  */
 class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
 
     private val TAG = "MoreType"
+
+    /** [viewTypeMap] save MoreViewType by layout id */
     private var viewTypeMap = SparseArrayCompat<MoreViewType<Any>>()
+
+    /** [modelTypeMap] save Data::class by layout id */
     private var modelTypeMap = SparseArrayCompat<KClass<out Any>>()
+
+    /** [multiModelMap] save [MultiLink] by Data::class */
     private var multiModelMap = mutableMapOf<KClass<*>, MultiLink<Any>>()
 
+    /**
+     *  [register] register single MoreViewType , MoreViewType can't repeat
+     *  if two ViewType's getViewModel() return same Data::class
+     *  [viewTypeMap] and [modelTypeMap] will remove oldViewType and replace by newViewType
+     */
     override fun register(viewType: MoreViewType<*>): MoreAdapter {
         val type = viewType.getViewLayout()
         val model = viewType.getViewModel()
@@ -39,12 +53,24 @@ class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
         return adapter
     }
 
+    /**
+     * [multiRegister] register multi MoreViewType
+     * [clazz] which data will multi register
+     * [link] the link between data and kinds of viewType
+     * use map save , so same class will be replace, if you register repeated
+     */
     override fun multiRegister(clazz: KClass<*>, link: MultiLink<*>): MoreAdapter {
         @Suppress("UNCHECKED_CAST")
         multiModelMap.put(clazz, link as MultiLink<Any>)
         return adapter
     }
 
+    /**
+     * [attachViewTypeLayout] attach to viewType' layout by data item
+     * if data belong to single register will return viewType's unique key (layout)
+     * if data belong to multi register will return -1
+     * if data not register will throw [ModelNotRegisterException]
+     */
     override fun attachViewTypeLayout(any: Any): Int {
         val clazz = any::class
         val type = modelTypeMap.indexOfValue(clazz)
@@ -56,10 +82,16 @@ class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
                 throw ModelNotRegisterException(clazz.simpleName as String)
             }
         }
-        val key = viewTypeMap.keyAt(type)
-        return viewTypeMap[key].getViewLayout()
+        return viewTypeMap.keyAt(type)
     }
 
+    /**
+     * [attachViewType] attach to viewType by data item
+     * if data belong to single register will return viewType
+     * if data belong to multi register will return viewType by multiLink judge data
+     * if data belong to multi register, but not link viewType with multiLink will throw [MultiModelNotRegisterException]
+     * if data not register will throw [ModelNotRegisterException]
+     */
     override fun attachViewType(any: Any): MoreViewType<Any> {
         val clazz = any::class
         val type = modelTypeMap.indexOfValue(clazz)
@@ -77,6 +109,7 @@ class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
         }
     }
 
+    /** [buildViewType] return MoreViewType in onCreateViewHolder() to create viewHolder*/
     override fun buildViewType(type: Int): MoreViewType<Any>? {
         if (type == -1) {
             throw  NullPointerException("no such type!")
@@ -84,6 +117,7 @@ class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
         return viewTypeMap[type]
     }
 
+    /** [userSoleRegister] single register Global ViewType */
     override fun userSoleRegister(): MoreAdapter {
         val viewTypes = SoleLinkManager.viewTypes
         for (viewType in viewTypes){
@@ -91,6 +125,5 @@ class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
         }
         return adapter
     }
-
 
 }
