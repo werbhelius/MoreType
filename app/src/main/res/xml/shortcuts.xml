@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="about"
+        android:enabled="true"
+        android:icon="@mipmap/icon_info"
+        android:shortcutShortLabel="@string/about"
+        android:shortcutLongLabel="@string/about_desc"
+        android:shortcutDisabledMessage="@string/about_desc"
+        tools:ignore="UnusedAttribute">
+        <intent
+            android:action="shortStart"
+            android:targetPackage="com.werb.moretype"
+            android:targetClass="com.werb.moretype.me.AboutMeActivity" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+</shortcuts>

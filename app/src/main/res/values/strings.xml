@@ -3,6 +3,16 @@
     <string name="app_desc">new method to build data in RecyclerView with Kotlin!</string>
     <string name="single_register">Single Register</string>
     <string name="single_register_desc">Register one2one ViewType</string>
+    <string name="multi_register">Multi Register</string>
+    <string name="multi_register_desc">Register one2more ViewType</string>
+    <string name="animation">Animation</string>
+    <string name="animation_desc">Provides five types of Animation</string>
+    <string name="itemClick">ItemClick</string>
+    <string name="itemClick_desc">Support onItemClick and onItemLongClick</string>
+    <string name="complete">Complete Example</string>
+    <string name="complete_desc">A combination of elegant implementation layouts with refresh and loadMore</string>
+    <string name="about">About</string>
+    <string name="about_desc">About me</string>
     <string name="send_message">Send Message…</string>
     <string name="send">Send</string>
 
