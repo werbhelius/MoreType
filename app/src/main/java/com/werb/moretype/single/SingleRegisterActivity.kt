@@ -35,7 +35,7 @@ class SingleRegisterActivity: AppCompatActivity() {
         }
         gridLayoutManager.spanSizeLookup = spanSizeLookup
         single_register_list.layoutManager = gridLayoutManager
-        single_register_list.addItemDecoration(SingleItemDecoration(12, spanSizeLookup))
+        single_register_list.addItemDecoration(SingleItemDecoration(12))
         adapter.register(TitleViewType())
                 .register(SingleTypeOneViewType())
                 .register(SingleTypeTwoViewType())
