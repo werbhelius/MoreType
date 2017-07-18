@@ -166,7 +166,7 @@ class SlideInLeftAnimation : MoreAnimation {
 ### Refresh and loadMore
 **Refresh**: 使用 `SwipeRefreshLayout` 就可以实现下拉刷新
 
-**LoadMore**: 通过构建 `Footer.class` 和 `FootViewType` 实现数据和视图的绑定, 当 RecyclerView 滚动在底部时显示 `FootViewType`，在数据请求成功后移除 `FootViewType`
+**LoadMore**: 通过构建 `Footer.class` 和 `FootViewType` 实现数据和视图的绑定, 当 RecyclerView 滚动在底部时显示 `FootViewType`，在数据请求成功后移除 `FootViewType`
 
 [sample](https://github.com/Werb/MoreType/blob/master/app/src/main/java/com/werb/moretype/complete/CompleteActivity.kt)
 
