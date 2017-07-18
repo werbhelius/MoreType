@@ -99,6 +99,8 @@ class SingleRegisterActivity: AppCompatActivity() {
 
 **For use with `kotlin-android-extensions` to replace findViewById()**
 
+Upon completion of these three steps, a list based on the [Data Driven View] has been completed.
+
 ## Feature
 ### Multi Register: Register one2more ViewType
 
