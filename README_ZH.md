@@ -67,13 +67,13 @@ class SingleTypeOneViewType: MoreViewType<SingleText>() {
     }
 }
 ```
-**使用 `kotlin-android-extensions` 替换 findViewById()**
+**使用 `kotlin-android-extensions` 替代 findViewById()**
 
 * getViewLayout()：返回视图的 layout
 * getViewModel()：返回视图所对应的数据模型 data::class
 * bindData(): 绑定数据，处理点击等
 
-### Step 3. 在使用 `RecyclerView` 的地方，声明 `MoreAdapter()`对象，`register` 需要的 `viewType`，同时和 `RecyclerView` 绑定
+### Step 3. 在使用 `RecyclerView` 的地方，声明 `MoreAdapter()`对象，`register` 需要的 `viewType`，同时和 `RecyclerView` 绑定
 
 ```kotlin
 import kotlinx.android.synthetic.main.activity_single_register.*
@@ -100,7 +100,9 @@ class SingleRegisterActivity: AppCompatActivity() {
 
 }
 ```
-**使用 `kotlin-android-extensions` 替换 findViewById()**
+**使用 `kotlin-android-extensions` 替代 findViewById()**
+
+完成这三步，一个根据【数据驱动视图】的列表就已经构建完成。
 
 
 ## Feature
