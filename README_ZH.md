@@ -158,7 +158,7 @@ class SlideInLeftAnimation : MoreAnimation {
 **In ViewType 中处理点击事件** : 在viewType中使用 `view.setOnClickListener {}` 
 
 **In Activity 中处理点击事件** :
-1. 在 viewType 中使用 `holder.addOnClickListener(view: View)` or `holder.addOnClickListener(position: Int)` 绑定点击事件
+1. 在 viewType 中使用 `holder.addOnClickListener(view: View)` or `holder.addOnClickListener(viewId: Int)` 绑定点击事件
 2. 在 Activity 中通过 `viewType().setMoreClickListener()` 处理点击事件
 
 [sample](https://github.com/Werb/MoreType/tree/master/app/src/main/java/com/werb/moretype/click)

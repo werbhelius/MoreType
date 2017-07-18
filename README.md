@@ -155,7 +155,7 @@ Two ways to achieve ItemClick: **In ViewType** and **In Activity**
 **In ViewType** : Just use `view.setOnClickListener {}` in ViewType
 
 **In Activity** : 
-1. use `holder.addOnClickListener(view: View)` or `holder.addOnClickListener(position: Int)` to bind event in ViewType
+1. use `holder.addOnClickListener(view: View)` or `holder.addOnClickListener(viewId: Int)` to bind event in ViewType
 2. use `viewType().setMoreClickListener()` to deal event in Activity
 
 [sample](https://github.com/Werb/MoreType/tree/master/app/src/main/java/com/werb/moretype/click)
