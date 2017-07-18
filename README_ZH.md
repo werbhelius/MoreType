@@ -4,6 +4,9 @@
 
 中文版 | [English](https://github.com/Werb/MoreType/blob/master/README.md)
 
+[![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/Werb/MoreType/blob/master/LICENSE)
+ [ ![Download](https://api.bintray.com/packages/werbhelius/maven/moretype/images/download.svg) ](https://bintray.com/werbhelius/maven/moretype/_latestVersion)
+
 关键词:【数据驱动视图】
 
 之前在写公司的项目的时候，需要写大量的界面，这就意味着每一个界面都要写一个 Adapter，同时还要对不同的视图根据 getItemViewType() 写不同的 ViewHolder，在存在多种视图的时候，一个 Adapter 中的代码就会很冗余，而且耦合度很高，对后续的修改很不友好。
