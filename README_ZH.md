@@ -2,6 +2,8 @@
 
 > new method to build data in RecyclerView with Kotlin!
 
+<a href="https://fir.im/k9yq"><img src="https://raw.githubusercontent.com/Werb/MoreType/master/app/src/main/res/mipmap-xhdpi/app_icon.png" width = "90" alt="download" align=center /></a>
+
 中文版 | [English](https://github.com/Werb/MoreType/blob/master/README.md)
 
 [![Build Status](https://travis-ci.org/Werb/MoreType.svg?branch=master)](https://travis-ci.org/Werb/MoreType)
