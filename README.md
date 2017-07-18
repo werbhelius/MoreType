@@ -50,8 +50,6 @@ class SingleText {
 
 ### Step 2. create a class (xxxViewType) extends abstract class `MoreViewType<T : Any>()` , like:
 
-**For use with `kotlin-android-extensions` to replace findViewById()**
-
 ```kotlin
 import kotlinx.android.synthetic.main.item_view_single_type_one.view.*
 
@@ -69,10 +67,9 @@ class SingleTypeOneViewType: MoreViewType<SingleText>() {
     }
 }
 ```
+**For use with `kotlin-android-extensions` to replace findViewById()**
 
 ### Step 3. `register` and `attach` to `recyclerview` in Any where you build list, like:
-
-**For use with `kotlin-android-extensions` to replace findViewById()**
 
 ```kotlin
 import kotlinx.android.synthetic.main.activity_single_register.*
@@ -99,6 +96,8 @@ class SingleRegisterActivity: AppCompatActivity() {
 
 }
 ```
+
+**For use with `kotlin-android-extensions` to replace findViewById()**
 
 ## Feature
 ### Multi Register: Register one2more ViewType

@@ -50,8 +50,6 @@ class SingleText {
 
 ### Step 2. 创建一个类 xxxViewType 继承抽象类 `MoreViewType<T : Any>()` 例如:
 
-**使用 `kotlin-android-extensions` 替换 findViewById()**
-
 ```kotlin
 import kotlinx.android.synthetic.main.item_view_single_type_one.view.*
 
@@ -69,13 +67,13 @@ class SingleTypeOneViewType: MoreViewType<SingleText>() {
     }
 }
 ```
+**使用 `kotlin-android-extensions` 替换 findViewById()**
+
 * getViewLayout()：返回视图的 layout
 * getViewModel()：返回视图所对应的数据模型 data::class
 * bindData(): 绑定数据，处理点击等
 
 ### Step 3. 在使用 `RecyclerView` 的地方，声明 `MoreAdapter()`对象，`register` 需要的 `viewType`，同时和 `RecyclerView` 绑定
-
-**使用 `kotlin-android-extensions` 替换 findViewById()**
 
 ```kotlin
 import kotlinx.android.synthetic.main.activity_single_register.*
@@ -102,6 +100,8 @@ class SingleRegisterActivity: AppCompatActivity() {
 
 }
 ```
+**使用 `kotlin-android-extensions` 替换 findViewById()**
+
 
 ## Feature
 ### Multi Register: Register one2more ViewType
