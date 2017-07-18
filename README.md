@@ -2,7 +2,7 @@
 
 > new method to build data in RecyclerView with Kotlin!
 
-English|[中文版](https://github.com/Werb/MoreType/blob/master/README_ZH.md)
+English | [中文版](https://github.com/Werb/MoreType/blob/master/README_ZH.md)
 
 Keyword: Data driven view 【数据驱动视图】
 

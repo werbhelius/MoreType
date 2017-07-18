@@ -2,7 +2,7 @@
 
 > new method to build data in RecyclerView with Kotlin!
 
-中文版|[English](https://github.com/Werb/MoreType/blob/master/README.md)
+中文版 | [English](https://github.com/Werb/MoreType/blob/master/README.md)
 
 关键词:【数据驱动视图】
 
