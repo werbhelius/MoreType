@@ -28,6 +28,8 @@ Click icon download lastest sample
 
 **Release 版本将会在这个月底发布.**
 
+[与 MultiType 的异同](https://github.com/Werb/MoreType/issues/1)
+
 ## Preview
 ![more-type-one](./screenshot/type1.png)
 ![more-type-two](./screenshot/type2.png)
