@@ -19,6 +19,5 @@ class SingleTypeOneViewType: MoreViewType<SingleText>() {
         holder.itemView.title.text = data.title
         holder.itemView.desc.text = data.desc
         holder.itemView.icon.setImageURI(data.url)
-
     }
 }

@@ -44,13 +44,21 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
         val attachViewType = attachViewType(any)
         attachViewType.bindHolder(holder as MoreViewHolder)
         attachViewType.bindData(any, holder)
+        holder.itemView.setTag(R.id.moretype_item_viewtype, attachViewType)
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    override fun onViewRecycled(holder: ViewHolder?) {
+        if(holder is MoreViewHolder){
+            val moreViewType = holder.itemView.getTag(R.id.moretype_item_viewtype) as MoreViewType<Any>
+            moreViewType.unBindData(holder)
+        }
     }
 
     fun attachTo(view: RecyclerView): MoreLink {
         view.adapter = this
         return this
     }
-
 
     @Suppress("UNCHECKED_CAST")
     override fun loadData(data: Any) {

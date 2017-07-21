@@ -21,6 +21,9 @@ abstract class MoreViewType<T : Any>: MoreAction() {
     /** [bindData] bind data with T  */
     abstract fun bindData(data: T, holder: MoreViewHolder)
 
+    /** [unBindData] unbind and release resources*/
+    open fun unBindData(holder: MoreViewHolder){}
+
     /** [onCreateViewHolder] just like onCreateViewHolder() in RecyclerView.Adapter  */
     fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): MoreViewHolder{
         val view = inflater.inflate(getViewLayout(), parent, false)
