@@ -12,6 +12,8 @@ class MoreViewHolder(itemView: View) : ViewHolder(itemView) {
 
     private var action: MoreAction? = null
 
+    fun getItemView(): View = itemView
+
     fun setActionListener(action: MoreAction?) {
         this.action = action
     }
