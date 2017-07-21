@@ -36,11 +36,11 @@ Click icon download lastest sample
 
 ## Dependency
 ```gradle
-compile 'com.werb.moretype:moretype:0.1.0-beta'
+compile 'com.werb.moretype:moretype:0.1.5-beta2'
 ```
 or
 ```gradle
-implementation 'com.werb.moretype:moretype:0.1.0-beta'
+implementation 'com.werb.moretype:moretype:0.1.5-beta2'
 ```
 
 ## Usage
