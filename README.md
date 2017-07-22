@@ -69,9 +69,9 @@ class SingleTypeOneViewType: MoreViewType<SingleText>() {
     override fun getViewModel(): KClass<SingleText> = SingleText::class
 
     override fun bindData(data: SingleText, holder: MoreViewHolder) {
-        holder.itemView.title.text = data.title
-        holder.itemView.desc.text = data.desc
-        holder.itemView.icon.setImageURI(data.url)
+        holder.getItemView().title.text = data.title
+        holder.getItemView().desc.text = data.desc
+        holder.getItemView().icon.setImageURI(data.url)
 
     }
 }
