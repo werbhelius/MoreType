@@ -1,6 +1,5 @@
 package com.werb.moretype
 
-import android.view.View
 import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
 import com.werb.moretype.main.MainCard
@@ -16,8 +15,11 @@ class TitleViewType: MoreViewType<MainCard>() {
 
     override fun getViewModel(): KClass<MainCard> = MainCard::class
 
+    private val title = itemView.title
+    private val desc = itemView.desc
+
     override fun bindData(data: MainCard, holder: MoreViewHolder) {
-        holder.itemView.title.text = data.cardTitle
-        holder.itemView.desc.text = data.cardDesc
+        title.text = data.cardTitle
+        desc.desc.text = data.cardDesc
     }
 }

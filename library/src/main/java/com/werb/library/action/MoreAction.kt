@@ -1,5 +1,6 @@
 package com.werb.library.action
 
+import android.view.View
 import com.werb.library.MoreViewHolder
 
 
@@ -10,6 +11,11 @@ import com.werb.library.MoreViewHolder
 abstract class MoreAction: Action{
 
     var moreListener: MoreClickListener? = null
+    lateinit var itemView: View
+
+    override fun initHolder(holder: MoreViewHolder) {
+        this.itemView = holder.getItemView()
+    }
 
     override fun bindHolder(holder: MoreViewHolder) {
         holder.setActionListener(this)

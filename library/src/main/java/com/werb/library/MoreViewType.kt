@@ -1,6 +1,7 @@
 package com.werb.library
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import com.werb.library.action.MoreAction
 import kotlin.reflect.KClass
@@ -27,7 +28,9 @@ abstract class MoreViewType<T : Any>: MoreAction() {
     /** [onCreateViewHolder] just like onCreateViewHolder() in RecyclerView.Adapter  */
     fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): MoreViewHolder{
         val view = inflater.inflate(getViewLayout(), parent, false)
-        return MoreViewHolder(view)
+        val moreViewHolder = MoreViewHolder(view)
+        initHolder(moreViewHolder)
+        return moreViewHolder
     }
 
 }
