@@ -22,7 +22,7 @@ import com.werb.library.action.DataAction
  */
 class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
 
-    private var list: MutableList<Any> = mutableListOf()
+    val list: MutableList<Any> = mutableListOf()
     private val linkManager = MoreLinkManager(this)
     private var animation: MoreAnimation? = null
     private var animDuration = 250L
