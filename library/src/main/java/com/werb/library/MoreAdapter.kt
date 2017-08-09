@@ -90,8 +90,10 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
     override fun getData(position: Int): Any = list[position]
 
     override fun removeAllData() {
-        list.clear()
-        notifyDataSetChanged()
+        if(list.isNotEmpty()) {
+            list.clear()
+            notifyDataSetChanged()
+        }
     }
 
     override fun removeAllNotRefresh() {
