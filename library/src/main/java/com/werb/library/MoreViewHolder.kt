@@ -12,7 +12,8 @@ import com.werb.library.action.MoreAction
  */
 class MoreViewHolder(itemView: View) : ViewHolder(itemView) {
 
-    private var action: MoreAction? = null
+    var action: MoreAction? = null
+        private set
     private val viewMap = SparseArrayCompat<View>()
 
     fun getItemView(): View = itemView
