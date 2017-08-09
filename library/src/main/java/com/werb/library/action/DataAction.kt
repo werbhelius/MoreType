@@ -16,6 +16,9 @@ interface DataAction {
     /** [removeAllData] remove all data */
     fun removeAllData()
 
+    /** [removeAllNotRefresh] remove all data not notifyDataSetChanged */
+    fun removeAllNotRefresh()
+
     /** [removeData] remove data by item object */
     fun removeData(data: Any)
 

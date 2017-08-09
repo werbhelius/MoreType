@@ -83,6 +83,10 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
         notifyDataSetChanged()
     }
 
+    override fun removeAllNotRefresh() {
+        list.clear()
+    }
+
     override fun removeData(data: Any) {
         val contains = list.contains(data)
         if (contains) {
