@@ -76,6 +76,17 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
+    override fun loadData(index: Int, data: Any) {
+        if (data is List<*>) {
+            list.addAll(index, data as Collection<Any>)
+            notifyItemRangeInserted(index, data.size)
+        } else {
+            list.add(index, data)
+            notifyItemInserted(index)
+        }
+    }
+
     override fun getData(position: Int): Any = list[position]
 
     override fun removeAllData() {

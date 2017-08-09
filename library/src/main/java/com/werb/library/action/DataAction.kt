@@ -10,6 +10,9 @@ interface DataAction {
     /** [loadData] add data */
     fun loadData(data: Any)
 
+    /** [loadData] add data */
+    fun loadData(index: Int ,data: Any)
+
     /** [getData] get data by position */
     fun getData(position: Int): Any
 
