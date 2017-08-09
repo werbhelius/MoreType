@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
+                <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/type"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"

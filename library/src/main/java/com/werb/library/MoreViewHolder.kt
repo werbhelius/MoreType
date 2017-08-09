@@ -1,8 +1,10 @@
 package com.werb.library
 
+import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.View
 import com.werb.library.action.MoreAction
+
 
 /**
  * [MoreViewHolder] Base ViewHolder implement Action fun
@@ -11,6 +13,7 @@ import com.werb.library.action.MoreAction
 class MoreViewHolder(itemView: View) : ViewHolder(itemView) {
 
     private var action: MoreAction? = null
+    private val viewMap = SparseArrayCompat<View>()
 
     fun getItemView(): View = itemView
 
@@ -19,7 +22,7 @@ class MoreViewHolder(itemView: View) : ViewHolder(itemView) {
     }
 
     fun addOnClickListener(viewId: Int) {
-         itemView.findViewById<View>(viewId).setOnClickListener { action?.moreListener?.onItemClick(it, layoutPosition) }
+        itemView.findViewById<View>(viewId).setOnClickListener { action?.moreListener?.onItemClick(it, layoutPosition) }
     }
 
     fun addOnClickListener(view: View) {
@@ -46,5 +49,15 @@ class MoreViewHolder(itemView: View) : ViewHolder(itemView) {
                 }
             }
         }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    fun <T: View>findViewOften(viewId: Int): T {
+        var view = viewMap.get(viewId)
+        if (view == null) {
+            view = itemView.findViewById(viewId)
+            viewMap.put(viewId, view)
+        }
+        return view as T
     }
 }

@@ -1,24 +1,34 @@
 package com.werb.moretype.anim
 
+import android.support.v7.widget.AppCompatTextView
+import android.view.View
+import com.facebook.drawee.view.SimpleDraweeView
 import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
 import com.werb.moretype.R
-import kotlin.reflect.KClass
 import kotlinx.android.synthetic.main.item_view_anim.view.*
 
 /**
  * Created by wanbo on 2017/7/15.
  */
-class AnimViewType : MoreViewType<AnimType>() {
+class AnimViewType : MoreViewType<AnimType>(R.layout.item_view_anim, AnimType::class) {
 
-    override fun getViewLayout(): Int = R.layout.item_view_anim
+    private lateinit var title: AppCompatTextView
+    private lateinit var type: AppCompatTextView
+    private lateinit var icon: SimpleDraweeView
+    private lateinit var thumb: SimpleDraweeView
 
-    override fun getViewModel(): KClass<AnimType> = AnimType::class
+    override fun initView(holder: MoreViewHolder) {
+        title = holder.findViewOften(R.id.title)
+        type = holder.findViewOften(R.id.type)
+        icon = holder.findViewOften(R.id.icon)
+        thumb = holder.findViewOften(R.id.thumb)
+    }
 
     override fun bindData(data: AnimType, holder: MoreViewHolder) {
-        holder.itemView.title.text = data.title
-        holder.itemView.type.text = data.type
-        holder.itemView.icon.setImageURI(data.typeIcon)
-        holder.itemView.thumb.setImageURI(data.thumb)
+        title.text = data.title
+        type.text = data.type
+        icon.setImageURI(data.typeIcon)
+        thumb.setImageURI(data.thumb)
     }
 }

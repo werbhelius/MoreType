@@ -8,9 +8,6 @@ import com.werb.library.MoreViewHolder
  */
 interface Action {
 
-    /** [initHolder] init holder */
-    fun initHolder(holder: MoreViewHolder)
-
     /** [bindHolder] bind holder with action */
     fun bindHolder(holder: MoreViewHolder)
 

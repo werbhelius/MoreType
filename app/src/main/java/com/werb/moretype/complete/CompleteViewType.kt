@@ -1,8 +1,11 @@
 package com.werb.moretype.complete
 
+import android.content.Context
 import android.support.v7.widget.AppCompatTextView
 import android.text.TextUtils
 import android.view.LayoutInflater
+import android.view.View
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.Toast
@@ -18,33 +21,44 @@ import kotlinx.android.synthetic.main.item_view_multi_message_in.view.*
 /**
  * Created by wanbo on 2017/7/15.
  */
-class CompleteViewType: MoreViewType<Complete>() {
+class CompleteViewType: MoreViewType<Complete>(R.layout.item_view_complete, Complete::class) {
 
-    override fun getViewLayout(): Int = R.layout.item_view_complete
+    private lateinit var context: Context
+    private lateinit var icon: SimpleDraweeView
+    private lateinit var name: AppCompatTextView
+    private lateinit var desc: AppCompatTextView
+    private lateinit var time: AppCompatTextView
+    private lateinit var complete_content_layout: LinearLayout
 
-    override fun getViewModel(): KClass<Complete> = Complete::class
+    override fun initView(holder: MoreViewHolder) {
+        context = holder.getItemView().context
+        icon = holder.findViewOften(R.id.icon)
+        name = holder.findViewOften(R.id.name)
+        desc = holder.findViewOften(R.id.desc)
+        time = holder.findViewOften(R.id.time)
+        complete_content_layout = holder.findViewOften(R.id.complete_content_layout)
+    }
 
     override fun bindData(data: Complete, holder: MoreViewHolder) {
-        val context = holder.itemView.context
-        holder.itemView.icon.setImageURI(data.icon)
-        holder.itemView.name.text = data.name
-        holder.itemView.desc.text = data.desc
-        holder.itemView.time.text = Utils.sendTime(data.time.toLong() * 1000)
-        holder.itemView.complete_content_layout.removeAllViews()
+        icon.setImageURI(data.icon)
+        name.text = data.name
+        desc.text = data.desc
+        time.text = Utils.sendTime(data.time.toLong() * 1000)
+        complete_content_layout.removeAllViews()
         if(!TextUtils.isEmpty(data.text)){
-            val currentLayout = LayoutInflater.from(context).inflate(R.layout.widget_view_complete_text, holder.itemView.message_content_layout, false) as RelativeLayout
+            val currentLayout = LayoutInflater.from(context).inflate(R.layout.widget_view_complete_text, complete_content_layout, false) as RelativeLayout
             val text = currentLayout.findViewById<AppCompatTextView>(R.id.complete_text)
             text.text = data.text
-            holder.itemView.complete_content_layout.addView(currentLayout)
+            complete_content_layout.addView(currentLayout)
             val params = currentLayout.layoutParams as LinearLayout.LayoutParams
             params.bottomMargin = 15
         }
         if(!TextUtils.isEmpty(data.image)){
-            val currentLayout = LayoutInflater.from(context).inflate(R.layout.widget_view_message_in_image, holder.itemView.message_content_layout, false) as RelativeLayout
+            val currentLayout = LayoutInflater.from(context).inflate(R.layout.widget_view_message_in_image, complete_content_layout, false) as RelativeLayout
             val image = currentLayout.findViewById<SimpleDraweeView>(R.id.message_in_image)
             image.setImageURI(data.image)
             setImgSize(data.width, data.height, image)
-            holder.itemView.complete_content_layout.addView(currentLayout)
+            complete_content_layout.addView(currentLayout)
             val params = currentLayout.layoutParams as LinearLayout.LayoutParams
             params.topMargin = 10
         }

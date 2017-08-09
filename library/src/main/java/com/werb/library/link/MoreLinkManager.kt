@@ -34,8 +34,8 @@ class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
      *  [viewTypeMap] and [modelTypeMap] will remove oldViewType and replace by newViewType
      */
     override fun register(viewType: MoreViewType<*>): MoreAdapter {
-        val type = viewType.getViewLayout()
-        val model = viewType.getViewModel()
+        val type = viewType.layoutId
+        val model = viewType.clazz
         if(modelTypeMap.indexOfValue(model) != -1){
             val index = modelTypeMap.indexOfValue(model)
             val key = viewTypeMap.keyAt(index)

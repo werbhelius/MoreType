@@ -11,13 +11,10 @@ import kotlin.reflect.KClass
  * [MoreViewType] link with model
  * Created by wanbo on 2017/7/2.
  */
-abstract class MoreViewType<T : Any>: MoreAction() {
-
-    /** [getViewLayout] is unique and will help to build link */
-    abstract fun getViewLayout(): Int
-
-    /** [getViewModel] model link with viewType */
-    abstract fun  getViewModel(): KClass<T>
+abstract class MoreViewType<T: Any>(internal val layoutId: Int,
+                                     internal val clazz: KClass<T>): MoreAction() {
+    /** [initView] find view  */
+    abstract fun initView(holder: MoreViewHolder)
 
     /** [bindData] bind data with T  */
     abstract fun bindData(data: T, holder: MoreViewHolder)
@@ -27,9 +24,8 @@ abstract class MoreViewType<T : Any>: MoreAction() {
 
     /** [onCreateViewHolder] just like onCreateViewHolder() in RecyclerView.Adapter  */
     fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): MoreViewHolder{
-        val view = inflater.inflate(getViewLayout(), parent, false)
+        val view = inflater.inflate(layoutId, parent, false)
         val moreViewHolder = MoreViewHolder(view)
-        initHolder(moreViewHolder)
         return moreViewHolder
     }
 

@@ -1,23 +1,33 @@
 package com.werb.moretype.single
 
+import android.support.v7.widget.AppCompatTextView
+import android.view.View
+import com.facebook.drawee.view.SimpleDraweeView
 import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
 import com.werb.moretype.R
 import kotlinx.android.synthetic.main.item_view_single_type_one.view.*
-import kotlin.reflect.KClass
 
 /**
  * Created by wanbo on 2017/7/14.
  */
-class SingleTypeOneViewType: MoreViewType<SingleText>() {
+class SingleTypeOneViewType: MoreViewType<SingleText>(R.layout.item_view_single_type_one, SingleText::class) {
 
-    override fun getViewLayout(): Int = R.layout.item_view_single_type_one
+    private lateinit var title: AppCompatTextView
+    private lateinit var desc: AppCompatTextView
+    private lateinit var icon: SimpleDraweeView
 
-    override fun getViewModel(): KClass<SingleText> = SingleText::class
+    override fun initView(holder: MoreViewHolder) {
+        title = holder.findViewOften(R.id.title)
+        desc = holder.findViewOften(R.id.desc)
+        icon = holder.findViewOften(R.id.icon)
+    }
 
     override fun bindData(data: SingleText, holder: MoreViewHolder) {
-        holder.itemView.title.text = data.title
-        holder.itemView.desc.text = data.desc
-        holder.itemView.icon.setImageURI(data.url)
+        title.text = data.title
+        desc.text = data.desc
+        icon.setImageURI(data.url)
     }
+
+
 }
