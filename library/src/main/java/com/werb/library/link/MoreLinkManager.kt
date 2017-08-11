@@ -7,6 +7,7 @@ import com.werb.library.MoreViewType
 import com.werb.library.exception.ModelNotRegisterException
 import com.werb.library.exception.MultiModelNotRegisterException
 import kotlin.reflect.KClass
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 
 /**
@@ -62,6 +63,12 @@ class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
     override fun multiRegister(clazz: KClass<*>, link: MultiLink<*>): MoreAdapter {
         @Suppress("UNCHECKED_CAST")
         multiModelMap.put(clazz, link as MultiLink<Any>)
+        return adapter
+    }
+
+    override fun multiRegister(clazz: Class<*>, link: MultiLink<*>): MoreAdapter {
+        @Suppress("UNCHECKED_CAST")
+        multiModelMap.put(clazz.kotlin, link as MultiLink<Any>)
         return adapter
     }
 

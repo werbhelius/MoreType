@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView.Adapter
 import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.LinearInterpolator
+import com.werb.library.action.DataAction
 import com.werb.library.extension.AlphaAnimation
 import com.werb.library.extension.AnimExtension
 import com.werb.library.extension.MoreAnimation
@@ -12,8 +14,6 @@ import com.werb.library.link.MoreLink
 import com.werb.library.link.MoreLinkManager
 import com.werb.library.link.MultiLink
 import kotlin.reflect.KClass
-import android.view.animation.LinearInterpolator
-import com.werb.library.action.DataAction
 
 
 /**
@@ -23,7 +23,7 @@ import com.werb.library.action.DataAction
 class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
 
     val list: MutableList<Any> = mutableListOf()
-    private val linkManager = MoreLinkManager(this)
+    private val linkManager: MoreLink = MoreLinkManager(this)
     private var animation: MoreAnimation? = null
     private var animDuration = 250L
     private var startAnimPosition = 0
@@ -32,9 +32,9 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val moreViewType = buildViewType(viewType)
-        if (moreViewType == null){
+        if (moreViewType == null) {
             return attachViewType(list[viewType]).onCreateViewHolder(LayoutInflater.from(parent?.context), parent as ViewGroup)
-        }else {
+        } else {
             return moreViewType.onCreateViewHolder(LayoutInflater.from(parent?.context), parent as ViewGroup)
         }
     }
@@ -50,7 +50,7 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
 
     @Suppress("UNCHECKED_CAST")
     override fun onViewRecycled(holder: ViewHolder?) {
-        if(holder is MoreViewHolder){
+        if (holder is MoreViewHolder) {
             val moreViewType = holder.itemView.getTag(R.id.moretype_item_viewtype) as MoreViewType<Any>
             moreViewType.unBindData(holder)
         }
@@ -65,7 +65,7 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
     override fun loadData(data: Any) {
         if (data is List<*>) {
             var position = 0
-            if (list.size > 0){
+            if (list.size > 0) {
                 position = list.size
             }
             list.addAll(position, data as Collection<Any>)
@@ -90,7 +90,7 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
     override fun getData(position: Int): Any = list[position]
 
     override fun removeAllData() {
-        if(list.isNotEmpty()) {
+        if (list.isNotEmpty()) {
             list.clear()
             notifyDataSetChanged()
         }
@@ -109,10 +109,10 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
     }
 
     override fun removeData(position: Int) {
-        if(list.size == 0){
+        if (list.size == 0) {
             return
         }
-        if (position >= 0 && position <= list.size - 1){
+        if (position >= 0 && position <= list.size - 1) {
             list.removeAt(position)
             notifyItemRemoved(position)
         }
@@ -123,9 +123,9 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
     override fun getItemViewType(position: Int): Int {
         val any = list[position]
         val viewLayout = attachViewTypeLayout(any)
-        if (viewLayout == -1){
+        if (viewLayout == -1) {
             return position
-        }else {
+        } else {
             return viewLayout
         }
     }
@@ -136,13 +136,13 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
     }
 
     /** [renderWithAnimation] user default animation AlphaAnimation */
-    override fun renderWithAnimation() : MoreAdapter{
+    override fun renderWithAnimation(): MoreAdapter {
         this.animation = AlphaAnimation()
         return this
     }
 
     /** [renderWithAnimation] user custom animation */
-    override fun renderWithAnimation(animation: MoreAnimation) : MoreAdapter {
+    override fun renderWithAnimation(animation: MoreAnimation): MoreAdapter {
         this.animation = animation
         return this
     }
@@ -150,10 +150,10 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
     /** [addAnimation] addAnimation when view attached to windows */
     override fun addAnimation(holder: MoreViewHolder) {
         this.animation?.let {
-            if(holder.layoutPosition < startAnimPosition){
+            if (holder.layoutPosition < startAnimPosition) {
                 return
             }
-            if(!firstShow || holder.layoutPosition > lastAnimPosition) {
+            if (!firstShow || holder.layoutPosition > lastAnimPosition) {
                 val animators = it.getItemAnimators(holder.itemView)
                 for (anim in animators) {
                     anim.setDuration(animDuration).start()
@@ -165,7 +165,7 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
     }
 
     /** [duration] set animation duration */
-    override fun duration(duration: Long) : MoreAdapter {
+    override fun duration(duration: Long): MoreAdapter {
         this.animDuration = duration
         return this
     }
@@ -173,7 +173,7 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
     /** [firstShowAnim] set isShow animation when first display  */
     override fun firstShowAnim(firstShow: Boolean): MoreAdapter {
         this.firstShow = firstShow
-        return  this
+        return this
     }
 
     /** [startAnimPosition] set animation start position */
@@ -190,6 +190,12 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
 
     /** [multiRegister] multiRegister viewType like one2more case , user MultiLink to choose which one is we need */
     override fun multiRegister(clazz: KClass<out Any>, link: MultiLink<*>): MoreAdapter {
+        linkManager.multiRegister(clazz, link)
+        return this
+    }
+
+    /** [multiRegister] multiRegister viewType like one2more case , user MultiLink to choose which one is we need */
+    override fun multiRegister(clazz: Class<*>, link: MultiLink<*>): MoreAdapter {
         linkManager.multiRegister(clazz, link)
         return this
     }
