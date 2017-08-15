@@ -118,6 +118,12 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
         }
     }
 
+    override fun replaceData(position: Int, data: Any) {
+        list.removeAt(position)
+        list.add(position, data)
+        notifyItemChanged(position)
+    }
+
     override fun getItemCount(): Int = list.size
 
     override fun getItemViewType(position: Int): Int {

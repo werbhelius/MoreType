@@ -28,4 +28,7 @@ interface DataAction {
     /** [removeData] remove data by position */
     fun removeData(position: Int)
 
+    /** [replaceData] replace data by position */
+    fun replaceData(position: Int, data: Any)
+
 }
