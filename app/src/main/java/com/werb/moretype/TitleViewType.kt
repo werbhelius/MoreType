@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.item_view_title.view.*
 /**
  * Created by wanbo on 2017/7/14.
  */
-class TitleViewType: MoreViewType<MainCard>(R.layout.item_view_title, MainCard::class) {
+class TitleViewType: MoreViewType<MainCard>(R.layout.item_view_title) {
 
     private lateinit var title: AppCompatTextView
     private lateinit var desc: AppCompatTextView

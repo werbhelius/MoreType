@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_view_about_me_thx.view.*
 /**
  * Created by wanbo on 2017/7/15.
  */
-class MeThanksViewType: MoreViewType<MeThanks>(R.layout.item_view_about_me_thx, MeThanks::class) {
+class MeThanksViewType: MoreViewType<MeThanks>(R.layout.item_view_about_me_thx) {
 
     private lateinit var name: AppCompatTextView
     private lateinit var desc: AppCompatTextView

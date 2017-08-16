@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.item_view_main.view.*
 /**
  * Created by wanbo on 2017/7/14.
  */
-class MainCardViewType : MoreViewType<MainCard>(R.layout.item_view_main, MainCard::class) {
+class MainCardViewType : MoreViewType<MainCard>(R.layout.item_view_main) {
 
     private lateinit var card_title: AppCompatTextView
     private lateinit var card_desc: AppCompatTextView

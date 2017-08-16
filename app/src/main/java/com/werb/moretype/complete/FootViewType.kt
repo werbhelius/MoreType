@@ -7,7 +7,7 @@ import com.werb.moretype.R
 /**
  * Created by wanbo on 2017/7/15.
  */
-class FootViewType : MoreViewType<Footer>(R.layout.item_view_footer, Footer::class) {
+class FootViewType : MoreViewType<Footer>(R.layout.item_view_footer) {
 
     override fun initView(holder: MoreViewHolder) {
     }

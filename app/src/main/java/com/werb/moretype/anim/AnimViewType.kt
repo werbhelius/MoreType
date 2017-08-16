@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_view_anim.view.*
 /**
  * Created by wanbo on 2017/7/15.
  */
-class AnimViewType : MoreViewType<AnimType>(R.layout.item_view_anim, AnimType::class) {
+class AnimViewType : MoreViewType<AnimType>(R.layout.item_view_anim) {
 
     private lateinit var title: AppCompatTextView
     private lateinit var type: AppCompatTextView

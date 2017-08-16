@@ -8,7 +8,7 @@ import com.werb.moretype.R
 /**
  * Created by wanbo on 2017/7/15.
  */
-class MeMessageViewType: MoreViewType<MeMessage>(R.layout.item_view_about_me_message, MeMessage::class) {
+class MeMessageViewType: MoreViewType<MeMessage>(R.layout.item_view_about_me_message) {
 
     private lateinit var message: AppCompatTextView
 

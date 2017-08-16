@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_view_about_me_title.view.*
 /**
  * Created by wanbo on 2017/7/15.
  */
-class MeTitleViewType: MoreViewType<String>(R.layout.item_view_about_me_title, String::class) {
+class MeTitleViewType: MoreViewType<String>(R.layout.item_view_about_me_title) {
 
     private lateinit var title: AppCompatTextView
 

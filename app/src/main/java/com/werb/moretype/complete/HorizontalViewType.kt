@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.item_view_horizontal_list.view.*
 /**
  * Created by wanbo on 2017/7/15.
  */
-class HorizontalViewType: MoreViewType<HorizontalData>(R.layout.item_view_horizontal_list, HorizontalData::class) {
+class HorizontalViewType: MoreViewType<HorizontalData>(R.layout.item_view_horizontal_list) {
 
     private val adapter = MoreAdapter()
     private lateinit var itemView: View

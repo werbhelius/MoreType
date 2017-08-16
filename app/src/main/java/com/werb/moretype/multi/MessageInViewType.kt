@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_view_multi_message_in.view.*
 /**
  * Created by wanbo on 2017/7/14.
  */
-class MessageInViewType : MoreViewType<Message>(R.layout.item_view_multi_message_in, Message::class) {
+class MessageInViewType : MoreViewType<Message>(R.layout.item_view_multi_message_in) {
 
     private lateinit var message_icon: SimpleDraweeView
     private lateinit var message_time: AppCompatTextView

@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.item_view_multi_message_in.view.*
 /**
  * Created by wanbo on 2017/7/15.
  */
-class CompleteViewType: MoreViewType<Complete>(R.layout.item_view_complete, Complete::class) {
+class CompleteViewType: MoreViewType<Complete>(R.layout.item_view_complete) {
 
     private lateinit var context: Context
     private lateinit var icon: SimpleDraweeView

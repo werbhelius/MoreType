@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_view_click_two.view.*
 /**
  * Created by wanbo on 2017/7/15.
  */
-class ItemClickTwoViewType: MoreViewType<ItemClick>(R.layout.item_view_click_two, ItemClick::class) {
+class ItemClickTwoViewType: MoreViewType<ItemClick>(R.layout.item_view_click_two) {
 
     private lateinit var itemView: View
     private lateinit var context: Context

@@ -11,14 +11,12 @@ import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
 import com.werb.moretype.R
 import com.werb.moretype.Utils
-import kotlinx.android.synthetic.main.item_view_multi_message_out.view.*
-import kotlin.reflect.KClass
 
 
 /**
  * Created by wanbo on 2017/7/14.
  */
-class MessageOutViewType : MoreViewType<Message>(R.layout.item_view_multi_message_out, Message::class) {
+class MessageOutViewType : MoreViewType<Message>(R.layout.item_view_multi_message_out) {
 
     private lateinit var message_time: AppCompatTextView
     private lateinit var message_content_layout: FrameLayout

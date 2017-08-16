@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_view_horizontal_item.view.*
 /**
  * Created by wanbo on 2017/7/15.
  */
-class HorizontalItemViewType: MoreViewType<SingleText>(R.layout.item_view_horizontal_item, SingleText::class) {
+class HorizontalItemViewType: MoreViewType<SingleText>(R.layout.item_view_horizontal_item) {
 
     private lateinit var title: AppCompatTextView
     private lateinit var desc: AppCompatTextView

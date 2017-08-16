@@ -15,7 +15,7 @@ import kotlin.reflect.KClass
 /**
  * Created by wanbo on 2017/7/15.
  */
-class MeInfoViewType : MoreViewType<MeInfo>(R.layout.item_view_about_me_info, MeInfo::class) {
+class MeInfoViewType : MoreViewType<MeInfo>(R.layout.item_view_about_me_info) {
 
     private lateinit var name: AppCompatTextView
     private lateinit var desc: AppCompatTextView

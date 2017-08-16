@@ -24,10 +24,10 @@ class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
     private var viewTypeMap = SparseArrayCompat<MoreViewType<Any>>()
 
     /** [modelTypeMap] save Data::class by layout id */
-    private var modelTypeMap = SparseArrayCompat<KClass<out Any>>()
+    private var modelTypeMap = SparseArrayCompat<Class<*>>()
 
     /** [multiModelMap] save [MultiLink] by Data::class */
-    private var multiModelMap = mutableMapOf<KClass<*>, MultiLink<Any>>()
+    private var multiModelMap = mutableMapOf<Class<*>, MultiLink<Any>>()
 
     /**
      *  [register] register single MoreViewType , MoreViewType can't repeat
@@ -62,13 +62,13 @@ class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
      */
     override fun multiRegister(clazz: KClass<*>, link: MultiLink<*>): MoreAdapter {
         @Suppress("UNCHECKED_CAST")
-        multiModelMap.put(clazz, link as MultiLink<Any>)
+        multiModelMap.put(clazz.java, link as MultiLink<Any>)
         return adapter
     }
 
     override fun multiRegister(clazz: Class<*>, link: MultiLink<*>): MoreAdapter {
         @Suppress("UNCHECKED_CAST")
-        multiModelMap.put(clazz.kotlin, link as MultiLink<Any>)
+        multiModelMap.put(clazz, link as MultiLink<Any>)
         return adapter
     }
 
@@ -79,7 +79,7 @@ class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
      * if data not register will throw [ModelNotRegisterException]
      */
     override fun attachViewTypeLayout(any: Any): Int {
-        val clazz = any::class
+        val clazz = any.javaClass
         val type = modelTypeMap.indexOfValue(clazz)
         if (type == -1){
             val multiClazz = multiModelMap.containsKey(clazz)
@@ -100,7 +100,7 @@ class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
      * if data not register will throw [ModelNotRegisterException]
      */
     override fun attachViewType(any: Any): MoreViewType<Any> {
-        val clazz = any::class
+        val clazz = any.javaClass
         val type = modelTypeMap.indexOfValue(clazz)
         if (type == -1){
             val multiClazz = multiModelMap.containsKey(clazz)
