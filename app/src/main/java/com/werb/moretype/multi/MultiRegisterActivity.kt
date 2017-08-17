@@ -45,11 +45,11 @@ class MultiRegisterActivity : AppCompatActivity() {
         multi_register_list.layoutManager = LinearLayoutManager(this)
         adapter.register(TitleViewType())
                 .multiRegister(Message::class, object : MultiLink<Message> {
-                    override fun link(data: Message): MoreViewType<Message>? {
-                        if (data.me) {
-                            return MessageOutViewType()
+                    override fun link(data: Message): MoreViewType<Message> {
+                        return if (data.me) {
+                            MessageOutViewType()
                         } else {
-                            return MessageInViewType()
+                            MessageInViewType()
                         }
                     }
                 })
@@ -61,7 +61,7 @@ class MultiRegisterActivity : AppCompatActivity() {
             run {
                 if (hasFocus) {
                     view.postDelayed({
-                        multi_register_list.smoothScrollToPosition(adapter.itemCount)
+                        multi_register_list.smoothScrollToPosition(adapter.itemCount -1)
                     }, 250)
                 }
             }
@@ -75,7 +75,7 @@ class MultiRegisterActivity : AppCompatActivity() {
         if (!TextUtils.isEmpty(input_edit.text.toString())) {
             adapter.loadData(buildSendMessageText())
             input_edit.setText("")
-            multi_register_list.smoothScrollToPosition(adapter.itemCount)
+            multi_register_list.smoothScrollToPosition(adapter.itemCount -1)
         }
     }
 

@@ -7,7 +7,6 @@ import com.werb.library.MoreViewType
 import com.werb.library.exception.ModelNotRegisterException
 import com.werb.library.exception.MultiModelNotRegisterException
 import kotlin.reflect.KClass
-import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 
 /**
@@ -29,6 +28,9 @@ class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
     /** [multiModelMap] save [MultiLink] by Data::class */
     private var multiModelMap = mutableMapOf<KClass<*>, MultiLink<Any>>()
 
+    /** [multiViewTypeMap] save MoreViewType by layout id */
+    private var multiViewTypeMap = SparseArrayCompat<MoreViewType<Any>>()
+
     /**
      *  [register] register single MoreViewType , MoreViewType can't repeat
      *  if two ViewType's getViewModel() return same Data::class
@@ -37,7 +39,7 @@ class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
     override fun register(viewType: MoreViewType<*>): MoreAdapter {
         val type = viewType.layoutId
         val model = viewType.clazz
-        if(modelTypeMap.indexOfValue(model) != -1){
+        if (modelTypeMap.indexOfValue(model) != -1) {
             val index = modelTypeMap.indexOfValue(model)
             val key = viewTypeMap.keyAt(index)
             val oldViewType = viewTypeMap[key]
@@ -81,11 +83,18 @@ class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
     override fun attachViewTypeLayout(any: Any): Int {
         val clazz = any::class
         val type = modelTypeMap.indexOfValue(clazz)
-        if (type == -1){
+        if (type == -1) {
             val multiClazz = multiModelMap.containsKey(clazz)
-            if(multiClazz){
-                return -1
-            }else {
+            if (multiClazz) {
+                val multiLink = multiModelMap[clazz]
+                val viewType = multiLink?.link(any)
+                if (viewType != null) {
+                    if (multiViewTypeMap.get(viewType.layoutId) == null) {
+                        multiViewTypeMap.put(viewType.layoutId, viewType)
+                    }
+                    return viewType.layoutId
+                }
+            } else {
                 throw ModelNotRegisterException(clazz.simpleName as String)
             }
         }
@@ -102,12 +111,17 @@ class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
     override fun attachViewType(any: Any): MoreViewType<Any> {
         val clazz = any::class
         val type = modelTypeMap.indexOfValue(clazz)
-        if (type == -1){
+        if (type == -1) {
             val multiClazz = multiModelMap.containsKey(clazz)
-            if(multiClazz){
+            if (multiClazz) {
                 val multiLink = multiModelMap[clazz]
-                return  multiLink?.link(any)?.let { it } ?: throw MultiModelNotRegisterException(clazz.simpleName as String)
-            }else {
+                val viewType = multiLink?.link(any)
+                if (viewType != null) {
+                    return multiViewTypeMap[viewType.layoutId]
+                } else {
+                    throw MultiModelNotRegisterException(clazz.simpleName as String)
+                }
+            } else {
                 throw ModelNotRegisterException(clazz.simpleName as String)
             }
         } else {
@@ -117,17 +131,29 @@ class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
     }
 
     /** [buildViewType] return MoreViewType in onCreateViewHolder() to create viewHolder*/
-    override fun buildViewType(type: Int): MoreViewType<Any>? {
+    override fun buildViewType(type: Int): MoreViewType<Any> {
         if (type == -1) {
             throw  NullPointerException("no such type!")
         }
-        return viewTypeMap[type]
+
+        val viewType = viewTypeMap[type]
+        val multiViewType = multiViewTypeMap[type]
+
+        if (viewType != null){
+            return viewType
+        }
+
+        if (multiViewType != null){
+            return multiViewType
+        }
+
+        throw  NullPointerException("no such type!")
     }
 
     /** [userSoleRegister] single register Global ViewType */
     override fun userSoleRegister(): MoreAdapter {
         val viewTypes = SoleLinkManager.viewTypes
-        for (viewType in viewTypes){
+        for (viewType in viewTypes) {
             register(viewType)
         }
         return adapter

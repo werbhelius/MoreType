@@ -34,7 +34,7 @@ class ItemClickActivity : AppCompatActivity() {
         item_click_list.layoutManager = LinearLayoutManager(this)
         adapter.register(TitleViewType())
                 .multiRegister(ItemClick::class, object : MultiLink<ItemClick> {
-                    override fun link(data: ItemClick): MoreViewType<ItemClick>? {
+                    override fun link(data: ItemClick): MoreViewType<ItemClick> {
                         if (data.click) {
                             return buildItemClickOneViewType()
                         } else {

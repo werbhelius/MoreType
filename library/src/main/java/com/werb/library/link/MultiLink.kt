@@ -10,6 +10,6 @@ import com.werb.library.MoreViewType
 interface MultiLink<T: Any> {
 
     /** [link] return one ViewType by judge data */
-    fun link(data: T): MoreViewType<T>?
+    fun link(data: T): MoreViewType<T>
 
 }

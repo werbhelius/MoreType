@@ -1,5 +1,6 @@
 package com.werb.library
 
+import android.animation.TimeInterpolator
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.Adapter
 import android.support.v7.widget.RecyclerView.ViewHolder
@@ -32,11 +33,7 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val moreViewType = buildViewType(viewType)
-        if (moreViewType == null) {
-            return attachViewType(list[viewType]).onCreateViewHolder(LayoutInflater.from(parent?.context), parent as ViewGroup)
-        } else {
-            return moreViewType.onCreateViewHolder(LayoutInflater.from(parent?.context), parent as ViewGroup)
-        }
+        return moreViewType.onCreateViewHolder(LayoutInflater.from(parent?.context), parent as ViewGroup)
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
@@ -72,7 +69,7 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
             notifyItemRangeInserted(position, data.size)
         } else {
             list.add(data)
-            notifyItemInserted(list.indexOf(data))
+            notifyItemInserted(itemCount - 1)
         }
     }
 
@@ -128,12 +125,7 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
 
     override fun getItemViewType(position: Int): Int {
         val any = list[position]
-        val viewLayout = attachViewTypeLayout(any)
-        if (viewLayout == -1) {
-            return position
-        } else {
-            return viewLayout
-        }
+        return attachViewTypeLayout(any)
     }
 
     override fun onViewAttachedToWindow(holder: ViewHolder?) {
@@ -213,7 +205,7 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
     override fun attachViewTypeLayout(any: Any): Int = linkManager.attachViewTypeLayout(any)
 
     /** [buildViewType]  find viewType by layout */
-    override fun buildViewType(type: Int): MoreViewType<Any>? = linkManager.buildViewType(type)
+    override fun buildViewType(type: Int): MoreViewType<Any> = linkManager.buildViewType(type)
 
     /** [userSoleRegister] register sole global viewType */
     override fun userSoleRegister(): MoreAdapter = linkManager.userSoleRegister()

@@ -27,7 +27,7 @@ interface MoreLink {
     fun attachViewTypeLayout(any: Any) : Int
 
     /** [buildViewType]  find viewType by layout */
-    fun buildViewType(type: Int) : MoreViewType<Any>?
+    fun buildViewType(type: Int) : MoreViewType<Any>
 
     /** [userSoleRegister] register sole global viewType */
     fun userSoleRegister(): MoreAdapter
