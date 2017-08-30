@@ -6,29 +6,26 @@
 
 Click icon download lastest sample
 
-[English](https://github.com/Werb/MoreType/blob/master/README.md)
- | 中文版
+English | [中文版](https://github.com/Werb/MoreType/blob/master/README_ZH.md)
 
 [![Build Status](https://travis-ci.org/Werb/MoreType.svg?branch=master)](https://travis-ci.org/Werb/MoreType)
 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/Werb/MoreType/blob/master/LICENSE)
  [ ![Download](https://api.bintray.com/packages/werbhelius/maven/moretype/images/download.svg) ](https://bintray.com/werbhelius/maven/moretype/_latestVersion)
  [![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)
 
-关键词:【数据驱动视图】
+Keyword: Data driven view 【数据驱动视图】
 
-之前在写公司的项目的时候，需要写大量的界面，这就意味着每一个界面都要写一个 Adapter，同时还要对不同的视图根据 getItemViewType() 写不同的 ViewHolder，在存在多种视图的时候，一个 Adapter 中的代码就会很冗余，而且耦合度很高，对后续的修改很不友好。
+Before writing a project in the company, we need to write a large number of recyclerViews to display data, which means that each recyclerView must write an Adapter, but also for different views according to getItemViewType () write different ViewHolder, in the presence of multiple views Time, an adapter in the code will be very redundant, And the coupling is very high, the follow-up changes are very friendly. 
 
-**我们任意一个界面都是依靠服务器返回的数据构建的，所以我就在想，能不能简单的使用数据来驱动视图，这就也是 MoreType 的核心所在【数据驱动视图】。**
+**Any of our recyclerViews are based on the data returned by the server to build, so I was wondering, can not simply use the data to drive the view, which is the core of the MoreType 【data driven view】.**
 
-我并不是第一个想到这个概念的人，我最早看到这个概念的实践，是 drakeet 的 [MultiType](https://github.com/drakeet/MultiType) 。当时看完他的项目之后，有一种醍醐灌顶的畅快，这就是我所希望的【数据驱动视图】。
+I am not The first thought of this concept, I first saw the concept of practice, is [drakeet's MultiType](https://github.com/drakeet/MultiType). After watching his project, i know this is what I hope [Data driven view]. 
 
-大概在一个月前，开始接触 Kotlin，Kotlin 是一个让开发者用起来很爽的语言，不必深陷烦人的空指针异常，简洁的代码风格，在初次尝时候我就喜欢上了它，所以我决定用 Kotlin 来开发一个【数据驱动视图】的第三方库，从而就有了 MoreType 的产生【给你更多的可能】。
+**Kotlin on Android Now official.** Don't have to worry about the NullPointerException, simple code style, in the first time I like to like it, so I decided to use Kotlin to develop a **【data-driven view】** third-party library  of the , this was MoreType **【Give you more likely】**.
 
-**目前 MoreType 仍在开发，当前版本为 0.1.0-beta 版本，因为是基于 AS Preview 开发的，可能会有一些未知的 Bug**
+**This is a beta version, because it is based on the development of AS Preview, there may be some unknown Bug.**
 
-**Release 版本将会在这个月底发布.**
-
-[与 MultiType 的异同](https://github.com/Werb/MoreType/issues/1)
+**Release Version will be published at the end of the month.**
 
 ## Preview
 ![more-type-one](./screenshot/type1.png)
@@ -45,9 +42,9 @@ implementation 'com.werb.moretype:moretype:0.1.5-beta2'
 
 ## Usage
 
-Keyword: 【数据驱动视图】
+Keyword: Data driven view 【数据驱动视图】
 
-#### Step 1. 创建一个数据模型类，例如:
+#### Step 1. create a data model class, like:
 ```kotlin
 data class SingleText(val title: String, val desc: String, val url: String)
 ```
@@ -60,7 +57,7 @@ class SingleText {
 }
 ```
 
-### Step 2. 创建一个类 xxxViewType 继承抽象类 `MoreViewType<T : Any>()` 例如:
+### Step 2. create a class (xxxViewType) extends abstract class `MoreViewType<T : Any>()` , like:
 
 ```kotlin
 class SingleTypeOneViewType: MoreViewType<SingleText>(R.layout.item_view_single_type_one, SingleText::class) {
@@ -83,11 +80,7 @@ class SingleTypeOneViewType: MoreViewType<SingleText>(R.layout.item_view_single_
 }
 ```
 
-* getViewLayout()：返回视图的 layout
-* getViewModel()：返回视图所对应的数据模型 data::class
-* bindData(): 绑定数据，处理点击等
-
-### Step 3. 在使用 `RecyclerView` 的地方，声明 `MoreAdapter()`对象，`register` 需要的 `viewType`，同时和 `RecyclerView` 绑定
+### Step 3. `register` and `attach` to `recyclerview` in Any where you build list, like:
 
 ```kotlin
 import kotlinx.android.synthetic.main.activity_single_register.*
@@ -114,15 +107,15 @@ class SingleRegisterActivity: AppCompatActivity() {
 
 }
 ```
-**使用 `kotlin-android-extensions` 替代 findViewById()**
 
-完成这三步，一个根据【数据驱动视图】的列表就已经构建完成。
+**For use with `kotlin-android-extensions` to replace findViewById()**
 
+Upon completion of these three steps, a list based on the [Data Driven View] has been completed.
 
 ## Feature
 ### Multi Register: Register one2more ViewType
 
-通常我们的数据和视图是一对一的关系，比如瀑布流。MoreType 同时提供一种数据类型对应多种视图的情况，例如私信界面。
+Usually data and view are one-to-one relationships, like Feeds list, MoreType alse provide Multi Register like IM list, one data to Many views, MoreType can do it easily.
 
 ```kotlin
 adapter.register(TitleViewType())
@@ -137,12 +130,12 @@ adapter.register(TitleViewType())
         })
         .attachTo(multi_register_list)
 ```
-**Multi Register 必须显式声明 Data::class**
+**Multi Register must explicit declare data class**
 
 
 ### Animation: Provides five types of Animation
 
-提供五种动画支持: **Alpha** , **Scale** , **SlideInBottom** , **SlideInLeft** , **SlideInRight**
+Provide 5 animations: **Alpha** , **Scale** , **SlideInBottom** , **SlideInLeft** , **SlideInRight**
 
 ```Kotlin
     adapter.register(TitleViewType())
@@ -156,7 +149,7 @@ adapter.register(TitleViewType())
             .attachTo(anim_list)
 ```
 
-同时支持自定义动画, 创建一个类实现接口 `MoreAnimation` and 重写 `getItemAnimators(view: View)` 例如:
+Also suppost custom Animation, create a class implement `MoreAnimation` and override `getItemAnimators(view: View)` , like:
 ```kotlin
 class SlideInLeftAnimation : MoreAnimation {
 
@@ -169,25 +162,25 @@ class SlideInLeftAnimation : MoreAnimation {
 
 ### ItemClick: Support onItemClick and onItemLongClick
 
-两种方式实现点击事件: **In ViewType** and **In Activity**
+Two ways to achieve ItemClick: **In ViewType** and **In Activity**
 
-**In ViewType 中处理点击事件** : 在viewType中使用 `view.setOnClickListener {}` 
+**In ViewType** : Just use `view.setOnClickListener {}` in ViewType
 
-**In Activity 中处理点击事件** :
-1. 在 viewType 中使用 `holder.addOnClickListener(view: View)` or `holder.addOnClickListener(viewId: Int)` 绑定点击事件
-2. 在 Activity 中通过 `viewType().setMoreClickListener()` 处理点击事件
+**In Activity** : 
+1. use `holder.addOnClickListener(view: View)` or `holder.addOnClickListener(viewId: Int)` to bind event in ViewType
+2. use `viewType().setMoreClickListener()` to deal event in Activity
 
 [sample](https://github.com/Werb/MoreType/tree/master/app/src/main/java/com/werb/moretype/click)
 
 ### Refresh and loadMore
-**Refresh**: 使用 `SwipeRefreshLayout` 就可以实现下拉刷新
+**Refresh**: use `SwipeRefreshLayout`
 
-**LoadMore**: 通过构建 `Footer.class` 和 `FootViewType` 实现数据和视图的绑定, 当 RecyclerView 滚动在底部时显示 `FootViewType`，在数据请求成功后移除 `FootViewType`
+**LoadMore**: build `Footer.class` and `FootViewType` , when list smooth to last position - 1, show  `FootViewType` and remove `FootViewType`  when new data load successful
 
 [sample](https://github.com/Werb/MoreType/blob/master/app/src/main/java/com/werb/moretype/complete/CompleteActivity.kt)
 
-### 全局 ViewType
-**在自定义 Application中注册全局 ViewType**
+### Sole Global ViewType
+**Register global viewType in Custom Application**
 ```kotlin
 class MyApp: Application() {
 
@@ -205,7 +198,7 @@ class MyApp: Application() {
 }
 ```
 
-通过 `adapter.userSoleRegister()` 调用使用全局 ViewType
+and we can use it in any where with `adapter.userSoleRegister()`
 
 ## Thanks
 [MultiType](https://github.com/drakeet/MultiType)
