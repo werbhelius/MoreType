@@ -31,7 +31,7 @@ implementation 'com.werb.moretype:moretype:0.1.5-beta10'
 ## Update log
 #### [v0.1.5-beta10](https://github.com/Werb/MoreType/releases/tag/v0.1.5-beta10)
 1. add [initView()](https://github.com/Werb/MoreType/blob/master/library/src/main/java/com/werb/library/MoreViewType.kt#L17) method to reuse view in ViewType
-2. add [findViewOfen()](https://github.com/Werb/MoreType/blob/master/library/src/main/java/com/werb/library/MoreViewHolder.kt#L56) to cache and reuse view after first findViewById
+2. add [findViewOfen()](https://github.com/Werb/MoreType/blob/master/library/src/main/java/com/werb/library/MoreViewHolder.kt#L56) in MoreViewHolder to cache and reuse view after first findViewById
 3. add 8 [DataAction Method](https://github.com/Werb/MoreType/blob/master/library/src/main/java/com/werb/library/action/DataAction.kt) to operation data，like replace 、removeData、removeAllNotRefresh 
 
 ## Usage
