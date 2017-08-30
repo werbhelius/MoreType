@@ -72,6 +72,8 @@ class SingleTypeOneViewType: MoreViewType<SingleText>(R.layout.item_view_single_
         title = holder.findViewOften(R.id.title)
         desc = holder.findViewOften(R.id.desc)
         icon = holder.findViewOften(R.id.icon)
+
+        // findViewOften() will cache and reuse view after first findViewBtId
     }
 
     override fun bindData(data: SingleText, holder: MoreViewHolder) {
