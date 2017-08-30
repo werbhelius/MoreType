@@ -32,20 +32,17 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val moreViewType = buildViewType(viewType)
-        if (moreViewType == null) {
-            return attachViewType(list[viewType]).onCreateViewHolder(LayoutInflater.from(parent?.context), parent as ViewGroup)
-        } else {
-            return moreViewType.onCreateViewHolder(LayoutInflater.from(parent?.context), parent as ViewGroup)
-        }
+        return moreViewType?.onCreateViewHolder(LayoutInflater.from(parent?.context), parent as ViewGroup) ?: attachViewType(list[viewType]).onCreateViewHolder(LayoutInflater.from(parent?.context), parent as ViewGroup)
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         val any = list[position]
         val attachViewType = attachViewType(any)
-        attachViewType.initView(holder as MoreViewHolder)
-        attachViewType.bindHolder(holder)
-        attachViewType.bindData(any, holder)
-        holder.itemView.setTag(R.id.moretype_item_viewtype, attachViewType)
+        if (holder is MoreViewHolder) {
+            attachViewType.bindHolder(holder)
+            attachViewType.bindData(any, holder)
+            holder.itemView.setTag(R.id.moretype_item_viewtype, attachViewType)
+        }
     }
 
     @Suppress("UNCHECKED_CAST")
