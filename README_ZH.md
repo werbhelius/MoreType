@@ -59,7 +59,7 @@ class SingleText {
 }
 ```
 
-### Step 2. 创建一个类 xxxViewType 继承抽象类 `MoreViewType<T : Any>()` 例如:
+### Step 2. 创建一个类 xxxViewType 继承抽象类 `MoreViewType<T : Any>(layoutId, Class)` 例如:
 
 ```kotlin
 class SingleTypeOneViewType: MoreViewType<SingleText>(R.layout.item_view_single_type_one, SingleText::class) {

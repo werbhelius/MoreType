@@ -31,7 +31,7 @@ implementation 'com.werb.moretype:moretype:0.1.5-beta10'
 ## Update log
 #### [v0.1.5-beta10](https://github.com/Werb/MoreType/releases/tag/v0.1.5-beta10)
 1. add [initView()](https://github.com/Werb/MoreType/blob/master/library/src/main/java/com/werb/library/MoreViewType.kt#L17) method to reuse view in ViewType
-2. add 8 [DataAction Method](https://github.com/Werb/MoreType/blob/master/library/src/main/java/com/werb/library/action/DataAction.kt) to operation data，like replace 、removeData、removeAllNotRefresh 
+2. add 8 [DataAction Method](https://github.com/Werb/MoreType/blob/master/library/src/main/java/com/werb/library/action/DataAction.kt) to operation data，like replace 、removeData、removeAllNotRefresh 
 
 ## Usage
 
@@ -48,7 +48,7 @@ class SingleText {
 }
 ```
 
-### Step 2. create a class (xxxViewType) extends abstract class `MoreViewType<T : Any>()` , like:
+### Step 2. create a class (xxxViewType) extends abstract class `MoreViewType<T : Any>(layoutId, Class)` , like:
 
 ```kotlin
 class SingleTypeOneViewType: MoreViewType<SingleText>(R.layout.item_view_single_type_one, SingleText::class) {
