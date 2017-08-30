@@ -6,8 +6,7 @@
 
 Click icon download lastest sample
 
-[English](https://github.com/Werb/MoreType/blob/master/README.md)
- | 中文版
+[English](https://github.com/Werb/MoreType/blob/master/README_EN.md) | [中文版](https://github.com/Werb/MoreType/blob/master/README_ZH.md)
 
 [![Build Status](https://travis-ci.org/Werb/MoreType.svg?branch=master)](https://travis-ci.org/Werb/MoreType)
 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/Werb/MoreType/blob/master/LICENSE)
