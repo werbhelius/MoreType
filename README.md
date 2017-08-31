@@ -22,10 +22,12 @@ Click icon download lastest sample
 ## Dependency
 ```gradle
 compile 'com.werb.moretype:moretype:0.1.5-beta10'
+compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 or
 ```gradle
 implementation 'com.werb.moretype:moretype:0.1.5-beta10'
+implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 
 ## Update log
