@@ -9,6 +9,9 @@ import com.werb.moretype.R
  */
 class FootViewType : MoreViewType<Footer>(R.layout.item_view_footer) {
 
+    override fun initView(holder: MoreViewHolder) {
+    }
+
     override fun bindData(data: Footer, holder: MoreViewHolder) {
 
     }

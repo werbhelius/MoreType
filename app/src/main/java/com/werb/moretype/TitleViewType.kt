@@ -1,5 +1,6 @@
 package com.werb.moretype
 
+import android.support.v7.widget.AppCompatTextView
 import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
 import com.werb.moretype.main.MainCard
@@ -10,8 +11,16 @@ import kotlinx.android.synthetic.main.item_view_title.*
  */
 class TitleViewType: MoreViewType<MainCard>(R.layout.item_view_title) {
 
+    private lateinit var title: AppCompatTextView
+    private lateinit var desc: AppCompatTextView
+
+    override fun initView(holder: MoreViewHolder) {
+        title = holder.findViewOften(R.id.title)
+        desc = holder.findViewOften(R.id.desc)
+    }
+
     override fun bindData(data: MainCard, holder: MoreViewHolder) {
-        holder.title.text = data.cardTitle
-        holder.desc.text = data.cardDesc
+        title.text = data.cardTitle
+        desc.text = data.cardDesc
     }
 }

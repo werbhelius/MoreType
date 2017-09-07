@@ -1,5 +1,6 @@
 package com.werb.moretype.me
 
+import android.support.v7.widget.AppCompatTextView
 import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
 import com.werb.moretype.R
@@ -10,7 +11,13 @@ import kotlinx.android.synthetic.main.item_view_about_me_message.*
  */
 class MeMessageViewType: MoreViewType<MeMessage>(R.layout.item_view_about_me_message) {
 
+    private lateinit var message: AppCompatTextView
+
+    override fun initView(holder: MoreViewHolder) {
+        message = holder.findViewOften(R.id.message)
+    }
+
     override fun bindData(data: MeMessage, holder: MoreViewHolder) {
-        holder.message.text = data.message
+        message.text = data.message
     }
 }

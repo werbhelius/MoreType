@@ -18,24 +18,34 @@ import kotlinx.android.synthetic.main.item_view_multi_message_in.*
  */
 class MessageInViewType : MoreViewType<Message>(R.layout.item_view_multi_message_in) {
 
+    private lateinit var message_icon: SimpleDraweeView
+    private lateinit var message_time: AppCompatTextView
+    private lateinit var message_content_layout: FrameLayout
+
+    override fun initView(holder: MoreViewHolder) {
+        message_icon = holder.findViewOften(R.id.message_icon)
+        message_time = holder.findViewOften(R.id.message_time)
+        message_content_layout = holder.findViewOften(R.id.message_content_layout)
+    }
+
     override fun bindData(data: Message, holder: MoreViewHolder) {
-        holder.message_icon.setImageURI(data.icon)
+        message_icon.setImageURI(data.icon)
         if (data.showTime) {
-            holder.message_time.visibility = View.VISIBLE
-            holder.message_time.text = Utils.sendTime(data.time.toLong() * 1000)
+            message_time.visibility = View.VISIBLE
+            message_time.text = Utils.sendTime(data.time.toLong() * 1000)
         } else {
-            holder.message_time.visibility = View.INVISIBLE
+            message_time.visibility = View.INVISIBLE
         }
-        holder.message_content_layout.removeAllViews()
+        message_content_layout.removeAllViews()
         var currentLayout: RelativeLayout? = null
         when (data.messageType) {
             "text" -> {
-                currentLayout = LayoutInflater.from(holder.itemView.context).inflate(R.layout.widget_view_message_in_text, holder.message_content_layout, false) as RelativeLayout
+                currentLayout = LayoutInflater.from(holder.itemView.context).inflate(R.layout.widget_view_message_in_text, message_content_layout, false) as RelativeLayout
                 val text = currentLayout.findViewById<AppCompatTextView>(R.id.message_in_text)
                 text.text = data.text
             }
             "image" -> {
-                currentLayout = LayoutInflater.from(holder.itemView.context).inflate(R.layout.widget_view_message_in_image, holder.message_content_layout, false) as RelativeLayout
+                currentLayout = LayoutInflater.from(holder.itemView.context).inflate(R.layout.widget_view_message_in_image, message_content_layout, false) as RelativeLayout
                 val image = currentLayout.findViewById<SimpleDraweeView>(R.id.message_in_image)
                 image.setImageURI(data.url)
                 setImgSize(data.width, data.height, image)
@@ -44,10 +54,10 @@ class MessageInViewType : MoreViewType<Message>(R.layout.item_view_multi_message
 
             }
         }
-        holder.message_content_layout.addView(currentLayout)
+        message_content_layout.addView(currentLayout)
     }
 
-    private fun setImgSize(width: String, height: String, image: SimpleDraweeView) {
+    fun setImgSize(width: String, height: String, image: SimpleDraweeView) {
         val size = Utils.getIMImageSize(width.toDouble(), height.toDouble())
         val lp = image.layoutParams
         lp.width = size.width

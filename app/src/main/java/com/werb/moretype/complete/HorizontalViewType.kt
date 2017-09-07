@@ -1,8 +1,12 @@
 package com.werb.moretype.complete
 
+import android.content.Context
+import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.Toast
+import com.facebook.drawee.view.SimpleDraweeView
 import com.werb.library.MoreAdapter
 import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
@@ -15,24 +19,39 @@ import kotlinx.android.synthetic.main.item_view_horizontal_list.*
  */
 class HorizontalViewType: MoreViewType<HorizontalData>(R.layout.item_view_horizontal_list) {
 
+    private val adapter = MoreAdapter()
+    private lateinit var itemView: View
+    private lateinit var context: Context
+    private lateinit var icon: SimpleDraweeView
+    private lateinit var title: AppCompatTextView
+    private lateinit var horizontal_list: RecyclerView
+    private val horizontalItemViewType = getHorizontalItemViewType()
+
+    override fun initView(holder: MoreViewHolder) {
+        this.itemView = holder.getItemView()
+        context = holder.getItemView().context
+        icon = holder.findViewOften(R.id.icon)
+        title = holder.findViewOften(R.id.title)
+        horizontal_list = holder.findViewOften(R.id.horizontal_list)
+    }
+
     override fun bindData(data: HorizontalData, holder: MoreViewHolder) {
-        val adapter = MoreAdapter()
-        holder.icon.setImageURI(data.url)
-        holder.title.text = data.title
-        val layoutManager = LinearLayoutManager(holder.itemView.context)
+        icon.setImageURI(data.url)
+        title.text = data.title
+        val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        holder.horizontal_list.layoutManager = layoutManager
-        adapter.register(getHorizontalItemViewType(adapter))
-                .attachTo(holder.horizontal_list)
+        horizontal_list.layoutManager = layoutManager
+        adapter.register(horizontalItemViewType)
+                .attachTo(horizontal_list)
         adapter.removeAllData()
         adapter.loadData(data.list)
 
-        holder.itemView.setOnClickListener {
-            Toast.makeText(holder.itemView.context, " click in ViewType position is " + holder.layoutPosition.toString(), Toast.LENGTH_SHORT).show()
+        itemView.setOnClickListener {
+            Toast.makeText(context, " click in ViewType position is " + holder.layoutPosition.toString(), Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun getHorizontalItemViewType(adapter: MoreAdapter): HorizontalItemViewType{
+    private fun getHorizontalItemViewType(): HorizontalItemViewType{
 
         val viewType = HorizontalItemViewType()
         viewType.setMoreClickListener(object : MoreClickListener{

@@ -1,5 +1,6 @@
 package com.werb.moretype.complete
 
+import android.content.Context
 import android.support.v7.widget.AppCompatTextView
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -18,32 +19,48 @@ import kotlinx.android.synthetic.main.item_view_complete.*
  */
 class CompleteViewType: MoreViewType<Complete>(R.layout.item_view_complete) {
 
+    private lateinit var context: Context
+    private lateinit var icon: SimpleDraweeView
+    private lateinit var name: AppCompatTextView
+    private lateinit var desc: AppCompatTextView
+    private lateinit var time: AppCompatTextView
+    private lateinit var complete_content_layout: LinearLayout
+
+    override fun initView(holder: MoreViewHolder) {
+        context = holder.getItemView().context
+        icon = holder.findViewOften(R.id.icon)
+        name = holder.findViewOften(R.id.name)
+        desc = holder.findViewOften(R.id.desc)
+        time = holder.findViewOften(R.id.time)
+        complete_content_layout = holder.findViewOften(R.id.complete_content_layout)
+    }
+
     override fun bindData(data: Complete, holder: MoreViewHolder) {
-        holder.icon.setImageURI(data.icon)
-        holder.name.text = data.name
-        holder.desc.text = data.desc
-        holder.time.text = Utils.sendTime(data.time.toLong() * 1000)
-        holder.complete_content_layout.removeAllViews()
+        icon.setImageURI(data.icon)
+        name.text = data.name
+        desc.text = data.desc
+        time.text = Utils.sendTime(data.time.toLong() * 1000)
+        complete_content_layout.removeAllViews()
         if(!TextUtils.isEmpty(data.text)){
-            val currentLayout = LayoutInflater.from(holder.itemView.context).inflate(R.layout.widget_view_complete_text, holder.complete_content_layout, false) as RelativeLayout
+            val currentLayout = LayoutInflater.from(context).inflate(R.layout.widget_view_complete_text, complete_content_layout, false) as RelativeLayout
             val text = currentLayout.findViewById<AppCompatTextView>(R.id.complete_text)
             text.text = data.text
-            holder.complete_content_layout.addView(currentLayout)
+            complete_content_layout.addView(currentLayout)
             val params = currentLayout.layoutParams as LinearLayout.LayoutParams
             params.bottomMargin = 15
         }
         if(!TextUtils.isEmpty(data.image)){
-            val currentLayout = LayoutInflater.from(holder.itemView.context).inflate(R.layout.widget_view_message_in_image, holder.complete_content_layout, false) as RelativeLayout
+            val currentLayout = LayoutInflater.from(context).inflate(R.layout.widget_view_message_in_image, complete_content_layout, false) as RelativeLayout
             val image = currentLayout.findViewById<SimpleDraweeView>(R.id.message_in_image)
             image.setImageURI(data.image)
             setImgSize(data.width, data.height, image)
-            holder.complete_content_layout.addView(currentLayout)
+            complete_content_layout.addView(currentLayout)
             val params = currentLayout.layoutParams as LinearLayout.LayoutParams
             params.topMargin = 10
         }
 
         holder.itemView.setOnClickListener {
-            Toast.makeText(holder.itemView.context, " click in ViewType position is " + holder.layoutPosition.toString(), Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, " click in ViewType position is " + holder.layoutPosition.toString(), Toast.LENGTH_SHORT).show()
         }
     }
 

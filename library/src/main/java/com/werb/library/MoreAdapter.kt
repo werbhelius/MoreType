@@ -39,6 +39,7 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
         val any = list[position]
         val attachViewType = attachViewType(any)
         if (holder is MoreViewHolder) {
+            attachViewType.initView(holder)
             attachViewType.bindHolder(holder)
             attachViewType.bindData(any, holder)
             holder.itemView.setTag(R.id.moretype_item_viewtype, attachViewType)

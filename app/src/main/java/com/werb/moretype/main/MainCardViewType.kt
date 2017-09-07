@@ -1,6 +1,8 @@
 package com.werb.moretype.main
 
 import android.content.Intent
+import android.support.v7.widget.AppCompatTextView
+import android.support.v7.widget.CardView
 import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
 import com.werb.moretype.R
@@ -17,13 +19,23 @@ import kotlinx.android.synthetic.main.item_view_main.*
  */
 class MainCardViewType : MoreViewType<MainCard>(R.layout.item_view_main) {
 
-    override fun bindData(data: MainCard, holder: MoreViewHolder) {
-        holder.card_title.text = data.cardTitle
-        holder.card_desc.text = data.cardDesc
-        holder.main_card_layout.setOnClickListener { itemClick(holder) }
+    private lateinit var card_title: AppCompatTextView
+    private lateinit var card_desc: AppCompatTextView
+    private lateinit var main_card_layout: CardView
+
+    override fun initView(holder: MoreViewHolder) {
+        card_title = holder.findViewOften(R.id.card_title)
+        card_desc = holder.findViewOften(R.id.card_desc)
+        main_card_layout = holder.findViewOften(R.id.main_card_layout)
     }
 
-    private fun itemClick(holder: MoreViewHolder) {
+    override fun bindData(data: MainCard, holder: MoreViewHolder) {
+        card_title.text = data.cardTitle
+        card_desc.text = data.cardDesc
+        main_card_layout.setOnClickListener { itemClick(holder) }
+    }
+
+    fun itemClick(holder: MoreViewHolder) {
         val content = holder.itemView.context
         val intent = Intent()
         when (holder.layoutPosition) {

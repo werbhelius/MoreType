@@ -1,5 +1,7 @@
 package com.werb.moretype.single
 
+import android.support.v7.widget.AppCompatTextView
+import com.facebook.drawee.view.SimpleDraweeView
 import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
 import com.werb.moretype.R
@@ -10,11 +12,23 @@ import kotlinx.android.synthetic.main.item_view_single_type_one.*
  */
 class SingleTypeOneViewType: MoreViewType<SingleText>(R.layout.item_view_single_type_one) {
 
-    override fun bindData(data: SingleText, holder: MoreViewHolder) {
-        holder.title.text = data.title
-        holder.desc.text = data.desc
-        holder.icon.setImageURI(data.url)
+    private lateinit var title: AppCompatTextView
+    private lateinit var desc: AppCompatTextView
+    private lateinit var icon: SimpleDraweeView
+
+    override fun initView(holder: MoreViewHolder) {
+        title = holder.findViewOften(R.id.title)
+        desc = holder.findViewOften(R.id.desc)
+        icon = holder.findViewOften(R.id.icon)
     }
+
+    override fun bindData(data: SingleText, holder: MoreViewHolder) {
+        title.text = data.title
+        desc.text = data.desc
+        icon.setImageURI(data.url)
+    }
+
+
 
 
 }

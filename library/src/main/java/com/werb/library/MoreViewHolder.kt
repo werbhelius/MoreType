@@ -11,7 +11,7 @@ import kotlinx.android.extensions.LayoutContainer
  * [MoreViewHolder] Base ViewHolder implement Action fun
  * Created by wanbo on 2017/7/2.
  */
-open class MoreViewHolder(override val containerView: View) : ViewHolder(containerView), LayoutContainer {
+open class MoreViewHolder(itemView: View) : ViewHolder(itemView){
 
     private var action: MoreAction? = null
     private val viewMap = SparseArrayCompat<View>()
@@ -19,6 +19,8 @@ open class MoreViewHolder(override val containerView: View) : ViewHolder(contain
     fun setActionListener(action: MoreAction?) {
         this.action = action
     }
+
+    fun getItemView() = itemView
 
     fun addOnClickListener(viewId: Int) {
         itemView.findViewById<View>(viewId).setOnClickListener { action?.moreListener?.onItemClick(it, layoutPosition) }

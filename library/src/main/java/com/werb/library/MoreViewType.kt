@@ -21,6 +21,9 @@ abstract class MoreViewType<T : Any>(internal val layoutId: Int) : MoreAction() 
         clazz = p[0] as Class<T>
     }
 
+    /** [initView] find view  */
+    abstract fun initView(holder: MoreViewHolder)
+
     /** [bindData] bind data with T  */
     abstract fun bindData(data: T, holder: MoreViewHolder)
 
