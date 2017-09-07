@@ -131,7 +131,7 @@ class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
     }
 
     /** [buildViewType] return MoreViewType in onCreateViewHolder() to create viewHolder*/
-    override fun buildViewType(type: Int): MoreViewType<Any> {
+    override fun buildViewType(type: Int): MoreViewType<Any>?{
         if (type == -1) {
             throw  NullPointerException("no such type!")
         }

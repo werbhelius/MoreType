@@ -75,7 +75,11 @@ class MultiRegisterActivity : AppCompatActivity() {
         if (!TextUtils.isEmpty(input_edit.text.toString())) {
             adapter.loadData(buildSendMessageText())
             input_edit.setText("")
-            multi_register_list.smoothScrollToPosition(adapter.itemCount -1)
+            multi_register_list.smoothScrollToPosition(adapter.itemCount)
+            it.postDelayed({
+                adapter.loadData(buildInMessageText())
+                multi_register_list.smoothScrollToPosition(adapter.itemCount)
+            }, 200)
         }
     }
 
@@ -108,6 +112,20 @@ class MultiRegisterActivity : AppCompatActivity() {
                 "text",
                 true,
                 input_edit.text.toString(),
+                "",
+                "",
+                "",
+                "",
+                false
+        )
+    }
+
+    private fun buildInMessageText(): Message {
+        return Message(
+                "https://avatars5.githubusercontent.com/u/12763277?v=4&s=460",
+                "text",
+                false,
+                "收到你的消息",
                 "",
                 "",
                 "",
