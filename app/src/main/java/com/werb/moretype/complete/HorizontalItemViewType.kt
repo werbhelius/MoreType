@@ -1,20 +1,18 @@
 package com.werb.moretype.complete
 
 import android.support.v7.widget.AppCompatTextView
-import android.view.View
 import android.widget.ImageView
 import com.facebook.drawee.view.SimpleDraweeView
 import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
 import com.werb.moretype.R
 import com.werb.moretype.single.SingleText
-import kotlin.reflect.KClass
-import kotlinx.android.synthetic.main.item_view_horizontal_item.view.*
+import kotlinx.android.synthetic.main.item_view_horizontal_item.*
 
 /**
  * Created by wanbo on 2017/7/15.
  */
-class HorizontalItemViewType: MoreViewType<SingleText>(R.layout.item_view_horizontal_item, SingleText::class) {
+class HorizontalItemViewType: MoreViewType<SingleText>(R.layout.item_view_horizontal_item) {
 
     private lateinit var title: AppCompatTextView
     private lateinit var desc: AppCompatTextView

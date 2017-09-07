@@ -12,13 +12,12 @@ import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
 import com.werb.library.action.MoreClickListener
 import com.werb.moretype.R
-import kotlin.reflect.KClass
-import kotlinx.android.synthetic.main.item_view_horizontal_list.view.*
+import kotlinx.android.synthetic.main.item_view_horizontal_list.*
 
 /**
  * Created by wanbo on 2017/7/15.
  */
-class HorizontalViewType: MoreViewType<HorizontalData>(R.layout.item_view_horizontal_list, HorizontalData::class) {
+class HorizontalViewType: MoreViewType<HorizontalData>(R.layout.item_view_horizontal_list) {
 
     private val adapter = MoreAdapter()
     private lateinit var itemView: View
@@ -26,6 +25,7 @@ class HorizontalViewType: MoreViewType<HorizontalData>(R.layout.item_view_horizo
     private lateinit var icon: SimpleDraweeView
     private lateinit var title: AppCompatTextView
     private lateinit var horizontal_list: RecyclerView
+    private val horizontalItemViewType = getHorizontalItemViewType()
 
     override fun initView(holder: MoreViewHolder) {
         this.itemView = holder.getItemView()
@@ -41,7 +41,7 @@ class HorizontalViewType: MoreViewType<HorizontalData>(R.layout.item_view_horizo
         val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
         horizontal_list.layoutManager = layoutManager
-        adapter.register(getHorizontalItemViewType())
+        adapter.register(horizontalItemViewType)
                 .attachTo(horizontal_list)
         adapter.removeAllData()
         adapter.loadData(data.list)

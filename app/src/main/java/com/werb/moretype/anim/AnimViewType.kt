@@ -1,17 +1,16 @@
 package com.werb.moretype.anim
 
 import android.support.v7.widget.AppCompatTextView
-import android.view.View
 import com.facebook.drawee.view.SimpleDraweeView
 import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
 import com.werb.moretype.R
-import kotlinx.android.synthetic.main.item_view_anim.view.*
+import kotlinx.android.synthetic.main.item_view_anim.*
 
 /**
  * Created by wanbo on 2017/7/15.
  */
-class AnimViewType : MoreViewType<AnimType>(R.layout.item_view_anim, AnimType::class) {
+class AnimViewType : MoreViewType<AnimType>(R.layout.item_view_anim) {
 
     private lateinit var title: AppCompatTextView
     private lateinit var type: AppCompatTextView

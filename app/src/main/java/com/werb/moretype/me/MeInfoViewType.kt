@@ -8,14 +8,13 @@ import com.facebook.drawee.view.SimpleDraweeView
 import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
 import com.werb.moretype.R
-import kotlinx.android.synthetic.main.item_view_about_me_info.view.*
-import kotlin.reflect.KClass
+import kotlinx.android.synthetic.main.item_view_about_me_info.*
 
 
 /**
  * Created by wanbo on 2017/7/15.
  */
-class MeInfoViewType : MoreViewType<MeInfo>(R.layout.item_view_about_me_info, MeInfo::class) {
+class MeInfoViewType : MoreViewType<MeInfo>(R.layout.item_view_about_me_info) {
 
     private lateinit var name: AppCompatTextView
     private lateinit var desc: AppCompatTextView

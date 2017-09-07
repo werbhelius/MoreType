@@ -3,24 +3,24 @@ package com.werb.library
 import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.View
-import com.werb.library.action.Action
 import com.werb.library.action.MoreAction
+import kotlinx.android.extensions.LayoutContainer
 
 
 /**
  * [MoreViewHolder] Base ViewHolder implement Action fun
  * Created by wanbo on 2017/7/2.
  */
-class MoreViewHolder(itemView: View) : ViewHolder(itemView) {
+open class MoreViewHolder(itemView: View) : ViewHolder(itemView){
 
     private var action: MoreAction? = null
     private val viewMap = SparseArrayCompat<View>()
 
-    fun getItemView(): View = itemView
-
     fun setActionListener(action: MoreAction?) {
         this.action = action
     }
+
+    fun getItemView() = itemView
 
     fun addOnClickListener(viewId: Int) {
         itemView.findViewById<View>(viewId).setOnClickListener { action?.moreListener?.onItemClick(it, layoutPosition) }

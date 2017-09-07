@@ -4,8 +4,6 @@ import android.content.Context
 import android.support.v7.widget.AppCompatTextView
 import android.text.TextUtils
 import android.view.LayoutInflater
-import android.view.View
-import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.Toast
@@ -14,14 +12,12 @@ import com.werb.library.MoreViewHolder
 import com.werb.library.MoreViewType
 import com.werb.moretype.R
 import com.werb.moretype.Utils
-import kotlin.reflect.KClass
-import kotlinx.android.synthetic.main.item_view_complete.view.*
-import kotlinx.android.synthetic.main.item_view_multi_message_in.view.*
+import kotlinx.android.synthetic.main.item_view_complete.*
 
 /**
  * Created by wanbo on 2017/7/15.
  */
-class CompleteViewType: MoreViewType<Complete>(R.layout.item_view_complete, Complete::class) {
+class CompleteViewType: MoreViewType<Complete>(R.layout.item_view_complete) {
 
     private lateinit var context: Context
     private lateinit var icon: SimpleDraweeView
