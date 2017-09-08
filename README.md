@@ -32,7 +32,7 @@ implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
 ## Update log
 #### [v0.1.8](https://github.com/Werb/MoreType/releases/tag/v0.1.8)
- remove Kclass in [MoreViewType.kt](https://github.com/Werb/MoreType/blob/master/library/src/main/java/com/werb/library/MoreViewType.kt#L13)
+ remove KClass in [MoreViewType.kt](https://github.com/Werb/MoreType/blob/master/library/src/main/java/com/werb/library/MoreViewType.kt#L13)
 
 #### [v0.1.5-beta10](https://github.com/Werb/MoreType/releases/tag/v0.1.5-beta10)
 1. add [initView()](https://github.com/Werb/MoreType/blob/master/library/src/main/java/com/werb/library/MoreViewType.kt#L17) method to reuse view in ViewType
