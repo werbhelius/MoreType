@@ -17,9 +17,13 @@ import kotlinx.android.synthetic.main.item_view_horizontal_list.*
 /**
  * Created by wanbo on 2017/7/15.
  */
-class HorizontalViewType: MoreViewType<HorizontalData>(R.layout.item_view_horizontal_list) {
+class HorizontalViewType : MoreViewType<HorizontalData>(R.layout.item_view_horizontal_list) {
 
-    private val adapter = MoreAdapter()
+    private val adapter: MoreAdapter by lazy {
+        MoreAdapter().apply {
+            register(horizontalItemViewType)
+        }
+    }
     private lateinit var itemView: View
     private lateinit var context: Context
     private lateinit var icon: SimpleDraweeView
@@ -41,8 +45,7 @@ class HorizontalViewType: MoreViewType<HorizontalData>(R.layout.item_view_horizo
         val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
         horizontal_list.layoutManager = layoutManager
-        adapter.register(horizontalItemViewType)
-                .attachTo(horizontal_list)
+        adapter.attachTo(horizontal_list)
         adapter.removeAllData()
         adapter.loadData(data.list)
 
@@ -51,13 +54,13 @@ class HorizontalViewType: MoreViewType<HorizontalData>(R.layout.item_view_horizo
         }
     }
 
-    private fun getHorizontalItemViewType(): HorizontalItemViewType{
+    private fun getHorizontalItemViewType(): HorizontalItemViewType {
 
         val viewType = HorizontalItemViewType()
-        viewType.setMoreClickListener(object : MoreClickListener{
+        viewType.setMoreClickListener(object : MoreClickListener {
 
             override fun onItemClick(view: View, position: Int) {
-                when(view.id){
+                when (view.id) {
                     R.id.close -> {
                         adapter.removeData(position)
                     }

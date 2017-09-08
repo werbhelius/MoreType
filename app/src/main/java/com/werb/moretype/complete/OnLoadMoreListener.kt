@@ -56,8 +56,10 @@ abstract class OnLoadMoreListener : RecyclerView.OnScrollListener() {
         itemCount = layoutManager.itemCount
         if (lastItemCount != itemCount && lastVisibleItem + 1 == itemCount && !isShowFooter) {
             if (isHasMore()) {
-                showFooter(recyclerView)
-                onLoadMore(recyclerView)
+                recyclerView.post {
+                    showFooter(recyclerView)
+                    onLoadMore(recyclerView)
+                }
             } else {
                 lastItemCount = itemCount
             }

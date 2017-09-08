@@ -1,6 +1,5 @@
 package com.werb.library
 
-import android.animation.TimeInterpolator
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.Adapter
 import android.support.v7.widget.RecyclerView.ViewHolder
@@ -30,6 +29,7 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
     private var startAnimPosition = 0
     private var firstShow = false
     private var lastAnimPosition = -1
+    private var linearInterpolator = LinearInterpolator()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val moreViewType = buildViewType(viewType)
@@ -157,7 +157,7 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
                 val animators = it.getItemAnimators(holder.itemView)
                 for (anim in animators) {
                     anim.setDuration(animDuration).start()
-                    anim.interpolator = LinearInterpolator()
+                    anim.interpolator = linearInterpolator
                 }
                 lastAnimPosition = holder.layoutPosition
             }
