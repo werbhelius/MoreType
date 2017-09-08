@@ -59,7 +59,7 @@ class SingleText {
 }
 ```
 
-### Step 2. create a class (xxxViewType) extends abstract class `MoreViewType<T : Any>(layoutId, Class)` , like:
+### Step 2. create a class (xxxViewType) extends abstract class `MoreViewType<T : Any>(layoutId)` , like:
 
 ```kotlin
 class SingleTypeOneViewType: MoreViewType<SingleText>(R.layout.item_view_single_type_one) {
