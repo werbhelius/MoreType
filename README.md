@@ -21,16 +21,19 @@ Click icon download lastest sample
 
 ## Dependency
 ```gradle
-compile 'com.werb.moretype:moretype:0.1.5-beta10'
+compile 'com.werb.moretype:moretype:0.1.8'
 compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 or
 ```gradle
-implementation 'com.werb.moretype:moretype:0.1.5-beta10'
+implementation 'com.werb.moretype:moretype:0.1.8'
 implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 
 ## Update log
+#### [v0.1.8](https://github.com/Werb/MoreType/releases/tag/v0.1.8)
+ remove Kclass in [MoreViewType.kt](https://github.com/Werb/MoreType/blob/master/library/src/main/java/com/werb/library/MoreViewType.kt#L13)
+
 #### [v0.1.5-beta10](https://github.com/Werb/MoreType/releases/tag/v0.1.5-beta10)
 1. add [initView()](https://github.com/Werb/MoreType/blob/master/library/src/main/java/com/werb/library/MoreViewType.kt#L17) method to reuse view in ViewType
 2. add [findViewOfen()](https://github.com/Werb/MoreType/blob/master/library/src/main/java/com/werb/library/MoreViewHolder.kt#L56) in MoreViewHolder to cache and reuse view after first findViewById
@@ -54,7 +57,7 @@ class SingleText {
 ### Step 2. create a class (xxxViewType) extends abstract class `MoreViewType<T : Any>(layoutId, Class)` , like:
 
 ```kotlin
-class SingleTypeOneViewType: MoreViewType<SingleText>(R.layout.item_view_single_type_one, SingleText::class) {
+class SingleTypeOneViewType: MoreViewType<SingleText>(R.layout.item_view_single_type_one) {
 
     private lateinit var title: AppCompatTextView
     private lateinit var desc: AppCompatTextView

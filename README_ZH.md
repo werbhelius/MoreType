@@ -35,12 +35,12 @@ Click icon download lastest sample
 
 ## Dependency
 ```gradle
-compile 'com.werb.moretype:moretype:0.1.5-beta10'
+compile 'com.werb.moretype:moretype:0.1.8'
 compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 or
 ```gradle
-implementation 'com.werb.moretype:moretype:0.1.5-beta10'
+implementation 'com.werb.moretype:moretype:0.1.8'
 implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 
@@ -64,7 +64,7 @@ class SingleText {
 ### Step 2. 创建一个类 xxxViewType 继承抽象类 `MoreViewType<T : Any>(layoutId, Class)` 例如:
 
 ```kotlin
-class SingleTypeOneViewType: MoreViewType<SingleText>(R.layout.item_view_single_type_one, SingleText::class) {
+class SingleTypeOneViewType: MoreViewType<SingleText>(R.layout.item_view_single_type_one) {
 
     private lateinit var title: AppCompatTextView
     private lateinit var desc: AppCompatTextView

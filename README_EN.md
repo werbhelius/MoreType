@@ -33,12 +33,12 @@ I am not The first thought of this concept, I first saw the concept of practice,
 
 ## Dependency
 ```gradle
-compile 'com.werb.moretype:moretype:0.1.5-beta10'
+compile 'com.werb.moretype:moretype:0.1.8'
 compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 or
 ```gradle
-implementation 'com.werb.moretype:moretype:0.1.5-beta10'
+implementation 'com.werb.moretype:moretype:0.1.8'
 implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 
@@ -62,7 +62,7 @@ class SingleText {
 ### Step 2. create a class (xxxViewType) extends abstract class `MoreViewType<T : Any>(layoutId, Class)` , like:
 
 ```kotlin
-class SingleTypeOneViewType: MoreViewType<SingleText>(R.layout.item_view_single_type_one, SingleText::class) {
+class SingleTypeOneViewType: MoreViewType<SingleText>(R.layout.item_view_single_type_one) {
 
     private lateinit var title: AppCompatTextView
     private lateinit var desc: AppCompatTextView
