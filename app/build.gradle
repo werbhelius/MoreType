@@ -48,4 +48,5 @@ dependencies {
     implementation 'com.facebook.fresco:fresco:1.5.0'
     implementation 'com.werb.pickphotoview:pickphotoview:0.3.1-beta1'
     implementation 'com.werb.permissionschecker:permissionschecker:0.0.1-beta2'
+    implementation 'com.github.markzhai:blockcanary-android:1.5.0'
 }
