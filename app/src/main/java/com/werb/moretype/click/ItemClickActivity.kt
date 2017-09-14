@@ -41,7 +41,7 @@ class ItemClickActivity : AppCompatActivity() {
                     return if (data.click) {
                         RegisterItem(R.layout.item_view_click_one, ItemClickOneViewHolder::class.java, oneClick)
                     } else {
-                        RegisterItem(R.layout.item_view_click_one, ItemClickTwoViewHolder::class.java, twoClick)
+                        RegisterItem(R.layout.item_view_click_two, ItemClickTwoViewHolder::class.java, twoClick)
                     }
                 }
             })
@@ -89,7 +89,7 @@ class ItemClickActivity : AppCompatActivity() {
                             .show()
                 }
             }
-            return false
+            return true
         }
     }
 
