@@ -2,11 +2,10 @@ package com.werb.library.link
 
 import android.support.v4.util.SparseArrayCompat
 import android.util.Log
-import com.werb.library.MoreAdapter
-import com.werb.library.MoreViewType
+import com.werb.library.MoreViewHolder
+import com.werb.library.action.MoreClickListener
 import com.werb.library.exception.ModelNotRegisterException
-import com.werb.library.exception.MultiModelNotRegisterException
-import kotlin.reflect.KClass
+import java.lang.reflect.ParameterizedType
 
 
 /**
@@ -15,46 +14,50 @@ import kotlin.reflect.KClass
  * layout id is unique key
  * Created by wanbo on 2017/7/5.
  */
-class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
+class MoreLinkManager : MoreLink {
 
     private val TAG = "MoreType"
 
-    /** [viewTypeMap] save MoreViewType by layout id */
-    private var viewTypeMap = SparseArrayCompat<MoreViewType<Any>>()
+    /** [viewHolderMap] save MoreViewHolder by layout id */
+    private var viewHolderMap = SparseArrayCompat<Class<out MoreViewHolder<*>>>()
 
     /** [modelTypeMap] save Data::class by layout id */
     private var modelTypeMap = SparseArrayCompat<Class<*>>()
 
+    /** [modelTypeMap] save clickListener by layout id */
+    private var clickListenerMap = SparseArrayCompat<MoreClickListener?>()
+
     /** [multiModelMap] save [MultiLink] by Data::class */
     private var multiModelMap = mutableMapOf<Class<*>, MultiLink<Any>>()
 
-    /** [multiViewTypeMap] save MoreViewType by layout id */
-    private var multiViewTypeMap = SparseArrayCompat<MoreViewType<Any>>()
+    /** [multiViewHolderMap] save MoreViewType by layout id */
+    private var multiViewHolderMap = SparseArrayCompat<Class<out MoreViewHolder<*>>>()
 
     /**
      *  [register] register single MoreViewType , MoreViewType can't repeat
      *  if two ViewType's getViewModel() return same Data::class
-     *  [viewTypeMap] and [modelTypeMap] will remove oldViewType and replace by newViewType
+     *  [viewHolderMap] and [modelTypeMap] will remove oldViewType and replace by newViewType
      */
-    override fun register(viewType: MoreViewType<*>): MoreAdapter {
-        val type = viewType.layoutId
-        val model = viewType.clazz
+    override fun register(layoutId: Int, clazz: Class<out MoreViewHolder<*>>, clickListener: MoreClickListener?) {
+        val model = reflectClass(clazz)
         if (modelTypeMap.indexOfValue(model) != -1) {
             val index = modelTypeMap.indexOfValue(model)
-            val key = viewTypeMap.keyAt(index)
-            val oldViewType = viewTypeMap[key]
+            val key = viewHolderMap.keyAt(index)
+            val oldViewType = viewHolderMap[key]
             val modelName = model.simpleName
-            val newTypeName = viewType.javaClass.simpleName
-            val oldViewTypeName = oldViewType.javaClass.simpleName
-            viewTypeMap.removeAt(index)
+            val newTypeName = clazz.simpleName
+            val oldViewTypeName = oldViewType.simpleName
+            viewHolderMap.removeAt(index)
             modelTypeMap.removeAt(index)
+            clickListenerMap.removeAt(index)
             Log.w(TAG, "model repeated! $modelName.class will replace $oldViewTypeName to $newTypeName")
         }
         @Suppress("UNCHECKED_CAST")
-        viewTypeMap.put(type, viewType as MoreViewType<Any>?)
-        modelTypeMap.put(type, model)
-        return adapter
+        viewHolderMap.put(layoutId, clazz)
+        modelTypeMap.put(layoutId, model)
+        clickListenerMap.put(layoutId, clickListener)
     }
+
 
     /**
      * [multiRegister] register multi MoreViewType
@@ -62,16 +65,10 @@ class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
      * [link] the link between data and kinds of viewType
      * use map save , so same class will be replace, if you register repeated
      */
-    override fun multiRegister(clazz: KClass<*>, link: MultiLink<*>): MoreAdapter {
+    @Suppress("UNCHECKED_CAST")
+    override fun multiRegister(link: MultiLink<*>) {
         @Suppress("UNCHECKED_CAST")
-        multiModelMap.put(clazz.java, link as MultiLink<Any>)
-        return adapter
-    }
-
-    override fun multiRegister(clazz: Class<*>, link: MultiLink<*>): MoreAdapter {
-        @Suppress("UNCHECKED_CAST")
-        multiModelMap.put(clazz, link as MultiLink<Any>)
-        return adapter
+        multiModelMap.put(reflectClass(link::class.java), link as MultiLink<Any>)
     }
 
     /**
@@ -87,76 +84,73 @@ class MoreLinkManager(var adapter: MoreAdapter) : MoreLink {
             val multiClazz = multiModelMap.containsKey(clazz)
             if (multiClazz) {
                 val multiLink = multiModelMap[clazz]
-                val viewType = multiLink?.link(any)
-                if (viewType != null) {
-                    if (multiViewTypeMap.get(viewType.layoutId) == null) {
-                        multiViewTypeMap.put(viewType.layoutId, viewType)
+                multiLink?.let {
+                    val link = it.link(any)
+                    if (multiViewHolderMap.get(link.layoutId) == null) {
+                        multiViewHolderMap.put(link.layoutId, link.clazzViewHolder)
+                        clickListenerMap.put(link.layoutId, link.clickListener)
                     }
-                    return viewType.layoutId
+                    return link.layoutId
                 }
             } else {
                 throw ModelNotRegisterException(clazz.simpleName as String)
             }
         }
-        return viewTypeMap.keyAt(type)
+        return viewHolderMap.keyAt(type)
     }
 
-    /**
-     * [attachViewType] attach to viewType by data item
-     * if data belong to single register will return viewType
-     * if data belong to multi register will return viewType by multiLink judge data
-     * if data belong to multi register, but not link viewType with multiLink will throw [MultiModelNotRegisterException]
-     * if data not register will throw [ModelNotRegisterException]
-     */
-    override fun attachViewType(any: Any): MoreViewType<Any> {
-        val clazz = any.javaClass
-        val type = modelTypeMap.indexOfValue(clazz)
-        if (type == -1) {
-            val multiClazz = multiModelMap.containsKey(clazz)
-            if (multiClazz) {
-                val multiLink = multiModelMap[clazz]
-                val viewType = multiLink?.link(any)
-                if (viewType != null) {
-                    return multiViewTypeMap[viewType.layoutId]
-                } else {
-                    throw MultiModelNotRegisterException(clazz.simpleName as String)
-                }
-            } else {
-                throw ModelNotRegisterException(clazz.simpleName as String)
-            }
-        } else {
-            val key = viewTypeMap.keyAt(type)
-            return viewTypeMap[key]
-        }
-    }
-
-    /** [buildViewType] return MoreViewType in onCreateViewHolder() to create viewHolder*/
-    override fun buildViewType(type: Int): MoreViewType<Any>?{
+    /** [createViewHolder] return MoreViewHolder in onCreateViewHolder() to create viewHolder*/
+    override fun createViewHolder(type: Int): Class<out MoreViewHolder<*>> {
         if (type == -1) {
             throw  NullPointerException("no such type!")
         }
 
-        val viewType = viewTypeMap[type]
-        val multiViewType = multiViewTypeMap[type]
+        val viewHolder = viewHolderMap[type]
+        val multiViewHolder = multiViewHolderMap[type]
 
-        if (viewType != null){
-            return viewType
+        if (viewHolder != null) {
+            return viewHolder
         }
 
-        if (multiViewType != null){
-            return multiViewType
+        if (multiViewHolder != null) {
+            return multiViewHolder
         }
 
         throw  NullPointerException("no such type!")
     }
 
-    /** [userSoleRegister] single register Global ViewType */
-    override fun userSoleRegister(): MoreAdapter {
-        val viewTypes = SoleLinkManager.viewTypes
-        for (viewType in viewTypes) {
-            register(viewType)
+    override fun bindClickListener(holder: MoreViewHolder<*>): MoreClickListener? {
+        val clazz = holder.javaClass
+
+        val viewIndex = viewHolderMap.indexOfValue(clazz)
+        val multiIndex = multiViewHolderMap.indexOfValue(clazz)
+
+        if (viewIndex != -1){
+            val viewLayout = viewHolderMap.keyAt(viewIndex)
+            return clickListenerMap[viewLayout]
         }
-        return adapter
+
+        if (multiIndex != -1){
+            val multiLayout = multiViewHolderMap.keyAt(multiIndex)
+            return clickListenerMap[multiLayout]
+        }
+
+        return null
+    }
+
+    /** [userSoleRegister] single register Global ViewType */
+    override fun userSoleRegister() {
+        val items = SoleLinkManager.registerItem
+        for ((layoutId, clazzViewHolder, clickListener) in items) {
+            register(layoutId, clazzViewHolder, clickListener)
+        }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun reflectClass(clazz: Class<*>): Class<Any> {
+        val type = clazz.genericSuperclass as ParameterizedType
+        val p = type.actualTypeArguments
+        return p[0] as Class<Any>
     }
 
 }

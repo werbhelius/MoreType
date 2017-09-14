@@ -1,16 +1,15 @@
 package com.werb.moretype.multi
 
 import android.Manifest
+import android.app.Activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.View
 import com.werb.library.MoreAdapter
-import com.werb.library.MoreViewType
 import com.werb.library.link.MultiLink
 import com.werb.moretype.R
-import com.werb.moretype.TitleViewType
 import com.werb.moretype.data.DataServer
 import com.werb.permissionschecker.PermissionChecker
 import com.werb.pickphotoview.PickPhotoView
@@ -18,6 +17,8 @@ import kotlinx.android.synthetic.main.activity_multi_register.*
 import kotlinx.android.synthetic.main.widget_view_message_input.*
 import com.werb.pickphotoview.util.PickConfig
 import android.content.Intent
+import com.werb.library.link.RegisterItem
+import com.werb.moretype.TitleViewHolder
 import com.werb.moretype.Utils
 
 
@@ -43,17 +44,19 @@ class MultiRegisterActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener { finish() }
 
         multi_register_list.layoutManager = LinearLayoutManager(this)
-        adapter.register(TitleViewType())
-                .multiRegister(Message::class, object : MultiLink<Message> {
-                    override fun link(data: Message): MoreViewType<Message> {
-                        return if (data.me) {
-                            MessageOutViewType()
-                        } else {
-                            MessageInViewType()
-                        }
+        adapter.apply {
+            register(R.layout.item_view_title, TitleViewHolder::class.java)
+            multiRegister(object : MultiLink<Message>() {
+                override fun link(data: Message): RegisterItem {
+                    return if (data.me){
+                        RegisterItem(R.layout.item_view_multi_message_out, MessageOutViewType::class.java)
+                    }else {
+                        RegisterItem(R.layout.item_view_multi_message_in, MessageInViewType::class.java)
                     }
-                })
-                .attachTo(multi_register_list)
+                }
+            })
+            attachTo(multi_register_list)
+        }
 
         adapter.loadData(DataServer.getMultiRegisterData())
 
@@ -180,6 +183,12 @@ class MultiRegisterActivity : AppCompatActivity() {
                 adapter.loadData(buildSendMessageImage(path, imageSize))
                 multi_register_list.smoothScrollToPosition(adapter.itemCount)
             }
+        }
+    }
+
+    companion object {
+        fun startActivity(activity: Activity){
+            activity.startActivity(Intent(activity, MultiRegisterActivity::class.java))
         }
     }
 

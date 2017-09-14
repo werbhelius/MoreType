@@ -5,9 +5,9 @@ import android.view.View
 /**
  * Created by wanbo on 2017/7/2.
  */
-interface MoreClickListener {
+abstract class MoreClickListener {
 
-    fun onItemClick(view: View, position: Int)
+    open fun onItemClick(view: View, position: Int){}
 
-    fun onItemLongClick(view: View, position: Int): Boolean
+    open fun onItemLongClick(view: View, position: Int): Boolean { return false }
 }

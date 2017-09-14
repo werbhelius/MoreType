@@ -1,12 +1,13 @@
 package com.werb.moretype.me
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.werb.library.MoreAdapter
 import com.werb.moretype.R
-import com.werb.moretype.TitleViewType
+import com.werb.moretype.TitleViewHolder
 import com.werb.moretype.data.DataServer
 import com.werb.moretype.main.MainActivity
 import kotlinx.android.synthetic.main.activity_me.*
@@ -29,15 +30,17 @@ class AboutMeActivity: AppCompatActivity() {
         toolbar.setNavigationOnClickListener { onBackPressed() }
 
         me_list.layoutManager = LinearLayoutManager(this)
-        adapter.userSoleRegister()
-                .register(TitleViewType())
-                .register(MeInfoViewType())
-                .register(MeTitleViewType())
-                .register(MeMessageViewType())
-                .register(MeThanksViewType())
-                .renderWithAnimation()
-                .startAnimPosition(1)
-                .attachTo(me_list)
+        adapter.apply {
+            userSoleRegister()
+            register(R.layout.item_view_title, TitleViewHolder::class.java)
+            register(R.layout.item_view_about_me_info, MeInfoViewHolder::class.java)
+            register(R.layout.item_view_about_me_title, MeTitleViewType::class.java)
+            register(R.layout.item_view_about_me_message, MeMessageViewHolder::class.java)
+            register(R.layout.item_view_about_me_thx, MeThanksViewHolder::class.java)
+            renderWithAnimation()
+            startAnimPosition(1)
+            attachTo(me_list)
+        }
 
         adapter.loadData(DataServer.getAboutMeData())
         me_list.smoothScrollToPosition(0)
@@ -49,6 +52,12 @@ class AboutMeActivity: AppCompatActivity() {
         } else {
             startActivity(Intent(AboutMeActivity@this, MainActivity::class.java))
             finish()
+        }
+    }
+
+    companion object {
+        fun startActivity(activity: Activity){
+            activity.startActivity(Intent(activity, AboutMeActivity::class.java))
         }
     }
 

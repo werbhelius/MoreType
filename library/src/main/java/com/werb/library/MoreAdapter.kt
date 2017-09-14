@@ -4,9 +4,11 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.Adapter
 import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import com.werb.library.action.DataAction
+import com.werb.library.action.MoreClickListener
 import com.werb.library.extension.AlphaAnimation
 import com.werb.library.extension.AnimExtension
 import com.werb.library.extension.MoreAnimation
@@ -20,10 +22,10 @@ import kotlin.reflect.KClass
  * [MoreAdapter] build viewHolder with data
  * Created by wanbo on 2017/7/2.
  */
-class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
+class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, DataAction {
 
     val list: MutableList<Any> = mutableListOf()
-    private val linkManager: MoreLink = MoreLinkManager(this)
+    private val linkManager: MoreLink by lazy { MoreLinkManager() }
     private var animation: MoreAnimation? = null
     private var animDuration = 250L
     private var startAnimPosition = 0
@@ -31,28 +33,24 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
     private var lastAnimPosition = -1
     private var linearInterpolator = LinearInterpolator()
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        val moreViewType = buildViewType(viewType)
-        return moreViewType?.onCreateViewHolder(LayoutInflater.from(parent?.context), parent as ViewGroup) ?: attachViewType(list[viewType]).onCreateViewHolder(LayoutInflater.from(parent?.context), parent as ViewGroup)
+    @Suppress("UNCHECKED_CAST")
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MoreViewHolder<Any> {
+        val viewHolderClass = createViewHolder(viewType)
+        val con = viewHolderClass.getConstructor(View::class.java)
+        val view = LayoutInflater.from(parent?.context).inflate(viewType, parent, false)
+        return con.newInstance(view) as MoreViewHolder<Any>
     }
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: MoreViewHolder<Any>, position: Int) {
         val any = list[position]
-        val attachViewType = attachViewType(any)
-        if (holder is MoreViewHolder) {
-            attachViewType.initView(holder)
-            attachViewType.bindHolder(holder)
-            attachViewType.bindData(any, holder)
-            holder.itemView.setTag(R.id.moretype_item_viewtype, attachViewType)
-        }
+        holder.clickListener = bindClickListener(holder)
+        holder.bindData(any)
+
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun onViewRecycled(holder: ViewHolder?) {
-        if (holder is MoreViewHolder) {
-            val moreViewType = holder.itemView.getTag(R.id.moretype_item_viewtype) as MoreViewType<Any>
-            moreViewType.unBindData(holder)
-        }
+    override fun onViewRecycled(holder: MoreViewHolder<Any>) {
+        holder.unBindData()
     }
 
     fun attachTo(view: RecyclerView): MoreLink {
@@ -130,9 +128,9 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
         return attachViewTypeLayout(any)
     }
 
-    override fun onViewAttachedToWindow(holder: ViewHolder?) {
+    override fun onViewAttachedToWindow(holder: MoreViewHolder<Any>) {
         super.onViewAttachedToWindow(holder)
-        addAnimation(holder as MoreViewHolder)
+        addAnimation(holder)
     }
 
     /** [renderWithAnimation] user default animation AlphaAnimation */
@@ -148,7 +146,7 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
     }
 
     /** [addAnimation] addAnimation when view attached to windows */
-    override fun addAnimation(holder: MoreViewHolder) {
+    override fun addAnimation(holder: MoreViewHolder<Any>) {
         this.animation?.let {
             if (holder.layoutPosition < startAnimPosition) {
                 return
@@ -183,32 +181,23 @@ class MoreAdapter : Adapter<ViewHolder>(), MoreLink, AnimExtension, DataAction {
     }
 
     /** [register] register viewType which single link with model  */
-    override fun register(viewType: MoreViewType<*>): MoreAdapter {
-        linkManager.register(viewType)
-        return this
+    override fun register(layoutId: Int, clazz: Class<out MoreViewHolder<*>>, clickListener: MoreClickListener?) {
+        linkManager.register(layoutId, clazz, clickListener)
     }
 
     /** [multiRegister] multiRegister viewType like one2more case , user MultiLink to choose which one is we need */
-    override fun multiRegister(clazz: KClass<out Any>, link: MultiLink<*>): MoreAdapter {
-        linkManager.multiRegister(clazz, link)
-        return this
+    override fun multiRegister(link: MultiLink<*>) {
+        linkManager.multiRegister(link)
     }
-
-    /** [multiRegister] multiRegister viewType like one2more case , user MultiLink to choose which one is we need */
-    override fun multiRegister(clazz: Class<*>, link: MultiLink<*>): MoreAdapter {
-        linkManager.multiRegister(clazz, link)
-        return this
-    }
-
-    /** [attachViewType]  find viewType by item of list */
-    override fun attachViewType(any: Any): MoreViewType<Any> = linkManager.attachViewType(any)
 
     /** [attachViewTypeLayout]  find viewType layout by item of list */
     override fun attachViewTypeLayout(any: Any): Int = linkManager.attachViewTypeLayout(any)
 
-    /** [buildViewType]  find viewType by layout */
-    override fun buildViewType(type: Int): MoreViewType<Any>? = linkManager.buildViewType(type)
+    /** [createViewHolder]  find viewType by layout */
+    override fun createViewHolder(type: Int): Class<out MoreViewHolder<*>> = linkManager.createViewHolder(type)
+
+    override fun bindClickListener(holder: MoreViewHolder<*>): MoreClickListener? = linkManager.bindClickListener(holder)
 
     /** [userSoleRegister] register sole global viewType */
-    override fun userSoleRegister(): MoreAdapter = linkManager.userSoleRegister()
+    override fun userSoleRegister() = linkManager.userSoleRegister()
 }

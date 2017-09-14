@@ -3,7 +3,8 @@ package com.werb.moretype
 import android.app.Application
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.werb.library.MoreType
-import com.werb.moretype.complete.FootViewType
+import com.werb.library.link.RegisterItem
+import com.werb.moretype.complete.FootViewHolder
 
 /**
  * Created by wanbo on 2017/7/12.
@@ -20,7 +21,7 @@ class MyApp: Application() {
         myApp = this
         Fresco.initialize(myApp)
         // Sole Global Register, like footer , Cutting line
-        MoreType.soleRegister(FootViewType())
+        MoreType.soleRegister(RegisterItem(R.layout.item_view_footer, FootViewHolder::class.java))
     }
 
 }

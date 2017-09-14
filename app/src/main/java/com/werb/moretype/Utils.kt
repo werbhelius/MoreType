@@ -1,17 +1,10 @@
 package com.werb.moretype
 
 import android.graphics.BitmapFactory
-import android.net.Uri
-import android.text.TextUtils
 import com.werb.moretype.multi.ImageSize
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-import android.graphics.Bitmap
-import android.R.attr.path
-import java.io.File
-import java.nio.file.Files.exists
-
-
 
 
 /**

@@ -12,7 +12,7 @@ interface AnimExtension {
 
     fun renderWithAnimation(animation: MoreAnimation): MoreAdapter
 
-    fun addAnimation(holder: MoreViewHolder)
+    fun addAnimation(holder: MoreViewHolder<Any>)
 
     fun duration(duration: Long): MoreAdapter
 

@@ -1,18 +1,16 @@
 package com.werb.library.link
 
-import com.werb.library.MoreViewType
-
 /**
  * [SoleLinkManager] help to register global viewType
  * Created by wanbo on 2017/7/12.
  */
 internal object SoleLinkManager {
 
-    var viewTypes = arrayOf<MoreViewType<*>>()
+    var registerItem = arrayOf<RegisterItem>()
 
-    fun globalRegister(vararg viewTypes: MoreViewType<*>) {
+    fun globalRegister(vararg items: RegisterItem) {
         @Suppress("UNCHECKED_CAST")
-        this.viewTypes = viewTypes as Array<MoreViewType<*>>
+        this.registerItem = items as Array<RegisterItem>
     }
     
 }

@@ -1,5 +1,6 @@
 package com.werb.library
 
+import com.werb.library.link.RegisterItem
 import com.werb.library.link.SoleLinkManager
 
 /**
@@ -8,9 +9,9 @@ import com.werb.library.link.SoleLinkManager
  */
 object MoreType {
 
-    /** [soleRegister] register global viewType [viewTypes] MoreViewType Array */
-    fun soleRegister(vararg viewTypes: MoreViewType<*>) {
-        SoleLinkManager.globalRegister(*viewTypes)
+    /** [soleRegister] register global RegisterItem [items] RegisterItem Array */
+    fun soleRegister(vararg items: RegisterItem) {
+        SoleLinkManager.globalRegister(*items)
     }
 
 }

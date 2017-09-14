@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBackground"
     tools:context="com.werb.moretype.main.MainActivity">
 
@@ -43,6 +44,7 @@
         android:layout_below="@+id/more_layout"
         android:layout_marginTop="-27dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginRight="15dp"
+        app:layoutManager="LinearLayoutManager"/>
 
 </RelativeLayout>

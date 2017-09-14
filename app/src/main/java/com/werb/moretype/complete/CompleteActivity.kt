@@ -1,13 +1,14 @@
 package com.werb.moretype.complete
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.werb.library.MoreAdapter
 import com.werb.moretype.R
-import com.werb.moretype.TitleViewType
+import com.werb.moretype.TitleViewHolder
 import com.werb.moretype.data.DataServer
 import com.werb.moretype.main.MainCard
 import kotlinx.android.synthetic.main.activity_complete.*
@@ -27,13 +28,15 @@ class CompleteActivity: AppCompatActivity() {
         toolbar.setNavigationOnClickListener { finish() }
 
         complete_list.layoutManager = LinearLayoutManager(this)
-        adapter.userSoleRegister()
-                .register(TitleViewType())
-                .register(CompleteViewType())
-                .register(HorizontalViewType())
-                .renderWithAnimation()
-                .startAnimPosition(1)
-                .attachTo(complete_list)
+        adapter.apply {
+            userSoleRegister()
+            register(R.layout.item_view_title, TitleViewHolder::class.java)
+            register(R.layout.item_view_complete, CompleteViewHolder::class.java)
+            register(R.layout.item_view_horizontal_list, HorizontalViewHolder::class.java)
+            renderWithAnimation()
+                    .startAnimPosition(1)
+                    .attachTo(complete_list)
+        }
 
         adapter.loadData(MainCard("Complete Example", "A combination of elegant implementation layouts with refresh and loadMore"))
         adapter.loadData(DataServer.getCompleteData())
@@ -76,6 +79,12 @@ class CompleteActivity: AppCompatActivity() {
             }
         }
 
+    }
+
+    companion object {
+        fun startActivity(activity: Activity){
+            activity.startActivity(Intent(activity, CompleteActivity::class.java))
+        }
     }
 
 }
