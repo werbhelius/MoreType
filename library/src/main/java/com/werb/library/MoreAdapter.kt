@@ -15,6 +15,7 @@ import com.werb.library.extension.MoreAnimation
 import com.werb.library.link.MoreLink
 import com.werb.library.link.MoreLinkManager
 import com.werb.library.link.MultiLink
+import com.werb.library.link.RegisterItem
 import kotlin.reflect.KClass
 
 
@@ -181,8 +182,8 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
     }
 
     /** [register] register viewType which single link with model  */
-    override fun register(layoutId: Int, clazz: Class<out MoreViewHolder<*>>, clickListener: MoreClickListener?) {
-        linkManager.register(layoutId, clazz, clickListener)
+    override fun register(registerItem: RegisterItem) {
+        linkManager.register(registerItem)
     }
 
     /** [multiRegister] multiRegister viewType like one2more case , user MultiLink to choose which one is we need */

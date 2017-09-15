@@ -11,6 +11,7 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.CompoundButton
 import com.werb.library.MoreAdapter
 import com.werb.library.extension.*
+import com.werb.library.link.RegisterItem
 import com.werb.moretype.R
 import com.werb.moretype.TitleViewHolder
 import com.werb.moretype.data.DataServer
@@ -33,8 +34,8 @@ class AnimActivity : AppCompatActivity() {
 
         anim_list.layoutManager = LinearLayoutManager(this)
         adapter.apply {
-            register(R.layout.item_view_title, TitleViewHolder::class.java)
-            register(R.layout.item_view_anim, AnimViewHolder::class.java)
+            register(RegisterItem(R.layout.item_view_title, TitleViewHolder::class.java))
+            register(RegisterItem(R.layout.item_view_anim, AnimViewHolder::class.java))
             startAnimPosition(1)
             attachTo(anim_list)
         }
@@ -50,7 +51,7 @@ class AnimActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, p3: Long) {
-                when (position){
+                when (position) {
                     0 -> {
                         adapter.removeAllData()
                         adapter.renderWithAnimation(AlphaAnimation())

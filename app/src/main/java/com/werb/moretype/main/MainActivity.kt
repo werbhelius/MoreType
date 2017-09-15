@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.werb.library.MoreAdapter
 import com.werb.library.action.MoreClickListener
+import com.werb.library.link.RegisterItem
 import com.werb.moretype.R
 import com.werb.moretype.data.DataServer
 import com.werb.moretype.single.SingleRegisterActivity
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         adapter.apply {
-            register(R.layout.item_view_main, MainCardViewHolder::class.java)
+            register(RegisterItem(R.layout.item_view_main, MainCardViewHolder::class.java))
             attachTo(more_list)
         }
 

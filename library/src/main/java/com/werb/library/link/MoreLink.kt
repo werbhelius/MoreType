@@ -11,7 +11,7 @@ import com.werb.library.action.MoreClickListener
 interface MoreLink {
 
     /** [register]  register single link viewType when we use with click listener */
-    fun register(layoutId: Int, clazz: Class<out MoreViewHolder<*>>, clickListener: MoreClickListener? = null)
+    fun register(registerItem: RegisterItem)
 
     /** [multiRegister]  register multi link like one2more viewType when we use */
     fun multiRegister(link: MultiLink<*>)

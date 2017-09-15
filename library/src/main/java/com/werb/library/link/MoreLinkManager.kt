@@ -38,14 +38,14 @@ class MoreLinkManager : MoreLink {
      *  if two ViewType's getViewModel() return same Data::class
      *  [viewHolderMap] and [modelTypeMap] will remove oldViewType and replace by newViewType
      */
-    override fun register(layoutId: Int, clazz: Class<out MoreViewHolder<*>>, clickListener: MoreClickListener?) {
-        val model = reflectClass(clazz)
+    override fun register(registerItem: RegisterItem) {
+        val model = reflectClass(registerItem.clazzViewHolder)
         if (modelTypeMap.indexOfValue(model) != -1) {
             val index = modelTypeMap.indexOfValue(model)
             val key = viewHolderMap.keyAt(index)
             val oldViewType = viewHolderMap[key]
             val modelName = model.simpleName
-            val newTypeName = clazz.simpleName
+            val newTypeName = registerItem.clazzViewHolder.simpleName
             val oldViewTypeName = oldViewType.simpleName
             viewHolderMap.removeAt(index)
             modelTypeMap.removeAt(index)
@@ -53,9 +53,9 @@ class MoreLinkManager : MoreLink {
             Log.w(TAG, "model repeated! $modelName.class will replace $oldViewTypeName to $newTypeName")
         }
         @Suppress("UNCHECKED_CAST")
-        viewHolderMap.put(layoutId, clazz)
-        modelTypeMap.put(layoutId, model)
-        clickListenerMap.put(layoutId, clickListener)
+        viewHolderMap.put(registerItem.layoutId, registerItem.clazzViewHolder)
+        modelTypeMap.put(registerItem.layoutId, model)
+        clickListenerMap.put(registerItem.layoutId, registerItem.clickListener)
     }
 
 
@@ -141,8 +141,8 @@ class MoreLinkManager : MoreLink {
     /** [userSoleRegister] single register Global ViewType */
     override fun userSoleRegister() {
         val items = SoleLinkManager.registerItem
-        for ((layoutId, clazzViewHolder, clickListener) in items) {
-            register(layoutId, clazzViewHolder, clickListener)
+        for (item in items) {
+            register(item)
         }
     }
 

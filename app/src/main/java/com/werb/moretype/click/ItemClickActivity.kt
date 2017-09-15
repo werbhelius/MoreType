@@ -35,7 +35,7 @@ class ItemClickActivity : AppCompatActivity() {
 
         item_click_list.layoutManager = LinearLayoutManager(this)
         adapter.apply {
-            register(R.layout.item_view_title, TitleViewHolder::class.java)
+            register(RegisterItem(R.layout.item_view_title, TitleViewHolder::class.java))
             multiRegister(object : MultiLink<ItemClick>() {
                 override fun link(data: ItemClick): RegisterItem {
                     return if (data.click) {

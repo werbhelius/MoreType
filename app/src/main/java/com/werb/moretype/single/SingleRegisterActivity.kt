@@ -11,12 +11,13 @@ import com.werb.moretype.data.DataServer
 import kotlinx.android.synthetic.main.activity_single_register.*
 import android.support.v7.widget.GridLayoutManager.SpanSizeLookup
 import android.support.v7.widget.GridLayoutManager
+import com.werb.library.link.RegisterItem
 
 
 /**
  * Created by wanbo on 2017/7/14.
  */
-class SingleRegisterActivity: AppCompatActivity() {
+class SingleRegisterActivity : AppCompatActivity() {
 
     private val adapter = MoreAdapter()
 
@@ -31,7 +32,7 @@ class SingleRegisterActivity: AppCompatActivity() {
         val spanSizeLookup = object : SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 val item = adapter.getData(position)
-                return if (item is SingleImage ) 1 else 3
+                return if (item is SingleImage) 1 else 3
             }
         }
         gridLayoutManager.spanSizeLookup = spanSizeLookup
@@ -39,12 +40,12 @@ class SingleRegisterActivity: AppCompatActivity() {
         single_register_list.addItemDecoration(SingleItemDecoration(12))
 
         /* register viewType and attach to recyclerView */
-       adapter.apply {
-           register(R.layout.item_view_single_type_one, SingleTypeOneViewHolder::class.java)
-           register(R.layout.item_view_single_type_two, SingleTypeTwoViewType::class.java)
-           register(R.layout.item_view_title, TitleViewHolder::class.java)
-           attachTo(single_register_list)
-       }
+        adapter.apply {
+            register(RegisterItem(R.layout.item_view_single_type_one, SingleTypeOneViewHolder::class.java))
+            register(RegisterItem(R.layout.item_view_single_type_two, SingleTypeTwoViewType::class.java))
+            register(RegisterItem(R.layout.item_view_title, TitleViewHolder::class.java))
+            attachTo(single_register_list)
+        }
 
         /* load any data List or model object */
         adapter.loadData(DataServer.getSingleRegisterData())
@@ -52,7 +53,7 @@ class SingleRegisterActivity: AppCompatActivity() {
     }
 
     companion object {
-        fun startActivity(activity: Activity){
+        fun startActivity(activity: Activity) {
             activity.startActivity(Intent(activity, SingleRegisterActivity::class.java))
         }
     }

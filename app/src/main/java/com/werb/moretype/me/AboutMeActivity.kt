@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.werb.library.MoreAdapter
+import com.werb.library.link.RegisterItem
 import com.werb.moretype.R
 import com.werb.moretype.TitleViewHolder
 import com.werb.moretype.data.DataServer
@@ -32,11 +33,11 @@ class AboutMeActivity: AppCompatActivity() {
         me_list.layoutManager = LinearLayoutManager(this)
         adapter.apply {
             userSoleRegister()
-            register(R.layout.item_view_title, TitleViewHolder::class.java)
-            register(R.layout.item_view_about_me_info, MeInfoViewHolder::class.java)
-            register(R.layout.item_view_about_me_title, MeTitleViewType::class.java)
-            register(R.layout.item_view_about_me_message, MeMessageViewHolder::class.java)
-            register(R.layout.item_view_about_me_thx, MeThanksViewHolder::class.java)
+            register(RegisterItem(R.layout.item_view_title, TitleViewHolder::class.java))
+            register(RegisterItem(R.layout.item_view_about_me_info, MeInfoViewHolder::class.java))
+            register(RegisterItem(R.layout.item_view_about_me_title, MeTitleViewType::class.java))
+            register(RegisterItem(R.layout.item_view_about_me_message, MeMessageViewHolder::class.java))
+            register(RegisterItem(R.layout.item_view_about_me_thx, MeThanksViewHolder::class.java))
             renderWithAnimation()
             startAnimPosition(1)
             attachTo(me_list)

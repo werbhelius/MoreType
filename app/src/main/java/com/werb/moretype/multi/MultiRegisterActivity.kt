@@ -45,7 +45,7 @@ class MultiRegisterActivity : AppCompatActivity() {
 
         multi_register_list.layoutManager = LinearLayoutManager(this)
         adapter.apply {
-            register(R.layout.item_view_title, TitleViewHolder::class.java)
+            register(RegisterItem(R.layout.item_view_title, TitleViewHolder::class.java))
             multiRegister(object : MultiLink<Message>() {
                 override fun link(data: Message): RegisterItem {
                     return if (data.me){

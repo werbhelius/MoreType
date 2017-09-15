@@ -1,11 +1,11 @@
 package com.werb.moretype.complete
 
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.Toast
 import com.werb.library.MoreAdapter
 import com.werb.library.MoreViewHolder
 import com.werb.library.action.MoreClickListener
+import com.werb.library.link.RegisterItem
 import com.werb.moretype.R
 import kotlinx.android.synthetic.main.item_view_horizontal_list.*
 
@@ -16,7 +16,7 @@ class HorizontalViewHolder(containerView: View) : MoreViewHolder<HorizontalData>
 
     private val adapter: MoreAdapter by lazy {
         MoreAdapter().apply {
-            register(R.layout.item_view_horizontal_item, HorizontalItemViewHolder::class.java, click)
+            register(RegisterItem(R.layout.item_view_horizontal_item, HorizontalItemViewHolder::class.java, click))
             attachTo(horizontal_list)
         }
     }

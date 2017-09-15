@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.werb.library.MoreAdapter
+import com.werb.library.link.RegisterItem
 import com.werb.moretype.R
 import com.werb.moretype.TitleViewHolder
 import com.werb.moretype.data.DataServer
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_complete.*
 /**
  * Created by wanbo on 2017/7/15.
  */
-class CompleteActivity: AppCompatActivity() {
+class CompleteActivity : AppCompatActivity() {
 
     private val adapter = MoreAdapter()
 
@@ -30,9 +31,9 @@ class CompleteActivity: AppCompatActivity() {
         complete_list.layoutManager = LinearLayoutManager(this)
         adapter.apply {
             userSoleRegister()
-            register(R.layout.item_view_title, TitleViewHolder::class.java)
-            register(R.layout.item_view_complete, CompleteViewHolder::class.java)
-            register(R.layout.item_view_horizontal_list, HorizontalViewHolder::class.java)
+            register(RegisterItem(R.layout.item_view_title, TitleViewHolder::class.java))
+            register(RegisterItem(R.layout.item_view_complete, CompleteViewHolder::class.java))
+            register(RegisterItem(R.layout.item_view_horizontal_list, HorizontalViewHolder::class.java))
             renderWithAnimation()
                     .startAnimPosition(1)
                     .attachTo(complete_list)
@@ -54,9 +55,9 @@ class CompleteActivity: AppCompatActivity() {
     }
 
     /** [OnLoadMoreListener] this is a sample by use OnScrollListener  to achieve loadMore Data*/
-    private val loadMoreListener = object : OnLoadMoreListener(){
+    private val loadMoreListener = object : OnLoadMoreListener() {
 
-        override fun isHasMore(): Boolean  = true
+        override fun isHasMore(): Boolean = true
 
         override fun onLoadMore(v: View) {
             v.postDelayed({
@@ -82,7 +83,7 @@ class CompleteActivity: AppCompatActivity() {
     }
 
     companion object {
-        fun startActivity(activity: Activity){
+        fun startActivity(activity: Activity) {
             activity.startActivity(Intent(activity, CompleteActivity::class.java))
         }
     }
