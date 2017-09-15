@@ -1,9 +1,24 @@
+# Generated files
+bin/
+gen/
+release/
+
+# Gradle files
+.gradle/
+build/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# IntelliJ project files
 *.iml
-.gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
+.idea/
+
+# Eclipse project files
+.settings/
+
+# Misc
 .DS_Store
-/build
-/captures
-.externalNativeBuild
+
+.classpath
+.project
