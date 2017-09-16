@@ -23,22 +23,18 @@ I am not The first thought of this concept, I first saw the concept of practice,
 
 **Kotlin on Android Now official.** Don't have to worry about the NullPointerException, simple code style, in the first time I like to like it, so I decided to use Kotlin to develop a **【data-driven view】** third-party library  of the , this was MoreType **【Give you more likely】**.
 
-**This is a beta version, because it is based on the development of AS Preview, there may be some unknown Bug.**
-
-**Release Version will be published at the end of the month.**
-
 ## Preview
 ![more-type-one](./screenshot/type1.png)
 ![more-type-two](./screenshot/type2.png)
 
 ## Dependency
 ```gradle
-compile 'com.werb.moretype:moretype:0.1.8'
+compile 'com.werb.moretype:moretype:0.2.0'
 compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 or
 ```gradle
-implementation 'com.werb.moretype:moretype:0.1.8'
+implementation 'com.werb.moretype:moretype:0.2.0'
 implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 
@@ -59,30 +55,30 @@ class SingleText {
 }
 ```
 
-### Step 2. create a class (xxxViewType) extends abstract class `MoreViewType<T : Any>(layoutId)` , like:
+### Step 2. create a class (xxxViewHolder) extends abstract class `MoreViewHolder<T : Any>()` , like:
 
 ```kotlin
-class SingleTypeOneViewType: MoreViewType<SingleText>(R.layout.item_view_single_type_one) {
+import android.view.View
+import com.werb.library.MoreViewHolder
+import kotlinx.android.synthetic.main.item_view_single_type_one.*
 
-    private lateinit var title: AppCompatTextView
-    private lateinit var desc: AppCompatTextView
-    private lateinit var icon: SimpleDraweeView
+/**
+ * Created by wanbo on 2017/7/14.
+ */
+class SingleTypeOneViewHolder(containerView: View) : MoreViewHolder<SingleText>(containerView) {
 
-    override fun initView(holder: MoreViewHolder) {
-        title = holder.findViewOften(R.id.title)
-        desc = holder.findViewOften(R.id.desc)
-        icon = holder.findViewOften(R.id.icon)
-
-        // findViewOften() will cache and reuse view after first findViewBtId
-    }
-
-    override fun bindData(data: SingleText, holder: MoreViewHolder) {
+    override fun bindData(data: SingleText) {
         title.text = data.title
         desc.text = data.desc
         icon.setImageURI(data.url)
     }
+
 }
 ```
+* Compared with the 0.1.8 version removed `MoreViewType` using` MoreViewHolder` instead, regressing `RecyclerView` binding data in the first way
+* Only need to achieve the data class can be identified corresponding to the introduction of the layout of the advance to the registered part, you can more flexible to build the list
+* Android studio 3.0 version automatically depends on the `kotlin-android-extensions`, while` kotlin1.1.4-3` integrated `LayoutContainer`, in` ViewHolder` use `View` can be used directly by` id`, as above code Show more concise
+* **But it should be noted that if this approach is used, then it means that `Layout` has been determined. Please make sure that the` Layout` and `ViewHolder`**
 
 ### Step 3. `register` and `attach` to `recyclerview` in Any where you build list, like:
 
@@ -99,10 +95,11 @@ class SingleRegisterActivity: AppCompatActivity() {
 
         list.layoutManager = LinearLayoutManager(this)
 
-        /* register viewType and attach to recyclerView */
-        adapter.register(TitleViewType())
-                .register(SingleTypeOneViewType())
-                .attachTo(list)
+        /* register ViewHolder and attach to recyclerView */
+        adapter.apply {
+            register(RegisterItem(R.layout.item_view_single_type_one, SingleTypeOneViewHolder::class.java))
+            attachTo(single_register_list)
+        }
 
         /* load any data List or model object */
         adapter.loadData(DataServer.getSingleRegisterData())
@@ -112,31 +109,35 @@ class SingleRegisterActivity: AppCompatActivity() {
 }
 ```
 
-**For use with `kotlin-android-extensions` to replace findViewById()**
+* 0.2.0 version import the `RegisterItem`, in the 0.2.0 version of all registered (including one2more) are` RegisterItem` as the basic model
+```kotlin
+data class RegisterItem(val layoutId: Int, val clazzViewHolder: Class<out MoreViewHolder<*>>, var clickListener: MoreClickListener? = null)
+```
+* The three parameters are **Layout（布局）** ， **clazzViewHolder（ViewHolder 类）**， **clickListener（点击事件）**
+* Click event as optional
+
 
 Upon completion of these three steps, a list based on the [Data Driven View] has been completed.
 
 ## Feature
-### Multi Register: Register one2more ViewType
+### Multi Register: Register one2more ViewHolder
 
 Usually data and view are one-to-one relationships, like Feeds list, MoreType alse provide Multi Register like IM list, one data to Many views, MoreType can do it easily.
 
 ```kotlin
-adapter.register(TitleViewType())
-        .multiRegister(Message::class, object : MultiLink<Message> {
-            override fun link(data: Message): MoreViewType<Message>? {
-                if (data.me) {
-                    return MessageOutViewType()
-                } else {
-                    return MessageInViewType()
-                }
+adapter.apply {
+    multiRegister(object : MultiLink<Message>() {
+        override fun link(data: Message): RegisterItem {
+            return if (data.me){
+                RegisterItem(R.layout.item_view_multi_message_out, MessageOutViewHolder::class.java)
+            }else {
+                RegisterItem(R.layout.item_view_multi_message_in, MessageInViewHolder::class.java)
             }
-        })
-        .attachTo(multi_register_list)
+        }
+    })
+    attachTo(multi_register_list)
+}
 ```
-**Multi Register must explicit declare data class**
-
-
 ### Animation: Provides five types of Animation
 
 Provide 5 animations: **Alpha** , **Scale** , **SlideInBottom** , **SlideInLeft** , **SlideInRight**
@@ -166,13 +167,13 @@ class SlideInLeftAnimation : MoreAnimation {
 
 ### ItemClick: Support onItemClick and onItemLongClick
 
-Two ways to achieve ItemClick: **In ViewType** and **In Activity**
+Two ways to achieve ItemClick: **In ViewHolder** and **In Activity**
 
 **In ViewType** : Just use `view.setOnClickListener {}` in ViewType
 
 **In Activity** : 
-1. use `holder.addOnClickListener(view: View)` or `holder.addOnClickListener(viewId: Int)` to bind event in ViewType
-2. use `viewType().setMoreClickListener()` to deal event in Activity
+1. use `addOnClickListener(view: View)` or `addOnClickListener(viewId: Int)` to bind event in ViewType
+2. In the Activity through the `MoreClickListener ()` to create a click event object, you can pass in the registration
 
 [sample](https://github.com/Werb/MoreType/tree/master/app/src/main/java/com/werb/moretype/click)
 
@@ -197,7 +198,7 @@ class MyApp: Application() {
         super.onCreate()
         myApp = this
         // Sole Global Register, like footer , Cutting line
-        MoreType.soleRegister(FoorViewType())
+        MoreType.soleRegister(RegisterItem(R.layout.item_view_footer, FootViewHolder::class.java))
     }
 }
 ```

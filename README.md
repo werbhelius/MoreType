@@ -21,25 +21,23 @@ Click icon download lastest sample
 
 ## Dependency
 ```gradle
-compile 'com.werb.moretype:moretype:0.1.8'
+compile 'com.werb.moretype:moretype:0.2.0'
 compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 or
 ```gradle
-implementation 'com.werb.moretype:moretype:0.1.8'
+implementation 'com.werb.moretype:moretype:0.2.0'
 implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 
 ## Update log
-#### [v0.1.8](https://github.com/Werb/MoreType/releases/tag/v0.1.8)
- remove KClass in [MoreViewType.kt](https://github.com/Werb/MoreType/blob/master/library/src/main/java/com/werb/library/MoreViewType.kt#L13)
-
-#### [v0.1.5-beta10](https://github.com/Werb/MoreType/releases/tag/v0.1.5-beta10)
-1. add [initView()](https://github.com/Werb/MoreType/blob/master/library/src/main/java/com/werb/library/MoreViewType.kt#L17) method to reuse view in ViewType
-2. add [findViewOfen()](https://github.com/Werb/MoreType/blob/master/library/src/main/java/com/werb/library/MoreViewHolder.kt#L56) in MoreViewHolder to cache and reuse view after first findViewById
-3. add 8 [DataAction Method](https://github.com/Werb/MoreType/blob/master/library/src/main/java/com/werb/library/action/DataAction.kt) to operation data，like replace 、removeData、removeAllNotRefresh 
+#### [v0.2.0](https://github.com/Werb/MoreType/releases/tag/v0.2.0)
+* version removed `MoreViewType` using` MoreViewHolder` instead, regressing `RecyclerView` binding data in the first way
+* import the `RegisterItem`, all registered (including one2more) are` RegisterItem` as the basic model
 
 ## Usage
+
+Keyword: Data driven view 【数据驱动视图】
 
 #### Step 1. create a data model class, like:
 ```kotlin
@@ -54,28 +52,24 @@ class SingleText {
 }
 ```
 
-### Step 2. create a class (xxxViewType) extends abstract class `MoreViewType<T : Any>(layoutId, Class)` , like:
+### Step 2. create a class (xxxViewHolder) extends abstract class `MoreViewHolder<T : Any>()` , like:
 
 ```kotlin
-class SingleTypeOneViewType: MoreViewType<SingleText>(R.layout.item_view_single_type_one) {
+import android.view.View
+import com.werb.library.MoreViewHolder
+import kotlinx.android.synthetic.main.item_view_single_type_one.*
 
-    private lateinit var title: AppCompatTextView
-    private lateinit var desc: AppCompatTextView
-    private lateinit var icon: SimpleDraweeView
+/**
+ * Created by wanbo on 2017/7/14.
+ */
+class SingleTypeOneViewHolder(containerView: View) : MoreViewHolder<SingleText>(containerView) {
 
-    override fun initView(holder: MoreViewHolder) {
-        title = holder.findViewOften(R.id.title)
-        desc = holder.findViewOften(R.id.desc)
-        icon = holder.findViewOften(R.id.icon)
-
-        // findViewOften() will cache and reuse view after first findViewBtId
-    }
-
-    override fun bindData(data: SingleText, holder: MoreViewHolder) {
+    override fun bindData(data: SingleText) {
         title.text = data.title
         desc.text = data.desc
         icon.setImageURI(data.url)
     }
+
 }
 ```
 
@@ -94,10 +88,11 @@ class SingleRegisterActivity: AppCompatActivity() {
 
         list.layoutManager = LinearLayoutManager(this)
 
-        /* register viewType and attach to recyclerView */
-        adapter.register(TitleViewType())
-                .register(SingleTypeOneViewType())
-                .attachTo(list)
+        /* register ViewHolder and attach to recyclerView */
+        adapter.apply {
+            register(RegisterItem(R.layout.item_view_single_type_one, SingleTypeOneViewHolder::class.java))
+            attachTo(single_register_list)
+        }
 
         /* load any data List or model object */
         adapter.loadData(DataServer.getSingleRegisterData())

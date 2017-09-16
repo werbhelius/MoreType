@@ -15,17 +15,13 @@ Click icon download lastest sample
 
 关键词:【数据驱动视图】
 
-之前在写公司的项目的时候，需要写大量的界面，这就意味着每一个界面都要写一个 Adapter，同时还要对不同的视图根据 getItemViewType() 写不同的 ViewHolder，在存在多种视图的时候，一个 Adapter 中的代码就会很冗余，而且耦合度很高，对后续的修改很不友好。
+之前在写公司的项目的时候，需要写大量的界面，这就意味着每一个界面都要写一个 Adapter，同时还要对不同的视图根据 getItemViewHolder() 写不同的 ViewHolder，在存在多种视图的时候，一个 Adapter 中的代码就会很冗余，而且耦合度很高，对后续的修改很不友好。
 
 **我们任意一个界面都是依靠服务器返回的数据构建的，所以我就在想，能不能简单的使用数据来驱动视图，这就也是 MoreType 的核心所在【数据驱动视图】。**
 
 我并不是第一个想到这个概念的人，我最早看到这个概念的实践，是 drakeet 的 [MultiType](https://github.com/drakeet/MultiType) 。当时看完他的项目之后，有一种醍醐灌顶的畅快，这就是我所希望的【数据驱动视图】。
 
 大概在一个月前，开始接触 Kotlin，Kotlin 是一个让开发者用起来很爽的语言，不必深陷烦人的空指针异常，简洁的代码风格，在初次尝时候我就喜欢上了它，所以我决定用 Kotlin 来开发一个【数据驱动视图】的第三方库，从而就有了 MoreType 的产生【给你更多的可能】。
-
-**目前 MoreType 仍在开发，当前版本为 0.1.0-beta 版本，因为是基于 AS Preview 开发的，可能会有一些未知的 Bug**
-
-**Release 版本将会在这个月底发布.**
 
 [与 MultiType 的异同](https://github.com/Werb/MoreType/issues/1)
 
@@ -35,12 +31,12 @@ Click icon download lastest sample
 
 ## Dependency
 ```gradle
-compile 'com.werb.moretype:moretype:0.1.8'
+compile 'com.werb.moretype:moretype:0.2.0'
 compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 or
 ```gradle
-implementation 'com.werb.moretype:moretype:0.1.8'
+implementation 'com.werb.moretype:moretype:0.2.0'
 implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 
@@ -61,36 +57,33 @@ class SingleText {
 }
 ```
 
-### Step 2. 创建一个类 xxxViewType 继承抽象类 `MoreViewType<T : Any>(layoutId)` 例如:
+### Step 2. 创建一个类 xxxViewHolder 继承抽象类 `MoreViewHolder<T : Any>()` 例如:
 
 ```kotlin
-class SingleTypeOneViewType: MoreViewType<SingleText>(R.layout.item_view_single_type_one) {
+import android.view.View
+import com.werb.library.MoreViewHolder
+import kotlinx.android.synthetic.main.item_view_single_type_one.*
 
-    private lateinit var title: AppCompatTextView
-    private lateinit var desc: AppCompatTextView
-    private lateinit var icon: SimpleDraweeView
+/**
+ * Created by wanbo on 2017/7/14.
+ */
+class SingleTypeOneViewHolder(containerView: View) : MoreViewHolder<SingleText>(containerView) {
 
-    override fun initView(holder: MoreViewHolder) {
-        title = holder.findViewOften(R.id.title)
-        desc = holder.findViewOften(R.id.desc)
-        icon = holder.findViewOften(R.id.icon)
-
-        // findViewOften() will cache and reuse view after first findViewBtId
-    }
-
-    override fun bindData(data: SingleText, holder: MoreViewHolder) {
+    override fun bindData(data: SingleText) {
         title.text = data.title
         desc.text = data.desc
         icon.setImageURI(data.url)
     }
+
 }
 ```
 
-* getViewLayout()：返回视图的 layout
-* getViewModel()：返回视图所对应的数据模型 data::class
-* bindData(): 绑定数据，处理点击等
+* 相比 0.1.8 版本移除了 `MoreViewType` 使用 `MoreViewHolder` 替代，回归 `RecyclerView` 绑定数据最初的方式
+* 仅仅需要实现泛型确定相对应的数据类即可，关于布局的引入提前到了注册的部分，可以更加灵活的构建列表
+* Android studio 3.0 版本自动依赖了 `kotlin-android-extensions`，同时 `kotlin1.1.4-3` 集成了 `LayoutContainer`，在 `ViewHolder` 中使用 `View` 可以直接通过 `id` 使用，如上代码所示，更加简洁
+* **但需要注意的是，如果采用这样的方式，那么就意味着 `Layout` 已经确定，请确保在注册时声明的 `Layout` 和 `ViewHolder` 中 `Layout` 的一致性**
 
-### Step 3. 在使用 `RecyclerView` 的地方，声明 `MoreAdapter()`对象，`register` 需要的 `viewType`，同时和 `RecyclerView` 绑定
+### Step 3. 在使用 `RecyclerView` 的地方，声明 `MoreAdapter()`对象，`register` 需要的 `ViewHolder`，同时和 `RecyclerView` 绑定
 
 ```kotlin
 import kotlinx.android.synthetic.main.activity_single_register.*
@@ -105,10 +98,11 @@ class SingleRegisterActivity: AppCompatActivity() {
 
         list.layoutManager = LinearLayoutManager(this)
 
-        /* register viewType and attach to recyclerView */
-        adapter.register(TitleViewType())
-                .register(SingleTypeOneViewType())
-                .attachTo(list)
+        /* register ViewHolder and attach to recyclerView */
+        adapter.apply {
+            register(RegisterItem(R.layout.item_view_single_type_one, SingleTypeOneViewHolder::class.java))
+            attachTo(single_register_list)
+        }
 
         /* load any data List or model object */
         adapter.loadData(DataServer.getSingleRegisterData())
@@ -117,39 +111,43 @@ class SingleRegisterActivity: AppCompatActivity() {
 
 }
 ```
-**使用 `kotlin-android-extensions` 替代 findViewById()**
+* 0.2.0 版本引入了 `RegisterItem`，在 0.2.0 版本中一切注册（包括 one2more ）都以 `RegisterItem` 为基本模型
+```kotlin
+data class RegisterItem(val layoutId: Int, val clazzViewHolder: Class<out MoreViewHolder<*>>, var clickListener: MoreClickListener? = null)
+```
+* 三个参数分别是 **Layout（布局）** ， **clazzViewHolder（ViewHolder 类）**， **clickListener（点击事件）**
+* 点击事件为可选参数
 
 完成这三步，一个根据【数据驱动视图】的列表就已经构建完成。
 
 
 ## Feature
-### Multi Register: Register one2more ViewType
+### Multi Register: Register one2more ViewHolder
 
 通常我们的数据和视图是一对一的关系，比如瀑布流。MoreType 同时提供一种数据类型对应多种视图的情况，例如私信界面。
 
 ```kotlin
-adapter.register(TitleViewType())
-        .multiRegister(Message::class, object : MultiLink<Message> {
-            override fun link(data: Message): MoreViewType<Message>? {
-                if (data.me) {
-                    return MessageOutViewType()
-                } else {
-                    return MessageInViewType()
-                }
+adapter.apply {
+    multiRegister(object : MultiLink<Message>() {
+        override fun link(data: Message): RegisterItem {
+            return if (data.me){
+                RegisterItem(R.layout.item_view_multi_message_out, MessageOutViewHolder::class.java)
+            }else {
+                RegisterItem(R.layout.item_view_multi_message_in, MessageInViewHolder::class.java)
             }
-        })
-        .attachTo(multi_register_list)
+        }
+    })
+    attachTo(multi_register_list)
+}
 ```
-**Multi Register 必须显式声明 Data::class**
-
 
 ### Animation: Provides five types of Animation
 
 提供五种动画支持: **Alpha** , **Scale** , **SlideInBottom** , **SlideInLeft** , **SlideInRight**
 
 ```Kotlin
-    adapter.register(TitleViewType())
-            .register(AnimViewType())
+    adapter.register(TitleViewHolder())
+            .register(AnimViewHolder())
             /* assign Animation */
             .renderWithAnimation(AlphaAnimation())
             /* set Animation start position in list */
@@ -172,25 +170,25 @@ class SlideInLeftAnimation : MoreAnimation {
 
 ### ItemClick: Support onItemClick and onItemLongClick
 
-两种方式实现点击事件: **In ViewType** and **In Activity**
+两种方式实现点击事件: **In ViewHolder** and **In Activity**
 
-**In ViewType 中处理点击事件** : 在viewType中使用 `view.setOnClickListener {}` 
+**In ViewHolder 中处理点击事件** : 在ViewHolder中使用 `view.setOnClickListener {}` 
 
 **In Activity 中处理点击事件** :
-1. 在 viewType 中使用 `holder.addOnClickListener(view: View)` or `holder.addOnClickListener(viewId: Int)` 绑定点击事件
-2. 在 Activity 中通过 `viewType().setMoreClickListener()` 处理点击事件
+1. 在 ViewHolder 中使用 `addOnClickListener(view: View)` or `addOnClickListener(viewId: Int)` 绑定点击事件
+2. 在 Activity 中通过 `MoreClickListener()` 创建点击事件对象，在注册的时候传入即可
 
 [sample](https://github.com/Werb/MoreType/tree/master/app/src/main/java/com/werb/moretype/click)
 
 ### Refresh and loadMore
 **Refresh**: 使用 `SwipeRefreshLayout` 就可以实现下拉刷新
 
-**LoadMore**: 通过构建 `Footer.class` 和 `FootViewType` 实现数据和视图的绑定, 当 RecyclerView 滚动在底部时显示 `FootViewType`，在数据请求成功后移除 `FootViewType`
+**LoadMore**: 通过构建 `Footer.class` 和 `FootViewHolder` 实现数据和视图的绑定, 当 RecyclerView 滚动在底部时显示 `FootViewHolder`，在数据请求成功后移除 `FootViewHolder`
 
 [sample](https://github.com/Werb/MoreType/blob/master/app/src/main/java/com/werb/moretype/complete/CompleteActivity.kt)
 
-### 全局 ViewType
-**在自定义 Application中注册全局 ViewType**
+### 全局 ViewHolder
+**在自定义 Application中注册全局 ViewHolder**
 ```kotlin
 class MyApp: Application() {
 
@@ -203,12 +201,12 @@ class MyApp: Application() {
         super.onCreate()
         myApp = this
         // Sole Global Register, like footer , Cutting line
-        MoreType.soleRegister(FoorViewType())
+        MoreType.soleRegister(RegisterItem(R.layout.item_view_footer, FootViewHolder::class.java))
     }
 }
 ```
 
-通过 `adapter.userSoleRegister()` 调用使用全局 ViewType
+通过 `adapter.userSoleRegister()` 调用使用全局 ViewHolder
 
 ## Thanks
 [MultiType](https://github.com/drakeet/MultiType)
