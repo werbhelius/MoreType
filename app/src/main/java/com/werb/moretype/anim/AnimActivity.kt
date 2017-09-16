@@ -37,7 +37,6 @@ class AnimActivity : AppCompatActivity() {
             register(RegisterItem(R.layout.item_view_title, TitleViewHolder::class.java))
             register(RegisterItem(R.layout.item_view_anim, AnimViewHolder::class.java))
             startAnimPosition(1)
-            attachTo(anim_list)
         }
 
         switch_view.setOnCheckedChangeListener({ _: CompoundButton, check: Boolean ->
@@ -56,26 +55,31 @@ class AnimActivity : AppCompatActivity() {
                         adapter.removeAllData()
                         adapter.renderWithAnimation(AlphaAnimation())
                         adapter.loadData(DataServer.getAnimData())
+                        adapter.attachTo(anim_list)
                     }
                     1 -> {
                         adapter.removeAllData()
                         adapter.renderWithAnimation(ScaleInAnimation())
                         adapter.loadData(DataServer.getAnimData())
+                        adapter.attachTo(anim_list)
                     }
                     2 -> {
                         adapter.removeAllData()
                         adapter.renderWithAnimation(SlideInLeftAnimation())
                         adapter.loadData(DataServer.getAnimData())
+                        adapter.attachTo(anim_list)
                     }
                     3 -> {
                         adapter.removeAllData()
                         adapter.renderWithAnimation(SlideInRightAnimation())
                         adapter.loadData(DataServer.getAnimData())
+                        adapter.attachTo(anim_list)
                     }
                     4 -> {
                         adapter.removeAllData()
                         adapter.renderWithAnimation(SlideInBottomAnimation())
                         adapter.loadData(DataServer.getAnimData())
+                        adapter.attachTo(anim_list)
                     }
                 }
             }
