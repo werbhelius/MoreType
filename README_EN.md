@@ -29,12 +29,12 @@ I am not The first thought of this concept, I first saw the concept of practice,
 
 ## Dependency
 ```gradle
-compile 'com.werb.moretype:moretype:0.2.0'
+compile 'com.werb.moretype:moretype:0.2.1'
 compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 or
 ```gradle
-implementation 'com.werb.moretype:moretype:0.2.0'
+implementation 'com.werb.moretype:moretype:0.2.1'
 implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 

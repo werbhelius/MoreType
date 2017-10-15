@@ -21,18 +21,19 @@ Click icon download lastest sample
 
 ## Dependency
 ```gradle
-compile 'com.werb.moretype:moretype:0.2.0'
+compile 'com.werb.moretype:moretype:0.2.1'
 compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 or
 ```gradle
-implementation 'com.werb.moretype:moretype:0.2.0'
+implementation 'com.werb.moretype:moretype:0.2.1'
 implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 
 ## Update log
 #### [v0.2.1](https://github.com/Werb/MoreType/releases/tag/v0.2.1)
 * support payLoads [commit-30651b6](https://github.com/Werb/MoreType/commit/30651b6e092a65f073106a7488ecc86f6e7e8219)
+* simple see [MoreViewHolder.kt](https://github.com/Werb/MoreType/blob/master/app/src/main/java/com/werb/moretype/main/MainCardViewHolder.kt) and [MainActivity.kt](https://github.com/Werb/MoreType/blob/master/app/src/main/java/com/werb/moretype/main/MainActivity.kt)
 
 #### [v0.2.0](https://github.com/Werb/MoreType/releases/tag/v0.2.0)
 * version removed `MoreViewType` using` MoreViewHolder` instead, regressing `RecyclerView` binding data in the first way
