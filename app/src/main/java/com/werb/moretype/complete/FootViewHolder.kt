@@ -9,7 +9,7 @@ import com.werb.moretype.R
  */
 class FootViewHolder(containerView: View) : MoreViewHolder<Footer>(containerView) {
 
-    override fun bindData(data: Footer) {
+    override fun bindData(data: Footer, payloads: List<Any>) {
 
     }
 }

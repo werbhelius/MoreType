@@ -7,9 +7,9 @@ import kotlinx.android.synthetic.main.item_view_single_type_two.*
 /**
  * Created by wanbo on 2017/7/14.
  */
-class SingleTypeTwoViewType(containerView: View) : MoreViewHolder<SingleImage>(containerView) {
+class SingleTypeTwoViewHolder(containerView: View) : MoreViewHolder<SingleImage>(containerView) {
 
-    override fun bindData(data: SingleImage) {
+    override fun bindData(data: SingleImage, payloads: List<Any>) {
         title.text = data.title
         icon.setImageURI(data.url)
     }

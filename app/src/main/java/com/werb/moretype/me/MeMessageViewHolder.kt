@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.item_view_about_me_message.*
  */
 class MeMessageViewHolder(containerView: View) : MoreViewHolder<MeMessage>(containerView) {
 
-    override fun bindData(data: MeMessage) {
+    override fun bindData(data: MeMessage, payloads: List<Any>) {
         message.text = data.message
     }
 }

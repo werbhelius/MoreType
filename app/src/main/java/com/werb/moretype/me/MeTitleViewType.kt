@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.item_view_about_me_title.*
  */
 class MeTitleViewType(containerView: View) : MoreViewHolder<String>(containerView) {
 
-    override fun bindData(data: String) {
+    override fun bindData(data: String, payloads: List<Any>) {
         title.text = data
     }
 }

@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_view_about_me_thx.*
  */
 class MeThanksViewHolder(containerView: View) : MoreViewHolder<MeThanks>(containerView) {
 
-    override fun bindData(data: MeThanks) {
+    override fun bindData(data: MeThanks, payloads: List<Any>) {
         name.text = data.name
         desc.text = data.desc
         icon.setImageURI(data.url)

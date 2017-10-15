@@ -13,7 +13,7 @@ class TitleViewHolder(containerView: View) : MoreViewHolder<MainCard>(containerV
     private val title = containerView.title
     private val desc = containerView.desc
 
-    override fun bindData(data: MainCard) {
+    override fun bindData(data: MainCard, payloads: List<Any>) {
         title.text = data.cardTitle
         desc.text = data.cardDesc
     }

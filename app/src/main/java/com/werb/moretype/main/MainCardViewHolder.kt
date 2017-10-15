@@ -17,9 +17,31 @@ import kotlinx.android.synthetic.main.item_view_main.*
  */
 class MainCardViewHolder(containerView: View) : MoreViewHolder<MainCard>(containerView), LayoutContainer {
 
-    override fun bindData(data: MainCard) {
-        card_title.text = data.cardTitle
-        card_desc.text = data.cardDesc
+    override fun bindData(data: MainCard, payloads: List<Any>) {
+
+        card_playLoad.tag = false
+
+        // user payloads we can update any view we want
+        if (payloads.isNotEmpty()) {
+            payloads.forEach {
+                if (it is PayLoadOne) {
+                    if (it.load) {
+                        card_title.text = "PayLoadOne any view you want"
+                        card_desc.text = "Payloads will be empty"
+
+                    } else {
+                        card_title.text = data.cardTitle
+                        card_desc.text = data.cardDesc
+                        card_playLoad.tag = true
+                    }
+                }
+            }
+        } else {
+            card_title.text = data.cardTitle
+            card_desc.text = data.cardDesc
+        }
+
+        addOnClickListener(card_playLoad)
 
         main_card_layout.setOnClickListener {
             when (layoutPosition) {

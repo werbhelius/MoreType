@@ -46,7 +46,14 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         val any = list[position]
         holder.clickListener = bindClickListener(holder)
         holder.bindData(any)
+    }
 
+    override fun onBindViewHolder(holder: MoreViewHolder<Any>, position: Int, payloads: MutableList<Any>?) {
+        payloads?.let {
+            val any = list[position]
+            holder.clickListener = bindClickListener(holder)
+            holder.bindData(any, payloads)
+        } ?: onBindViewHolder(holder, position)
     }
 
     @Suppress("UNCHECKED_CAST")

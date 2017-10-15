@@ -42,7 +42,7 @@ class SingleRegisterActivity : AppCompatActivity() {
         /* register viewType and attach to recyclerView */
         adapter.apply {
             register(RegisterItem(R.layout.item_view_single_type_one, SingleTypeOneViewHolder::class.java))
-            register(RegisterItem(R.layout.item_view_single_type_two, SingleTypeTwoViewType::class.java))
+            register(RegisterItem(R.layout.item_view_single_type_two, SingleTypeTwoViewHolder::class.java))
             register(RegisterItem(R.layout.item_view_title, TitleViewHolder::class.java))
             attachTo(single_register_list)
         }

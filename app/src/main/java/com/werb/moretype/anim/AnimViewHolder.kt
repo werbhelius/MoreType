@@ -9,10 +9,10 @@ import kotlinx.android.synthetic.main.item_view_anim.*
  */
 class AnimViewHolder(containerView: View) : MoreViewHolder<AnimType>(containerView) {
 
-    override fun bindData(data: AnimType) {
+    override fun bindData(data: AnimType, payloads: List<Any>) {
         title.text = data.title
         type.text = data.type
         icon.setImageURI(data.typeIcon)
         thumb.setImageURI(data.thumb)
     }
-}
+} 

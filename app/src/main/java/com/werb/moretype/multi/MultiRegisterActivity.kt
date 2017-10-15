@@ -49,9 +49,9 @@ class MultiRegisterActivity : AppCompatActivity() {
             multiRegister(object : MultiLink<Message>() {
                 override fun link(data: Message): RegisterItem {
                     return if (data.me){
-                        RegisterItem(R.layout.item_view_multi_message_out, MessageOutViewType::class.java)
+                        RegisterItem(R.layout.item_view_multi_message_out, MessageOutViewHolder::class.java)
                     }else {
-                        RegisterItem(R.layout.item_view_multi_message_in, MessageInViewType::class.java)
+                        RegisterItem(R.layout.item_view_multi_message_in, MessageInViewHolder::class.java)
                     }
                 }
             })

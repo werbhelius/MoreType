@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.item_view_about_me_info.*
  */
 class MeInfoViewHolder(containerView: View) : MoreViewHolder<MeInfo>(containerView) {
 
-    override fun bindData(data: MeInfo) {
+    override fun bindData(data: MeInfo, payloads: List<Any>) {
         val context = containerView.context
         name.text = data.name
         desc.text = data.desc

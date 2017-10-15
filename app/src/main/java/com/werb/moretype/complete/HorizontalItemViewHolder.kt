@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.item_view_horizontal_item.*
  */
 class HorizontalItemViewHolder(containerView: View) : MoreViewHolder<SingleText>(containerView) {
 
-    override fun bindData(data: SingleText) {
+    override fun bindData(data: SingleText, payloads: List<Any>) {
         icon.setImageURI(data.url)
         title.text = data.title
         desc.text = data.desc

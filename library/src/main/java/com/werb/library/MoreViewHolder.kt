@@ -43,7 +43,7 @@ abstract class MoreViewHolder<T : Any>(override val containerView: View) : ViewH
     }
 
     /** [bindData] bind data with T  */
-    abstract fun bindData(data: T)
+    abstract fun bindData(data: T, payloads: List<Any> = arrayListOf())
 
     /** [unBindData] unbind and release resources*/
     open fun unBindData() {}

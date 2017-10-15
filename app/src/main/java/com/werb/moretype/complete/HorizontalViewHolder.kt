@@ -21,7 +21,7 @@ class HorizontalViewHolder(containerView: View) : MoreViewHolder<HorizontalData>
         }
     }
 
-    override fun bindData(data: HorizontalData) {
+    override fun bindData(data: HorizontalData, payloads: List<Any>) {
         icon.setImageURI(data.url)
         title.text = data.title
         adapter.removeAllData()

@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.item_view_click_two.*
  */
 class ItemClickTwoViewHolder(containerView: View) : MoreViewHolder<ItemClick>(containerView) {
 
-    override fun bindData(data: ItemClick) {
+    override fun bindData(data: ItemClick, payloads: List<Any>) {
         title.text = data.title
         icon.setImageURI(data.url)
         itemView.setOnClickListener {
