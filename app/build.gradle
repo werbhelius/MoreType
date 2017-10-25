@@ -46,7 +46,9 @@ dependencies {
     implementation 'com.android.support:cardview-v7:26.1.0'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.facebook.fresco:fresco:1.5.0'
-    implementation 'com.werb.pickphotoview:pickphotoview:0.3.1-beta1'
     implementation 'com.werb.permissionschecker:permissionschecker:0.0.1-beta2'
-    implementation 'com.github.markzhai:blockcanary-android:1.5.0'
+    implementation('com.werb.pickphotoview:pickphotoview:0.3.6-beta1', {
+        exclude group: 'com.android.support'
+        exclude group: 'com.werb.moretype'
+    })
 }

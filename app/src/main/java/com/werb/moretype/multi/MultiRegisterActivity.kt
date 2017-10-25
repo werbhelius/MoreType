@@ -12,14 +12,14 @@ import com.werb.library.link.MultiLink
 import com.werb.moretype.R
 import com.werb.moretype.data.DataServer
 import com.werb.permissionschecker.PermissionChecker
-import com.werb.pickphotoview.PickPhotoView
 import kotlinx.android.synthetic.main.activity_multi_register.*
 import kotlinx.android.synthetic.main.widget_view_message_input.*
-import com.werb.pickphotoview.util.PickConfig
 import android.content.Intent
 import com.werb.library.link.RegisterItem
 import com.werb.moretype.TitleViewHolder
 import com.werb.moretype.Utils
+import com.werb.pickphotoview.PickPhotoView
+import com.werb.pickphotoview.util.PickConfig
 
 
 /**
@@ -102,9 +102,10 @@ class MultiRegisterActivity : AppCompatActivity() {
                 .setShowCamera(true)
                 .setSpanCount(4)
                 .setLightStatusBar(true)
-                .setStatusBarColor("#ffffff")
-                .setToolbarColor("#ffffff")
-                .setToolbarIconColor("#000000")
+                .setStatusBarColor(R.color.colorTextLight)
+                .setToolbarColor(R.color.colorTextLight)
+                .setToolbarTextColor(R.color.colorAccent)
+                .setSelectIconColor(R.color.colorPrimary)
                 .setShowGif(false)
                 .start()
     }

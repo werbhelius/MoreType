@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "0.2.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -31,6 +31,11 @@ android {
         experimental = true
     }
 }
+
+configurations.all {
+    transitive = true
+}
+
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
