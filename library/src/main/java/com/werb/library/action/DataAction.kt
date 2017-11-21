@@ -7,6 +7,12 @@ package com.werb.library.action
  */
 interface DataAction {
 
+    /** [loadData] add data with merge*/
+    fun refresh(index: Int = 0, data : Any, merge: Boolean)
+
+    /** [loadData] add data with merge*/
+    fun appendData(data : Any, merge: Boolean)
+
     /** [loadData] add data */
     fun loadData(data: Any)
 

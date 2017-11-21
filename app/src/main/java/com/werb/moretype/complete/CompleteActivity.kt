@@ -44,9 +44,8 @@ class CompleteActivity : AppCompatActivity() {
 
         //refresh
         refresh.setOnRefreshListener {
-            adapter.removeAllData()
-            adapter.loadData(MainCard("Complete Example", "A combination of elegant implementation layouts with refresh and loadMore"))
-            adapter.loadData(DataServer.getCompleteData())
+//            adapter.loadData(MainCard("Complete Example", "A combination of elegant implementation layouts with refresh and loadMore"))
+            adapter.refresh(5, DataServer.getCompleteData(), true)
             refresh.isRefreshing = false
         }
 
@@ -64,7 +63,7 @@ class CompleteActivity : AppCompatActivity() {
                 val any = adapter.getData(adapter.itemCount - 1)
                 if (any is Footer) {
                     adapter.removeData(any)
-                    adapter.loadData(DataServer.getCompleteData())
+                    adapter.appendData(DataServer.getSingleData(), true)
                     isShowFooter = false
                 }
             }, 500)

@@ -19,13 +19,7 @@
 
         <activity android:name=".main.MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts"/>
+
         </activity>
 
         <activity android:name=".single.SingleRegisterActivity" />
@@ -37,7 +31,17 @@
 
         <activity android:name=".click.ItemClickActivity" />
 
-        <activity android:name=".complete.CompleteActivity" />
+        <activity android:name=".complete.CompleteActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts"/>
+
+        </activity>
 
         <activity android:name=".me.AboutMeActivity"/>
 

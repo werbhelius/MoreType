@@ -197,6 +197,19 @@ object DataServer {
         return itemClickDataList
     }
 
+    fun getSingleData() : Complete {
+        return Complete(
+                "wanbo",
+                "Developer & Designer",
+                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
+                "1500106878",
+                "new method to build data in RecyclerView with Kotlin!",
+                "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782",
+                "467",
+                "292"
+        )
+    }
+
     fun getCompleteData(): List<Any> {
         val completeDataList = arrayListOf<Any>()
         completeDataList.add(Complete(
@@ -209,101 +222,101 @@ object DataServer {
                 "467",
                 "292"
         ))
-        completeDataList.add(Complete(
-                "wanbo",
-                "Curiosity",
-                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
-                "1500107414",
-                "The motivation that drives me to keep trying is my curiosity",
-                "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9",
-                "467",
-                "292"
-        ))
-        completeDataList.add(Complete(
-                "wanbo",
-                "I'm actually a musician",
-                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
-                "1500108765",
-                "Can you read this paragraph? My dream is to make music. My idol is jay Chou. I want to stand on the stage like him and sing for my favorite people",
-                "http://h.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=e778191ebd3eb1354492bfbf932e84e5/9213b07eca8065386ba591e596dda144ac3482fc.jpg",
-                "436",
-                "600"
-        ))
+//        completeDataList.add(Complete(
+//                "wanbo",
+//                "Curiosity",
+//                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
+//                "1500107414",
+//                "The motivation that drives me to keep trying is my curiosity",
+//                "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9",
+//                "467",
+//                "292"
+//        ))
+//        completeDataList.add(Complete(
+//                "wanbo",
+//                "I'm actually a musician",
+//                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
+//                "1500108765",
+//                "Can you read this paragraph? My dream is to make music. My idol is jay Chou. I want to stand on the stage like him and sing for my favorite people",
+//                "http://h.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=e778191ebd3eb1354492bfbf932e84e5/9213b07eca8065386ba591e596dda144ac3482fc.jpg",
+//                "436",
+//                "600"
+//        ))
         completeDataList.add(HorizontalData(
                 "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
                 "MoreType",
                 buildSingTextDataList()
         ))
-        completeDataList.add(Complete(
-                "wanbo",
-                "Try all kinds of things",
-                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
-                "1500107762",
-                "Pixel-Web ，It was my first Vue project",
-                "https://raw.githubusercontent.com/Werb/Pixel-Web/master/screenshots/pixel-web-one.png",
-                "1890",
-                "850"
-        ))
-        completeDataList.add(Complete(
-                "wanbo",
-                "Android Developer",
-                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
-                "1500107779",
-                "Forgot when I started liking Android",
-                "http://img0.imgtn.bdimg.com/it/u=4177297633,2800217385&fm=26&gp=0.jpg",
-                "580",
-                "358"
-        ))
-        completeDataList.add(Complete(
-                "wanbo",
-                "Developer & Designer",
-                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
-                "1500106878",
-                "new method to build data in RecyclerView with Kotlin!",
-                "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782",
-                "467",
-                "292"
-        ))
-        completeDataList.add(HorizontalData(
-                "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
-                "MoreType",
-                buildSingTextDataList()
-        ))
-        completeDataList.add(Complete(
-                "wanbo",
-                "Curiosity",
-                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
-                "1500107414",
-                "The motivation that drives me to keep trying is my curiosity",
-                "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9",
-                "467",
-                "292"
-        ))
-        completeDataList.add(Complete(
-                "wanbo",
-                "I'm actually a musician",
-                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
-                "1500108765",
-                "Can you read this paragraph? My dream is to make music. My idol is jay Chou. I want to stand on the stage like him and sing for my favorite people",
-                "http://h.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=e778191ebd3eb1354492bfbf932e84e5/9213b07eca8065386ba591e596dda144ac3482fc.jpg",
-                "436",
-                "600"
-        ))
-        completeDataList.add(Complete(
-                "wanbo",
-                "Try all kinds of things",
-                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
-                "1500107762",
-                "Pixel-Web ，It was my first Vue project",
-                "https://raw.githubusercontent.com/Werb/Pixel-Web/master/screenshots/pixel-web-one.png",
-                "1890",
-                "850"
-        ))
-        completeDataList.add(HorizontalData(
-                "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
-                "MoreType",
-                buildSingTextDataList()
-        ))
+//        completeDataList.add(Complete(
+//                "wanbo",
+//                "Try all kinds of things",
+//                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
+//                "1500107762",
+//                "Pixel-Web ，It was my first Vue project",
+//                "https://raw.githubusercontent.com/Werb/Pixel-Web/master/screenshots/pixel-web-one.png",
+//                "1890",
+//                "850"
+//        ))
+//        completeDataList.add(Complete(
+//                "wanbo",
+//                "Android Developer",
+//                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
+//                "1500107779",
+//                "Forgot when I started liking Android",
+//                "http://img0.imgtn.bdimg.com/it/u=4177297633,2800217385&fm=26&gp=0.jpg",
+//                "580",
+//                "358"
+//        ))
+//        completeDataList.add(Complete(
+//                "wanbo",
+//                "Developer & Designer",
+//                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
+//                "1500106878",
+//                "new method to build data in RecyclerView with Kotlin!",
+//                "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782",
+//                "467",
+//                "292"
+//        ))
+//        completeDataList.add(HorizontalData(
+//                "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+//                "MoreType",
+//                buildSingTextDataList()
+//        ))
+//        completeDataList.add(Complete(
+//                "wanbo",
+//                "Curiosity",
+//                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
+//                "1500107414",
+//                "The motivation that drives me to keep trying is my curiosity",
+//                "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9",
+//                "467",
+//                "292"
+//        ))
+//        completeDataList.add(Complete(
+//                "wanbo",
+//                "I'm actually a musician",
+//                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
+//                "1500108765",
+//                "Can you read this paragraph? My dream is to make music. My idol is jay Chou. I want to stand on the stage like him and sing for my favorite people",
+//                "http://h.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=e778191ebd3eb1354492bfbf932e84e5/9213b07eca8065386ba591e596dda144ac3482fc.jpg",
+//                "436",
+//                "600"
+//        ))
+//        completeDataList.add(Complete(
+//                "wanbo",
+//                "Try all kinds of things",
+//                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
+//                "1500107762",
+//                "Pixel-Web ，It was my first Vue project",
+//                "https://raw.githubusercontent.com/Werb/Pixel-Web/master/screenshots/pixel-web-one.png",
+//                "1890",
+//                "850"
+//        ))
+//        completeDataList.add(HorizontalData(
+//                "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+//                "MoreType",
+//                buildSingTextDataList()
+//        ))
         completeDataList.add(Complete(
                 "wanbo",
                 "Android Developer",
