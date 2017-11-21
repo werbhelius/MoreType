@@ -2,7 +2,6 @@ package com.werb.library
 
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.Adapter
-import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,6 @@ import com.werb.library.link.MoreLink
 import com.werb.library.link.MoreLinkManager
 import com.werb.library.link.MultiLink
 import com.werb.library.link.RegisterItem
-import kotlin.reflect.KClass
 
 
 /**
@@ -26,6 +24,7 @@ import kotlin.reflect.KClass
 class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, DataAction {
 
     val list: MutableList<Any> = mutableListOf()
+    val hashList: MutableList<String> = mutableListOf()
     private val linkManager: MoreLink by lazy { MoreLinkManager() }
     private var animation: MoreAnimation? = null
     private var animDuration = 250L
@@ -67,6 +66,83 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
     }
 
     @Suppress("UNCHECKED_CAST")
+    override fun refresh(index: Int, data: Any, merge : Boolean) {
+        if(merge) {
+            if(data is List<*>) {
+                for(idx in data.indices) {
+                    val new = MoreGson.hash(data[idx]!!)
+                    if(list.size > idx + index) {
+                        val d = hashList[idx + index]
+                        if (new != d) {
+                            list.removeAt(idx + index)
+                            notifyItemRemoved(idx + index)
+                            list.add(idx + index, data[idx]!!)
+                            notifyItemInserted(idx + index)
+                        }
+                    } else {
+                        list.add(idx + index, data[idx]!!)
+                        notifyItemInserted(idx + index)
+                    }
+                }
+                if(data.size < list.size) {
+                    notifyItemRangeRemoved(data.size, list.size - 1)
+                }
+            } else {
+                val hash = MoreGson.hash(data)
+                for(index in hashList.indices) {
+                    if(hash != hashList[index]) {
+                        list.removeAt(index)
+                        notifyItemRemoved(index)
+                    }
+                }
+                list.add(data)
+                notifyItemInserted(itemCount - 1)
+            }
+        } else {
+            list.clear()
+            hashList.clear()
+            loadData(data)
+        }
+        setHashData()
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    override fun appendData(data: Any, merge : Boolean) {
+        if(merge) {
+            if(data is List<*>) {
+                data.forEach {it1->
+                    val h = MoreGson.hash(it1!!)
+                    for(idx in hashList.indices) {
+                        val d = hashList[idx]
+                        if(h == d) {
+                            list.removeAt(idx)
+                            notifyItemRemoved(idx)
+                            break
+                        }
+                    }
+                    list.add(it1)
+                    notifyItemInserted(itemCount - 1)
+                }
+            } else {
+                val hash = MoreGson.hash(data)
+                for(index in hashList.indices) {
+                    if(hash == hashList[index]) {
+                        list.removeAt(index)
+                        list.add(data)
+                        notifyItemMoved(index, itemCount - 1)
+                        return
+                    }
+                }
+                list.add(data)
+                notifyItemInserted(itemCount - 1)
+            }
+        } else {
+            loadData(data)
+        }
+        setHashData()
+    }
+
+    @Suppress("UNCHECKED_CAST")
     override fun loadData(data: Any) {
         if (data is List<*>) {
             var position = 0
@@ -79,6 +155,7 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
             list.add(data)
             notifyItemInserted(itemCount - 1)
         }
+        setHashData()
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -89,6 +166,15 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         } else {
             list.add(index, data)
             notifyItemInserted(index)
+        }
+        setHashData()
+    }
+
+    private fun setHashData() {
+        hashList.clear()
+        list.forEach {
+            val hash = MoreGson.hash(it)
+            hashList.add(hash)
         }
     }
 

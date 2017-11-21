@@ -197,6 +197,19 @@ object DataServer {
         return itemClickDataList
     }
 
+    fun getSingleData() : Complete {
+        return Complete(
+                "wanbo",
+                "Developer & Designer",
+                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
+                "1500106878",
+                "new method to build data in RecyclerView with Kotlin!",
+                "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782",
+                "467",
+                "292"
+        )
+    }
+
     fun getCompleteData(): List<Any> {
         val completeDataList = arrayListOf<Any>()
         completeDataList.add(Complete(
