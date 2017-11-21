@@ -80,8 +80,8 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
                             notifyItemInserted(idx + index)
                         }
                     } else {
-                        list.add(idx + index, data[idx]!!)
-                        notifyItemInserted(idx + index)
+                        list.add(data[idx]!!)
+                        notifyItemInserted(list.size - 1)
                     }
                 }
                 if(data.size < list.size) {

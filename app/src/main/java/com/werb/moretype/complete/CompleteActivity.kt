@@ -45,7 +45,7 @@ class CompleteActivity : AppCompatActivity() {
         //refresh
         refresh.setOnRefreshListener {
 //            adapter.loadData(MainCard("Complete Example", "A combination of elegant implementation layouts with refresh and loadMore"))
-            adapter.refresh(2, DataServer.getCompleteData(), true)
+            adapter.refresh(5, DataServer.getCompleteData(), true)
             refresh.isRefreshing = false
         }
 
