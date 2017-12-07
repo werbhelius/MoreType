@@ -10,6 +10,8 @@ import com.werb.library.MoreAdapter
 import com.werb.library.link.RegisterItem
 import com.werb.moretype.R
 import com.werb.moretype.TitleViewHolder
+import com.werb.moretype.anim.AnimType
+import com.werb.moretype.anim.AnimViewHolder
 import com.werb.moretype.data.DataServer
 import com.werb.moretype.main.MainCard
 import kotlinx.android.synthetic.main.activity_complete.*
@@ -32,6 +34,7 @@ class CompleteActivity : AppCompatActivity() {
         adapter.apply {
             userSoleRegister()
             register(RegisterItem(R.layout.item_view_title, TitleViewHolder::class.java))
+            register(RegisterItem(R.layout.item_view_anim, AnimViewHolder::class.java))
             register(RegisterItem(R.layout.item_view_complete, CompleteViewHolder::class.java))
             register(RegisterItem(R.layout.item_view_horizontal_list, HorizontalViewHolder::class.java))
             renderWithAnimation()
@@ -44,9 +47,8 @@ class CompleteActivity : AppCompatActivity() {
 
         //refresh
         refresh.setOnRefreshListener {
-            adapter.removeAllData()
-            adapter.loadData(MainCard("Complete Example", "A combination of elegant implementation layouts with refresh and loadMore"))
-            adapter.loadData(DataServer.getCompleteData())
+            adapter.refresh(1, AnimType("看图：这里是过去24小时发生的重要的事", "城市", "http://img.qdaily.com/category/icon_yellow_app/20160606004533uFozK3xI4CHZjfSM.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                    "http://img.qdaily.com/article/article_show/20170715103111KHrZm3894Ys7uGIB.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"), true)
             refresh.isRefreshing = false
         }
 
@@ -64,7 +66,6 @@ class CompleteActivity : AppCompatActivity() {
                 val any = adapter.getData(adapter.itemCount - 1)
                 if (any is Footer) {
                     adapter.removeData(any)
-                    adapter.loadData(DataServer.getCompleteData())
                     isShowFooter = false
                 }
             }, 500)
