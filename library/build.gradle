@@ -61,7 +61,7 @@ publish {
     userOrg = 'werbhelius'
     groupId = 'com.werb.moretype'
     artifactId = 'moretype'
-    publishVersion = '0.2.1'
+    publishVersion = '0.2.2-beta1'
     desc = 'New method to build data in RecyclerView with Kotlin!'
     website = 'https://github.com/Werb/MoreType'
 }
