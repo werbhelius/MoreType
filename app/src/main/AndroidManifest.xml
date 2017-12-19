@@ -41,6 +41,9 @@
 
         <activity android:name=".me.AboutMeActivity"/>
 
+        <activity android:name=".diff.DiffDataActivity"
+            android:theme="@style/AnimTheme"/>
+
         <provider
             android:name="com.werb.pickphotoview.provider.PickProvider"
             android:authorities="${applicationId}.provider"

@@ -1,5 +1,8 @@
 package com.werb.library.action
 
+import android.support.v7.util.DiffUtil
+import com.werb.library.link.XDiffCallback
+
 
 /**
  * Action of Data in Adapter
@@ -8,10 +11,7 @@ package com.werb.library.action
 interface DataAction {
 
     /** [loadData] add data with merge*/
-    fun refresh(index: Int = 0, data : Any, merge: Boolean)
-
-    /** [loadData] add data with merge*/
-    fun appendData(data : Any, merge: Boolean)
+    fun refresh(index: Int = 0, newData : Any, diffUtilClazz: Class<out XDiffCallback>)
 
     /** [loadData] add data */
     fun loadData(data: Any)
@@ -22,11 +22,17 @@ interface DataAction {
     /** [getData] get data by position */
     fun getData(position: Int): Any
 
+    /** [getDataIndex] get position by data */
+    fun getDataIndex(data: Any) : Int
+
     /** [removeAllData] remove all data */
     fun removeAllData()
 
     /** [removeAllNotRefresh] remove all data not notifyDataSetChanged */
     fun removeAllNotRefresh()
+
+    /** [removeDataFromIndex] remove data from index */
+    fun removeDataFromIndex(index: Int)
 
     /** [removeData] remove data by item object */
     fun removeData(data: Any)

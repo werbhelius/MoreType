@@ -26,6 +26,7 @@ object DataServer {
         mainCardList.add(MainCard("Animation", "Provides five types of Animation"))
         mainCardList.add(MainCard("ItemClick", "Support onItemClick and onItemLongClick"))
         mainCardList.add(MainCard("Complete Example", "A combination of elegant implementation layouts with refresh and loadMore"))
+        mainCardList.add(MainCard("Diff Data", "Diff data when refresh and loadMore"))
         mainCardList.add(MainCard("About Me", "Developer & Designer"))
         return mainCardList
     }
@@ -360,5 +361,78 @@ object DataServer {
         aboutMeDataList.add(MeMessage(MyApp.myApp.getString(R.string.like_words_one)))
         aboutMeDataList.add(MeMessage(MyApp.myApp.getString(R.string.like_words_two)))
         return aboutMeDataList
+    }
+
+    fun getDiffData1(): List<Any> {
+        val diffList = arrayListOf<Any>()
+        diffList.add(Complete(
+                "wanbo",
+                "Developer & Designer",
+                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
+                "1500106878",
+                "new method to build data in RecyclerView with Kotlin!",
+                "https://boygeniusreport.files.wordpress.com/2014/12/ultimate-material-lollipop-collection-268.png?w=782",
+                "467",
+                "292"
+        ))
+        diffList.add(Complete(
+                "wanbo",
+                "Curiosity",
+                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
+                "1500107414",
+                "The motivation that drives me to keep trying is my curiosity",
+                "https://img.scoop.it/f9ZSLthhGIc6nSw9gF7Z1Tl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9",
+                "467",
+                "292"
+        ))
+        diffList.add(Complete(
+                "wanbo",
+                "I'm actually a musician",
+                "http://wx3.sinaimg.cn/mw690/b447c185ly8fdocwsavc6j20ku0kuaba.jpg",
+                "1500108765",
+                "Can you read this paragraph? My dream is to make music. My idol is jay Chou. I want to stand on the stage like him and sing for my favorite people",
+                "http://h.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=e778191ebd3eb1354492bfbf932e84e5/9213b07eca8065386ba591e596dda144ac3482fc.jpg",
+                "436",
+                "600"
+        ))
+        diffList.add(AnimType("看图：这里是过去24小时发生的重要的事", "城市", "http://img.qdaily.com/category/icon_yellow_app/20160606004533uFozK3xI4CHZjfSM.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170715103111KHrZm3894Ys7uGIB.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        diffList.add(AnimType("盗版碟商贩，本周的时代预言家 | 好奇心辞典", "城市", "http://img.qdaily.com/category/icon_yellow_app/20160606004533uFozK3xI4CHZjfSM.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170714180204gKehPAICiFdx1Uwm.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        diffList.add(AnimType("这部纪录片美极了，而且居然没有用到特效", "娱乐", "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170712164259UN4sqz2rogl0bWKY.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        diffList.add(AnimType("诺兰表示，《敦刻尔克》的叙事结构可能是他所有作品中最复杂的。？", "娱乐", "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170714133142RYHh7qjSKcUPa9wp.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        return diffList
+    }
+
+    fun getDiffData2(): List<Any> {
+        val diffList = arrayListOf<Any>()
+        diffList.add(MainCard("Single Register", "Register one2one ViewType"))
+        diffList.add(MainCard("Multi Register", "Register one2more ViewType"))
+        diffList.add(MainCard("Animation", "Provides five types of Animation"))
+        diffList.add(MainCard("ItemClick", "Support onItemClick and onItemLongClick"))
+        diffList.add(MainCard("Complete Example", "A combination of elegant implementation layouts with refresh and loadMore"))
+        diffList.add(MainCard("About Me", "Developer & Designer"))
+        return diffList
+    }
+
+    fun getDiffData3(): List<Any> {
+        val diffList = arrayListOf<Any>()
+        diffList.add(AnimType("看图：这里是过去24小时发生的重要的事", "城市", "http://img.qdaily.com/category/icon_yellow_app/20160606004533uFozK3xI4CHZjfSM.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170715103111KHrZm3894Ys7uGIB.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        diffList.add(AnimType("盗版碟商贩，本周的时代预言家 | 好奇心辞典", "城市", "http://img.qdaily.com/category/icon_yellow_app/20160606004533uFozK3xI4CHZjfSM.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170714180204gKehPAICiFdx1Uwm.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        diffList.add(AnimType("这部纪录片美极了，而且居然没有用到特效", "娱乐", "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170712164259UN4sqz2rogl0bWKY.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        diffList.add(AnimType("诺兰表示，《敦刻尔克》的叙事结构可能是他所有作品中最复杂的。？", "娱乐", "http://img.qdaily.com/category/icon_yellow_app/20160606004531TgJK5XPy61qfS7rN.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
+                "http://img.qdaily.com/article/article_show/20170714133142RYHh7qjSKcUPa9wp.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"))
+        diffList.add(MainCard("Single Register", "Register one2one ViewType"))
+        diffList.add(MainCard("Multi Register", "Register one2more ViewType"))
+        diffList.add(MainCard("Animation", "Provides five types of Animation"))
+        diffList.add(MainCard("ItemClick", "Support onItemClick and onItemLongClick"))
+        diffList.add(MainCard("Complete Example", "A combination of elegant implementation layouts with refresh and loadMore"))
+        diffList.add(MainCard("About Me", "Developer & Designer"))
+        return diffList
     }
 }

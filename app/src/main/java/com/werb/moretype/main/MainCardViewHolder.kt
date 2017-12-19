@@ -6,6 +6,7 @@ import com.werb.library.MoreViewHolder
 import com.werb.moretype.anim.AnimActivity
 import com.werb.moretype.click.ItemClickActivity
 import com.werb.moretype.complete.CompleteActivity
+import com.werb.moretype.diff.DiffDataActivity
 import com.werb.moretype.me.AboutMeActivity
 import com.werb.moretype.multi.MultiRegisterActivity
 import com.werb.moretype.single.SingleRegisterActivity
@@ -61,6 +62,9 @@ class MainCardViewHolder(containerView: View) : MoreViewHolder<MainCard>(contain
                     CompleteActivity.startActivity(containerView.context as Activity)
                 }
                 5 -> {
+                    DiffDataActivity.startActivity(containerView.context as Activity)
+                }
+                6 -> {
                     AboutMeActivity.startActivity(containerView.context as Activity)
                 }
                 else -> {

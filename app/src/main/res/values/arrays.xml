@@ -7,4 +7,11 @@
         <item>Right</item>
         <item>Bottom</item>
     </string-array>
+
+    <string-array name="DiffData">
+        <item>Data1</item>
+        <item>Data2</item>
+        <item>Data3</item>
+        <item>Same</item>
+    </string-array>
 </resources>

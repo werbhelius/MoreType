@@ -15,6 +15,12 @@ import com.werb.moretype.anim.AnimViewHolder
 import com.werb.moretype.data.DataServer
 import com.werb.moretype.main.MainCard
 import kotlinx.android.synthetic.main.activity_complete.*
+import android.support.v7.util.DiffUtil
+import android.support.v7.widget.DefaultItemAnimator
+
+
+
+
 
 /**
  * Created by wanbo on 2017/7/15.
@@ -47,8 +53,8 @@ class CompleteActivity : AppCompatActivity() {
 
         //refresh
         refresh.setOnRefreshListener {
-            adapter.refresh(1, AnimType("看图：这里是过去24小时发生的重要的事", "城市", "http://img.qdaily.com/category/icon_yellow_app/20160606004533uFozK3xI4CHZjfSM.png?imageMogr2/auto-orient/thumbnail/!160x160r/gravity/Center/crop/160x160/quality/85/ignore-error/1",
-                    "http://img.qdaily.com/article/article_show/20170715103111KHrZm3894Ys7uGIB.jpg?imageMogr2/auto-orient/thumbnail/!640x380r/gravity/Center/crop/640x380/quality/85/format/jpg/ignore-error/1"), true)
+            adapter.removeDataFromIndex(1)
+            adapter.loadData(DataServer.getCompleteData())
             refresh.isRefreshing = false
         }
 
@@ -67,6 +73,7 @@ class CompleteActivity : AppCompatActivity() {
                 if (any is Footer) {
                     adapter.removeData(any)
                     isShowFooter = false
+                    adapter.loadData(DataServer.getCompleteData())
                 }
             }, 500)
         }

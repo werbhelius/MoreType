@@ -12,6 +12,9 @@ import com.werb.library.extension.AlphaAnimation
 import com.werb.library.extension.AnimExtension
 import com.werb.library.extension.MoreAnimation
 import com.werb.library.link.*
+import android.text.method.TextKeyListener.clear
+import android.support.v7.util.DiffUtil
+import com.werb.library.link.XDiffCallback
 
 
 /**
@@ -21,7 +24,6 @@ import com.werb.library.link.*
 class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, DataAction {
 
     val list: MutableList<Any> = mutableListOf()
-    val hashList: MutableList<String> = mutableListOf()
     private val linkManager: MoreLink by lazy { MoreLinkManager() }
     private var animation: MoreAnimation? = null
     private var animDuration = 250L
@@ -63,86 +65,24 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun refresh(index: Int, data: Any, merge : Boolean ) {
-        if(merge) {
-            if(data is List<*>) {
-                for(idx in data.indices) {
-                    data[idx]?.let {
-                        val new = MoreGson.hash(it)
-                        if(list.size > idx + index) {
-                            val d = hashList[idx + index]
-                            if (new != d) {
-                                list.removeAt(idx + index)
-                                notifyItemRemoved(idx + index)
-                                list.add(idx + index, it)
-                                notifyItemInserted(idx + index)
-                            }
-                        } else {
-                            list.add(it)
-                            notifyItemInserted(list.size - 1)
-                        }
-                    }
-                }
-                if(data.size < list.size) {
-                    notifyItemRangeRemoved(data.size, list.size - 1)
-                }
-            } else {
-                val hash = MoreGson.hash(data)
-                (index until  hashList.size)
-                        .forEach {
-                            if(hash != hashList[it]) {
-                                list.removeAt(it)
-                                notifyItemRemoved(it)
-                            }
-                        }
-                list.add(data)
-                notifyItemInserted(itemCount - 1)
-            }
+    override fun refresh(index: Int, newData: Any, diffUtilClazz: Class<out XDiffCallback>) {
+        val newList = mutableListOf<Any>()
+        val fixList = list.subList(0, index)
+        val diff = diffUtilClazz.getConstructor(List::class.java, List::class.java)
+        newList.addAll(fixList)
+        if (newData is List<*>) {
+            newList.addAll(newData as Collection<Any>)
         } else {
-            list.clear()
-            hashList.clear()
-            loadData(data)
+            newList.add(newData)
         }
-        setHashData()
+        val diffCallback = diff.newInstance(list, newList)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        diffResult.dispatchUpdatesTo(this)
+        list.clear()
+        list.addAll(newList)
     }
 
-    @Suppress("UNCHECKED_CAST")
-    override fun appendData(data: Any, merge : Boolean) {
-        if(merge) {
-            if(data is List<*>) {
-                data.forEach { any ->
-                    any?.let {
-                        val h = MoreGson.hash(any)
-                        for(idx in hashList.indices) {
-                            val d = hashList[idx]
-                            if(h == d) {
-                                list.removeAt(idx)
-                                notifyItemRemoved(idx)
-                                break
-                            }
-                        }
-                        list.add(any)
-                        notifyItemInserted(itemCount - 1)
-                    }
-                }
-            } else {
-                val hash = MoreGson.hash(data)
-                for(index in hashList.indices) {
-                    if(hash == hashList[index]) {
-                        list.removeAt(index)
-                        list.add(data)
-                        notifyItemMoved(index, itemCount - 1)
-                        return
-                    }
-                }
-                list.add(data)
-                notifyItemInserted(itemCount - 1)
-            }
-        } else {
-            loadData(data)
-        }
-        setHashData()
-    }
+    override fun getDataIndex(data: Any): Int = list.indexOf(data)
 
     @Suppress("UNCHECKED_CAST")
     override fun loadData(data: Any) {
@@ -157,7 +97,6 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
             list.add(data)
             notifyItemInserted(itemCount - 1)
         }
-        setHashData()
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -168,15 +107,6 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         } else {
             list.add(index, data)
             notifyItemInserted(index)
-        }
-        setHashData()
-    }
-
-    private fun setHashData() {
-        hashList.clear()
-        list.forEach {
-            val hash = MoreGson.hash(it)
-            hashList.add(hash)
         }
     }
 
@@ -209,6 +139,12 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
             list.removeAt(position)
             notifyItemRemoved(position)
         }
+    }
+
+    override fun removeDataFromIndex(index: Int) {
+        val count = list.size
+        list.subList(index, list.size).clear()
+        notifyItemRangeRemoved(index, count)
     }
 
     override fun replaceData(position: Int, data: Any) {

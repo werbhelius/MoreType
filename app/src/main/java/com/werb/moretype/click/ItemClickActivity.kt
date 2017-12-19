@@ -34,6 +34,7 @@ class ItemClickActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener { finish() }
 
         item_click_list.layoutManager = LinearLayoutManager(this)
+        item_click_list.adapter = adapter
         adapter.apply {
             register(RegisterItem(R.layout.item_view_title, TitleViewHolder::class.java))
             multiRegister(object : MultiLink<ItemClick>() {
@@ -45,7 +46,6 @@ class ItemClickActivity : AppCompatActivity() {
                     }
                 }
             })
-            attachTo(item_click_list)
         }
 
         adapter.loadData(DataServer.getItemClickData())
