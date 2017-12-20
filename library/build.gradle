@@ -43,11 +43,10 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testImplementation 'junit:junit:4.12'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
-    implementation 'com.android.support:recyclerview-v7:26.1.0'
-    implementation 'com.google.code.gson:gson:2.8.1'
+    compile 'com.android.support:recyclerview-v7:26.1.0'
 
 }
 repositories {
@@ -61,7 +60,7 @@ publish {
     userOrg = 'werbhelius'
     groupId = 'com.werb.moretype'
     artifactId = 'moretype'
-    publishVersion = '0.2.2-beta1'
+    publishVersion = '0.2.2-beta3'
     desc = 'New method to build data in RecyclerView with Kotlin!'
     website = 'https://github.com/Werb/MoreType'
 }
