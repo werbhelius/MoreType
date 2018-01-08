@@ -217,6 +217,10 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         linkManager.register(registerItem)
     }
 
+    override fun register(clazz: Class<out MoreViewHolder<*>>, clickListener: MoreClickListener?) {
+        linkManager.register(clazz)
+    }
+
     /** [multiRegister] multiRegister viewType like one2more case , user MultiLink to choose which one is we need */
     override fun multiRegister(link: MultiLink<*>) {
         linkManager.multiRegister(link)

@@ -3,6 +3,8 @@ package com.werb.moretype.main
 import android.app.Activity
 import android.view.View
 import com.werb.library.MoreViewHolder
+import com.werb.library.link.LayoutID
+import com.werb.moretype.R
 import com.werb.moretype.anim.AnimActivity
 import com.werb.moretype.click.ItemClickActivity
 import com.werb.moretype.complete.CompleteActivity
@@ -16,6 +18,8 @@ import kotlinx.android.synthetic.main.item_view_main.*
 /**
  * Created by wanbo on 2017/7/14.
  */
+
+@LayoutID(R.layout.item_view_main)
 class MainCardViewHolder(containerView: View) : MoreViewHolder<MainCard>(containerView), LayoutContainer {
 
     override fun bindData(data: MainCard, payloads: List<Any>) {

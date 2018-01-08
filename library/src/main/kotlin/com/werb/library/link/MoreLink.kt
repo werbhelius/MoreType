@@ -13,6 +13,9 @@ interface MoreLink {
     /** [register]  register single link viewType when we use with click listener */
     fun register(registerItem: RegisterItem)
 
+    /** [register]  register single link viewType when we use with click listener with Annotation*/
+    fun register(clazz: Class<out MoreViewHolder<*>>, clickListener: MoreClickListener? = null)
+
     /** [multiRegister]  register multi link like one2more viewType when we use */
     fun multiRegister(link: MultiLink<*>)
 

@@ -58,6 +58,10 @@ class MoreLinkManager : MoreLink {
         clickListenerMap.put(registerItem.layoutId, registerItem.clickListener)
     }
 
+    override fun register(clazz: Class<out MoreViewHolder<*>>, clickListener: MoreClickListener?) {
+        val layoutID = requestLayoutID(clazz)
+        register(RegisterItem(layoutID, clazz, clickListener))
+    }
 
     /**
      * [multiRegister] register multi MoreViewType
@@ -125,12 +129,12 @@ class MoreLinkManager : MoreLink {
         val viewIndex = viewHolderMap.indexOfValue(clazz)
         val multiIndex = multiViewHolderMap.indexOfValue(clazz)
 
-        if (viewIndex != -1){
+        if (viewIndex != -1) {
             val viewLayout = viewHolderMap.keyAt(viewIndex)
             return clickListenerMap[viewLayout]
         }
 
-        if (multiIndex != -1){
+        if (multiIndex != -1) {
             val multiLayout = multiViewHolderMap.keyAt(multiIndex)
             return clickListenerMap[multiLayout]
         }
@@ -151,6 +155,13 @@ class MoreLinkManager : MoreLink {
         val type = clazz.genericSuperclass as ParameterizedType
         val p = type.actualTypeArguments
         return p[0] as Class<Any>
+    }
+
+    private fun requestLayoutID(clazz: Class<*>): Int {
+        val layoutID = clazz.getAnnotation(LayoutID::class.java)
+        layoutID?.let {
+            return layoutID.layoutId
+        } ?: throw NullPointerException("ViewHolder class ${clazz.simpleName} has not register LayoutID in Annotation !")
     }
 
 }

@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         adapter.apply {
-            register(RegisterItem(R.layout.item_view_main, MainCardViewHolder::class.java, playLoadClick))
+            register(MainCardViewHolder::class.java, playLoadClick)
             attachTo(more_list)
         }
 
