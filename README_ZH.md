@@ -31,12 +31,12 @@ Click icon download lastest sample
 
 ## Dependency
 ```gradle
-compile 'com.werb.moretype:moretype:0.2.1'
+compile 'com.werb.moretype:moretype:0.2.3'
 compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 or
 ```gradle
-implementation 'com.werb.moretype:moretype:0.2.1'
+implementation 'com.werb.moretype:moretype:0.2.3'
 implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 
@@ -60,13 +60,8 @@ class SingleText {
 ### Step 2. 创建一个类 xxxViewHolder 继承抽象类 `MoreViewHolder<T : Any>()` 例如:
 
 ```kotlin
-import android.view.View
-import com.werb.library.MoreViewHolder
-import kotlinx.android.synthetic.main.item_view_single_type_one.*
-
-/**
- * Created by wanbo on 2017/7/14.
- */
+// Register layoutID here or Register with adapter in Activity
+@LayoutID(R.layout.item_view_single_type_one)
 class SingleTypeOneViewHolder(containerView: View) : MoreViewHolder<SingleText>(containerView) {
 
     override fun bindData(data: SingleText, payloads: List<Any>) {
@@ -100,7 +95,10 @@ class SingleRegisterActivity: AppCompatActivity() {
 
         /* register ViewHolder and attach to recyclerView */
         adapter.apply {
+            // two method register Layout
             register(RegisterItem(R.layout.item_view_single_type_one, SingleTypeOneViewHolder::class.java))
+            // or
+            register(SingleTypeOneViewHolder::class.java)
             attachTo(single_register_list)
         }
 
@@ -117,6 +115,7 @@ data class RegisterItem(val layoutId: Int, val clazzViewHolder: Class<out MoreVi
 ```
 * 三个参数分别是 **Layout（布局）** ， **clazzViewHolder（ViewHolder 类）**， **clickListener（点击事件）**
 * 点击事件为可选参数
+* 0.2.3 版本引入了 `@LayoutID( val layoutID: Int )` 在单一模型注册绑定的时候，你可以使用此方法
 
 完成这三步，一个根据【数据驱动视图】的列表就已经构建完成。
 

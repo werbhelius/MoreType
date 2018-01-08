@@ -21,23 +21,19 @@ Click icon download lastest sample
 
 ## Dependency
 ```gradle
-compile 'com.werb.moretype:moretype:0.2.1'
+compile 'com.werb.moretype:moretype:0.2.3'
 compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 or
 ```gradle
-implementation 'com.werb.moretype:moretype:0.2.1'
+implementation 'com.werb.moretype:moretype:0.2.3'
 implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 
 ## Update log
-#### [v0.2.1](https://github.com/Werb/MoreType/releases/tag/v0.2.1)
-* support payLoads [commit-30651b6](https://github.com/Werb/MoreType/commit/30651b6e092a65f073106a7488ecc86f6e7e8219)
-* simple see [MoreViewHolder.kt](https://github.com/Werb/MoreType/blob/master/app/src/main/java/com/werb/moretype/main/MainCardViewHolder.kt) and [MainActivity.kt](https://github.com/Werb/MoreType/blob/master/app/src/main/java/com/werb/moretype/main/MainActivity.kt)
-
-#### [v0.2.0](https://github.com/Werb/MoreType/releases/tag/v0.2.0)
-* version removed `MoreViewType` using` MoreViewHolder` instead, regressing `RecyclerView` binding data in the first way
-* import the `RegisterItem`, all registered (including one2more) are` RegisterItem` as the basic model
+#### [v0.2.3](https://github.com/Werb/MoreType/releases/tag/v0.2.3)
+* Add diff in refresh [commit-b7057fd](https://github.com/Werb/MoreType/commit/b7057fd34baac72252aaa684a68575786682019e)
+* Add LayoutID register in Custom MoreViewHolder [comment-7beece6](https://github.com/Werb/MoreType/commit/7beece67f03b9808ee5eea232cbd4af8e5ea1841)
 
 ## Usage
 
@@ -59,13 +55,8 @@ class SingleText {
 ### Step 2. create a class (xxxViewHolder) extends abstract class `MoreViewHolder<T : Any>()` , like:
 
 ```kotlin
-import android.view.View
-import com.werb.library.MoreViewHolder
-import kotlinx.android.synthetic.main.item_view_single_type_one.*
-
-/**
- * Created by wanbo on 2017/7/14.
- */
+// Register layoutID here or Register with adapter in Activity
+@LayoutID(R.layout.item_view_single_type_one)
 class SingleTypeOneViewHolder(containerView: View) : MoreViewHolder<SingleText>(containerView) {
 
     override fun bindData(data: SingleText, payloads: List<Any>) {
@@ -94,7 +85,10 @@ class SingleRegisterActivity: AppCompatActivity() {
 
         /* register ViewHolder and attach to recyclerView */
         adapter.apply {
+            // two method register Layout
             register(RegisterItem(R.layout.item_view_single_type_one, SingleTypeOneViewHolder::class.java))
+            // or
+            register(SingleTypeOneViewHolder::class.java)
             attachTo(single_register_list)
         }
 

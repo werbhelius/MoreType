@@ -29,12 +29,12 @@ I am not The first thought of this concept, I first saw the concept of practice,
 
 ## Dependency
 ```gradle
-compile 'com.werb.moretype:moretype:0.2.1'
+compile 'com.werb.moretype:moretype:0.2.3'
 compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 or
 ```gradle
-implementation 'com.werb.moretype:moretype:0.2.1'
+implementation 'com.werb.moretype:moretype:0.2.3'
 implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 
@@ -58,13 +58,8 @@ class SingleText {
 ### Step 2. create a class (xxxViewHolder) extends abstract class `MoreViewHolder<T : Any>()` , like:
 
 ```kotlin
-import android.view.View
-import com.werb.library.MoreViewHolder
-import kotlinx.android.synthetic.main.item_view_single_type_one.*
-
-/**
- * Created by wanbo on 2017/7/14.
- */
+// Register layoutID here or Register with adapter in Activity
+@LayoutID(R.layout.item_view_single_type_one)
 class SingleTypeOneViewHolder(containerView: View) : MoreViewHolder<SingleText>(containerView) {
 
     override fun bindData(data: SingleText, payloads: List<Any>) {
@@ -97,7 +92,10 @@ class SingleRegisterActivity: AppCompatActivity() {
 
         /* register ViewHolder and attach to recyclerView */
         adapter.apply {
+            // two method register Layout
             register(RegisterItem(R.layout.item_view_single_type_one, SingleTypeOneViewHolder::class.java))
+            // or
+            register(SingleTypeOneViewHolder::class.java)
             attachTo(single_register_list)
         }
 
@@ -115,6 +113,7 @@ data class RegisterItem(val layoutId: Int, val clazzViewHolder: Class<out MoreVi
 ```
 * The three parameters are **Layout（布局）** ， **clazzViewHolder（ViewHolder 类）**， **clickListener（点击事件）**
 * Click event as optional
+* 0.2.3 version import the `@LayoutID( val layoutID: Int )`, you can use it in singler Register
 
 
 Upon completion of these three steps, a list based on the [Data Driven View] has been completed.
