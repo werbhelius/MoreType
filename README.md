@@ -21,12 +21,12 @@ Click icon download lastest sample
 
 ## Dependency
 ```gradle
-compile 'com.werb.moretype:moretype:0.2.3'
+compile 'com.werb.moretype:moretype:0.2.3-1'
 compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 or
 ```gradle
-implementation 'com.werb.moretype:moretype:0.2.3'
+implementation 'com.werb.moretype:moretype:0.2.3-1'
 implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 ```
 
