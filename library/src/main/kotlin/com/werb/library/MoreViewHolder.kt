@@ -16,6 +16,24 @@ abstract class MoreViewHolder<T : Any>(override val containerView: View) : ViewH
 
     fun getItemView() = itemView
 
+    fun addOnTouchListener(viewId: Int) {
+        clickListener?.let {
+            val _this = it
+            itemView.findViewById<View>(viewId).setOnTouchListener { v, event ->
+                _this.onItemTouch(v, event, layoutPosition)
+            }
+        }
+    }
+
+    fun addOnTouchListener(view: View) {
+        clickListener?.let {
+            val _this = it
+            view.setOnTouchListener { v, event ->
+                _this.onItemTouch(v, event, layoutPosition)
+            }
+        }
+    }
+
     fun addOnClickListener(viewId: Int) {
         itemView.findViewById<View>(viewId).setOnClickListener { clickListener?.onItemClick(it, layoutPosition) }
     }

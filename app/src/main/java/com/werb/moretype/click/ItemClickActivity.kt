@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import com.werb.library.MoreAdapter
@@ -63,6 +64,11 @@ class ItemClickActivity : AppCompatActivity() {
                     Toast.makeText(view.context, "click button in Activity position is " + position.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+
+        override fun onItemTouch(view: View, event: MotionEvent, position: Int): Boolean {
+            Toast.makeText(this@ItemClickActivity, "111", Toast.LENGTH_SHORT).show()
+            return true
         }
 
         override fun onItemLongClick(view: View, position: Int): Boolean {

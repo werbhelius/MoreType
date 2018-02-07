@@ -21,6 +21,7 @@ class ItemClickOneViewHolder(containerView: View) : MoreViewHolder<ItemClick>(co
         /* click in activity */
         addOnClickListener(icon)
         addOnClickListener(button)
+        addOnTouchListener(containerView)
     }
 
 }
