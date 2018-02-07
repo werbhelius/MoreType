@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 4
-        versionName "0.2.3-1"
+        versionCode 5
+        versionName "0.2.3-2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -60,7 +60,7 @@ publish {
     userOrg = 'werbhelius'
     groupId = 'com.werb.moretype'
     artifactId = 'moretype'
-    publishVersion = '0.2.3-1'
+    publishVersion = '0.2.3-2'
     desc = 'New method to build data in RecyclerView with Kotlin!'
     website = 'https://github.com/Werb/MoreType'
 }
