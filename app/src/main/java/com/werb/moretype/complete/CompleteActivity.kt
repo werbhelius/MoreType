@@ -10,16 +10,10 @@ import com.werb.library.MoreAdapter
 import com.werb.library.link.RegisterItem
 import com.werb.moretype.R
 import com.werb.moretype.TitleViewHolder
-import com.werb.moretype.anim.AnimType
 import com.werb.moretype.anim.AnimViewHolder
 import com.werb.moretype.data.DataServer
 import com.werb.moretype.main.MainCard
 import kotlinx.android.synthetic.main.activity_complete.*
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.DefaultItemAnimator
-
-
-
 
 
 /**

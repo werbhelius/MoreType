@@ -33,10 +33,10 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
     private var linearInterpolator = LinearInterpolator()
 
     @Suppress("UNCHECKED_CAST")
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MoreViewHolder<Any> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoreViewHolder<Any> {
         val viewHolderClass = createViewHolder(viewType)
         val con = viewHolderClass.getConstructor(View::class.java)
-        val view = LayoutInflater.from(parent?.context).inflate(viewType, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
         return con.newInstance(view) as MoreViewHolder<Any>
     }
 
@@ -46,12 +46,14 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         holder.bindData(any)
     }
 
-    override fun onBindViewHolder(holder: MoreViewHolder<Any>, position: Int, payloads: MutableList<Any>?) {
-        payloads?.let {
+    override fun onBindViewHolder(holder: MoreViewHolder<Any>, position: Int, payloads: MutableList<Any>) {
+        if (payloads.isNotEmpty()) {
             val any = list[position]
             holder.clickListener = bindClickListener(holder)
             holder.bindData(any, payloads)
-        } ?: onBindViewHolder(holder, position)
+        } else {
+            onBindViewHolder(holder, position)
+        }
     }
 
     @Suppress("UNCHECKED_CAST")
