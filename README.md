@@ -21,19 +21,17 @@ Click icon download lastest sample
 
 ## Dependency
 ```gradle
-compile 'com.werb.moretype:moretype:0.2.3-1'
-compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+compile 'com.werb.moretype:moretype:0.2.5'
 ```
 or
 ```gradle
-implementation 'com.werb.moretype:moretype:0.2.3-1'
-implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+implementation 'com.werb.moretype:moretype:0.2.5'
 ```
 
 ## Update log
-#### [v0.2.3](https://github.com/Werb/MoreType/releases/tag/v0.2.3)
-* Add diff in refresh [commit-b7057fd](https://github.com/Werb/MoreType/commit/b7057fd34baac72252aaa684a68575786682019e)
-* Add LayoutID register in Custom MoreViewHolder [comment-7beece6](https://github.com/Werb/MoreType/commit/7beece67f03b9808ee5eea232cbd4af8e5ea1841)
+#### [v0.2.5](https://github.com/Werb/MoreType/releases/tag/v0.2.5)
+* fix fix payloads judge error
+* update support lib version
 
 ## Usage
 

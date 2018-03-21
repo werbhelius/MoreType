@@ -31,13 +31,11 @@ Click icon download lastest sample
 
 ## Dependency
 ```gradle
-compile 'com.werb.moretype:moretype:0.2.3-1'
-compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+compile 'com.werb.moretype:moretype:0.2.5'
 ```
 or
 ```gradle
-implementation 'com.werb.moretype:moretype:0.2.3-1'
-implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+implementation 'com.werb.moretype:moretype:0.2.5'
 ```
 
 ## Usage
