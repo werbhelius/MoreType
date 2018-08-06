@@ -12,8 +12,8 @@ import com.werb.library.extension.AlphaAnimation
 import com.werb.library.extension.AnimExtension
 import com.werb.library.extension.MoreAnimation
 import com.werb.library.link.*
-import android.text.method.TextKeyListener.clear
 import android.support.v7.util.DiffUtil
+import com.werb.library.exception.ViewHolderInitErrorException
 import com.werb.library.link.XDiffCallback
 
 
@@ -37,7 +37,16 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         val viewHolderClass = createViewHolder(viewType)
         val con = viewHolderClass.getConstructor(View::class.java)
         val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
-        return con.newInstance(view) as MoreViewHolder<Any>
+        var moreViewHolder: MoreViewHolder<Any>? = null
+        try {
+            moreViewHolder = con.newInstance(view) as MoreViewHolder<Any>
+        } catch (e: Exception) {
+            e.printStackTrace()
+            if (moreViewHolder == null) {
+                throw ViewHolderInitErrorException(viewHolderClass.simpleName, e.cause?.message ?: "")
+            }
+        }
+        return moreViewHolder!!
     }
 
     override fun onBindViewHolder(holder: MoreViewHolder<Any>, position: Int) {
