@@ -3,6 +3,7 @@ package com.werb.library
 import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.View
 import com.werb.library.action.MoreClickListener
+import com.werb.library.scroll.IViewHolderScrollMonitor
 import kotlinx.android.extensions.LayoutContainer
 
 
@@ -10,7 +11,7 @@ import kotlinx.android.extensions.LayoutContainer
  * [MoreViewHolder] Base ViewHolder implement Action fun
  * Created by wanbo on 2017/7/2.
  */
-abstract class MoreViewHolder<T : Any>(override val containerView: View) : ViewHolder(containerView), LayoutContainer {
+abstract class MoreViewHolder<T : Any>(override val containerView: View) : ViewHolder(containerView), LayoutContainer, IViewHolderScrollMonitor {
 
     internal var clickListener: MoreClickListener? = null
 

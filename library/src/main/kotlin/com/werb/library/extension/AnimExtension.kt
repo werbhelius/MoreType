@@ -6,7 +6,7 @@ import com.werb.library.MoreViewHolder
 /**
  * Created by wanbo on 2017/7/13.
  */
-interface AnimExtension {
+internal interface AnimExtension {
 
     fun renderWithAnimation(): MoreAdapter
 

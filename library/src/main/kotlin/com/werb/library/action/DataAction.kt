@@ -8,7 +8,7 @@ import com.werb.library.link.XDiffCallback
  * Action of Data in Adapter
  * Created by wanbo on 2017/7/15.
  */
-interface DataAction {
+internal interface DataAction {
 
     /** [loadData] add data with merge*/
     fun refresh(index: Int = 0, newData : Any, diffUtilClazz: Class<out XDiffCallback>)

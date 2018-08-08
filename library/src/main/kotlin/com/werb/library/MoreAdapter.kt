@@ -13,15 +13,18 @@ import com.werb.library.extension.AnimExtension
 import com.werb.library.extension.MoreAnimation
 import com.werb.library.link.*
 import android.support.v7.util.DiffUtil
+import android.util.Log
 import com.werb.library.exception.ViewHolderInitErrorException
 import com.werb.library.link.XDiffCallback
+import com.werb.library.scroll.IAdapterScrollMonitor
+import com.werb.library.scroll.IViewHolderScrollMonitor
 
 
 /**
  * [MoreAdapter] build viewHolder with data
  * Created by wanbo on 2017/7/2.
  */
-class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, DataAction {
+class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, DataAction, IAdapterScrollMonitor {
 
     val list: MutableList<Any> = mutableListOf()
     private val linkManager: MoreLink by lazy { MoreLinkManager() }
@@ -31,6 +34,9 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
     private var firstShow = false
     private var lastAnimPosition = -1
     private var linearInterpolator = LinearInterpolator()
+
+    private var visibleHolders: ArrayList<IViewHolderScrollMonitor>? = null
+    private val TAG = "ScrollMonitor"
 
     @Suppress("UNCHECKED_CAST")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoreViewHolder<Any> {
@@ -88,9 +94,9 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         }
         val diffCallback = diff.newInstance(list, newList)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
-        diffResult.dispatchUpdatesTo(this)
         list.clear()
         list.addAll(newList)
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun getDataIndex(data: Any): Int = list.indexOf(data)
@@ -173,7 +179,74 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
 
     override fun onViewAttachedToWindow(holder: MoreViewHolder<Any>) {
         super.onViewAttachedToWindow(holder)
+        Log.d(TAG, "MoreAdapter onViewAttachedToWindow ")
         addAnimation(holder)
+        visibleHolders?.let {
+            Log.d(TAG, "MoreAdapter onViewAttachedToWindow $it ---${it.contains(holder)}")
+            if (!it.contains(holder)) {
+                it.add(holder)
+                holder.onViewAttachedToWindow()
+            }
+        }
+    }
+
+    override fun onViewDetachedFromWindow(holder: MoreViewHolder<Any>) {
+        super.onViewDetachedFromWindow(holder)
+        Log.d(TAG, "MoreAdapter onViewDetachedFromWindow ")
+        visibleHolders?.let {
+            Log.d(TAG, "MoreAdapter onViewDetachedFromWindow $it")
+            it.remove(holder)
+            holder.onViewDetachedFromWindow()
+        }
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        Log.d(TAG, "MoreAdapter onWindowFocusChanged ")
+        visibleHolders?.let {
+            Log.d(TAG, "MoreAdapter onWindowFocusChanged $it")
+            for (i in it.indices) {
+                it[i].onWindowFocusChanged(hasFocus)
+            }
+        }
+    }
+
+    override fun onPauseResume(onResume: Boolean) {
+        Log.d(TAG, "MoreAdapter onPauseResume ")
+        visibleHolders?.let {
+            Log.d(TAG, "MoreAdapter onPauseResume $onResume ---$it")
+            for (i in it.indices) {
+                it[i].onPauseResume(onResume)
+            }
+        }
+    }
+
+    override fun onHolderScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+        Log.d(TAG, "MoreAdapter onHolderScrolled ")
+        visibleHolders?.let {
+            Log.d(TAG, "MoreAdapter onHolderScrolled $it")
+            for (i in it.indices) {
+                it[i].onScrolled(recyclerView, dx, dy)
+            }
+        }
+    }
+
+
+    override fun onHolderScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+        Log.d(TAG, "MoreAdapter onHolderScrollStateChanged ")
+        visibleHolders?.let {
+            Log.d(TAG, "MoreAdapter onHolderScrollStateChanged $it")
+            for (i in it.indices) {
+                it[i].onScrollStateChanged(recyclerView, newState)
+            }
+        }
+    }
+
+    /** [scrollMonitor] open scroll monitor */
+    override fun scrollMonitor(monitor: Boolean): MoreAdapter {
+        if (monitor) {
+            visibleHolders = arrayListOf()
+        }
+        return this
     }
 
     /** [renderWithAnimation] user default animation AlphaAnimation */
