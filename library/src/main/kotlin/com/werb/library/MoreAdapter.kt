@@ -35,8 +35,12 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
     private var lastAnimPosition = -1
     private var linearInterpolator = LinearInterpolator()
 
-    private var visibleHolders: ArrayList<IViewHolderScrollMonitor>? = null
+    private var visibleHolders: MutableList<IViewHolderScrollMonitor>? = null
     private val TAG = "ScrollMonitor"
+    //上次滑动方向
+    private var scrollUp:Boolean = true
+    //是否按滑动方向分发事件
+    private var direction = true
 
     @Suppress("UNCHECKED_CAST")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoreViewHolder<Any> {
@@ -179,10 +183,10 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
 
     override fun onViewAttachedToWindow(holder: MoreViewHolder<Any>) {
         super.onViewAttachedToWindow(holder)
-        Log.d(TAG, "MoreAdapter onViewAttachedToWindow ")
+//        Log.d(TAG, "MoreAdapter onViewAttachedToWindow  ${holder.javaClass.simpleName} ")
         addAnimation(holder)
         visibleHolders?.let {
-            Log.d(TAG, "MoreAdapter onViewAttachedToWindow $it ---${it.contains(holder)}")
+//            Log.d(TAG, "MoreAdapter onViewAttachedToWindow  ${holder.javaClass.simpleName}---scrollUp= $scrollUp ${it.contains(holder)}")
             if (!it.contains(holder)) {
                 it.add(holder)
                 holder.onViewAttachedToWindow()
@@ -192,18 +196,18 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
 
     override fun onViewDetachedFromWindow(holder: MoreViewHolder<Any>) {
         super.onViewDetachedFromWindow(holder)
-        Log.d(TAG, "MoreAdapter onViewDetachedFromWindow ")
+//        Log.d(TAG, "MoreAdapter onViewDetachedFromWindow  ${holder.javaClass.simpleName} ")
         visibleHolders?.let {
-            Log.d(TAG, "MoreAdapter onViewDetachedFromWindow $it")
+//            Log.d(TAG, "MoreAdapter onViewAttachedToWindow  ${holder.javaClass.simpleName} scrollUp= $scrollUp $it")
             it.remove(holder)
             holder.onViewDetachedFromWindow()
         }
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
-        Log.d(TAG, "MoreAdapter onWindowFocusChanged ")
-        visibleHolders?.let {
-            Log.d(TAG, "MoreAdapter onWindowFocusChanged $it")
+//        Log.d(TAG, "MoreAdapter onWindowFocusChanged ")
+        getVisibleHolders()?.let {
+//            Log.d(TAG, "MoreAdapter onWindowFocusChanged scrollUp= $scrollUp $it")
             for (i in it.indices) {
                 it[i].onWindowFocusChanged(hasFocus)
             }
@@ -211,9 +215,9 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
     }
 
     override fun onPauseResume(onResume: Boolean) {
-        Log.d(TAG, "MoreAdapter onPauseResume ")
-        visibleHolders?.let {
-            Log.d(TAG, "MoreAdapter onPauseResume $onResume ---$it")
+//        Log.d(TAG, "MoreAdapter onPauseResume ")
+        getVisibleHolders()?.let {
+//            Log.d(TAG, "MoreAdapter onPauseResume $onResume scrollUp= $scrollUp ---$it")
             for (i in it.indices) {
                 it[i].onPauseResume(onResume)
             }
@@ -221,9 +225,12 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
     }
 
     override fun onHolderScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-        Log.d(TAG, "MoreAdapter onHolderScrolled ")
-        visibleHolders?.let {
-            Log.d(TAG, "MoreAdapter onHolderScrolled $it")
+        if (dy != 0 && direction){
+            scrollUp = dy > 0
+        }
+//        Log.d(TAG, "MoreAdapter onHolderScrolled dy $dy")
+        getVisibleHolders()?.let {
+//            Log.d(TAG, "MoreAdapter onHolderScrolled visibleHolders scrollUp= $scrollUp $it")
             for (i in it.indices) {
                 it[i].onScrolled(recyclerView, dx, dy)
             }
@@ -232,9 +239,9 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
 
 
     override fun onHolderScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-        Log.d(TAG, "MoreAdapter onHolderScrollStateChanged ")
-        visibleHolders?.let {
-            Log.d(TAG, "MoreAdapter onHolderScrollStateChanged $it")
+//        Log.d(TAG, "MoreAdapter onHolderScrollStateChanged ")
+        getVisibleHolders()?.let {
+//            Log.d(TAG, "MoreAdapter onHolderScrollStateChanged scrollUp= $scrollUp $it")
             for (i in it.indices) {
                 it[i].onScrollStateChanged(recyclerView, newState)
             }
@@ -242,11 +249,19 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
     }
 
     /** [scrollMonitor] open scroll monitor */
-    override fun scrollMonitor(monitor: Boolean): MoreAdapter {
+    override fun scrollMonitor(monitor: Boolean, direction: Boolean): MoreAdapter {
         if (monitor) {
             visibleHolders = arrayListOf()
+            this.direction = direction
         }
         return this
+    }
+
+    fun getVisibleHolders(reverse: Boolean = true): MutableList<IViewHolderScrollMonitor>? {
+        if (visibleHolders == null || scrollUp || !reverse){
+            return visibleHolders
+        }
+        return visibleHolders!!.asReversed()
     }
 
     /** [renderWithAnimation] user default animation AlphaAnimation */

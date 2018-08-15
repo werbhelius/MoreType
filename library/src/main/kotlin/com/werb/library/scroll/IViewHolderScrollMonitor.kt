@@ -2,7 +2,7 @@ package com.werb.library.scroll
 
 import android.support.v7.widget.RecyclerView
 
-internal interface IViewHolderScrollMonitor{
+interface IViewHolderScrollMonitor{
 
     //viewholder attach detach
     fun onViewAttachedToWindow(){}
