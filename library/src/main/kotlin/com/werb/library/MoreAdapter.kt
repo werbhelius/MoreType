@@ -18,6 +18,7 @@ import com.werb.library.exception.ViewHolderInitErrorException
 import com.werb.library.link.XDiffCallback
 import com.werb.library.scroll.IAdapterScrollMonitor
 import com.werb.library.scroll.IViewHolderScrollMonitor
+import java.lang.ref.SoftReference
 
 
 /**
@@ -34,6 +35,7 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
     private var firstShow = false
     private var lastAnimPosition = -1
     private var linearInterpolator = LinearInterpolator()
+    private var recyclerViewSoft: SoftReference<RecyclerView>? = null
 
     private var visibleHolders: MutableList<IViewHolderScrollMonitor>? = null
     private val TAG = "ScrollMonitor"
@@ -82,6 +84,7 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
 
     fun attachTo(view: RecyclerView): MoreLink {
         view.adapter = this
+        recyclerViewSoft = SoftReference(view)
         return this
     }
 
@@ -101,6 +104,7 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         list.clear()
         list.addAll(newList)
         diffResult.dispatchUpdatesTo(this)
+        restoreRecyclerView()
     }
 
     override fun getDataIndex(data: Any): Int = list.indexOf(data)
@@ -118,6 +122,7 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
             list.add(data)
             notifyItemInserted(itemCount - 1)
         }
+        restoreRecyclerView()
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -129,6 +134,7 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
             list.add(index, data)
             notifyItemInserted(index)
         }
+        restoreRecyclerView()
     }
 
     override fun getData(position: Int): Any = list[position]
@@ -172,6 +178,13 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         list.removeAt(position)
         list.add(position, data)
         notifyItemChanged(position)
+    }
+
+    private fun restoreRecyclerView() {
+        recyclerViewSoft?.get()?.apply {
+            val state = this.layoutManager.onSaveInstanceState()
+            this.layoutManager.onRestoreInstanceState(state)
+        }
     }
 
     override fun getItemCount(): Int = list.size
