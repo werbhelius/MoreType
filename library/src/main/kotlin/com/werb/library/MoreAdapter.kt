@@ -103,8 +103,13 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         list.clear()
         list.addAll(newList)
-        diffResult.dispatchUpdatesTo(this)
-        restoreRecyclerView()
+        recyclerViewSoft?.get()?.apply {
+            val state = this.layoutManager.onSaveInstanceState()
+            diffResult.dispatchUpdatesTo(this@MoreAdapter)
+            this.layoutManager.onRestoreInstanceState(state)
+        } ?: run {
+            diffResult.dispatchUpdatesTo(this@MoreAdapter)
+        }
     }
 
     override fun getDataIndex(data: Any): Int = list.indexOf(data)
@@ -117,24 +122,46 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
                 position = list.size
             }
             list.addAll(position, data as Collection<Any>)
-            notifyItemRangeInserted(position, data.size)
+            recyclerViewSoft?.get()?.apply {
+                val state = this.layoutManager.onSaveInstanceState()
+                notifyItemRangeInserted(position, data.size)
+                this.layoutManager.onRestoreInstanceState(state)
+            } ?: run {
+                notifyItemRangeInserted(position, data.size)
+            }
         } else {
             list.add(data)
-            notifyItemInserted(itemCount - 1)
+            recyclerViewSoft?.get()?.apply {
+                val state = this.layoutManager.onSaveInstanceState()
+                notifyItemInserted(itemCount - 1)
+                this.layoutManager.onRestoreInstanceState(state)
+            } ?: run {
+                notifyItemInserted(itemCount - 1)
+            }
         }
-        restoreRecyclerView()
     }
 
     @Suppress("UNCHECKED_CAST")
     override fun loadData(index: Int, data: Any) {
         if (data is List<*>) {
             list.addAll(index, data as Collection<Any>)
-            notifyItemRangeInserted(index, data.size)
+            recyclerViewSoft?.get()?.apply {
+                val state = this.layoutManager.onSaveInstanceState()
+                notifyItemRangeInserted(index, data.size)
+                this.layoutManager.onRestoreInstanceState(state)
+            } ?: run {
+                notifyItemRangeInserted(index, data.size)
+            }
         } else {
             list.add(index, data)
-            notifyItemInserted(index)
+            recyclerViewSoft?.get()?.apply {
+                val state = this.layoutManager.onSaveInstanceState()
+                notifyItemInserted(index)
+                this.layoutManager.onRestoreInstanceState(state)
+            } ?: run {
+                notifyItemInserted(index)
+            }
         }
-        restoreRecyclerView()
     }
 
     override fun getData(position: Int): Any = list[position]
