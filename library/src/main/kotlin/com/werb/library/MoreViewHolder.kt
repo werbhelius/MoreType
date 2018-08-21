@@ -15,7 +15,7 @@ abstract class MoreViewHolder<T : Any>(override val containerView: View) : ViewH
 
     internal var clickListener: MoreClickListener? = null
 
-    fun getItemView() = itemView
+    fun getItemView(): View = itemView
 
     fun addOnTouchListener(viewId: Int) {
         clickListener?.let {
