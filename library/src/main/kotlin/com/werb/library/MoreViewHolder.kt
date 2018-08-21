@@ -44,7 +44,7 @@ abstract class MoreViewHolder<T : Any>(override val containerView: View) : ViewH
     }
 
     fun addOnLongClickListener(viewId: Int) {
-        clickListener?.let {
+        clickListener?.let { it ->
             val _this = it
             itemView.findViewById<View>(viewId).setOnLongClickListener {
                 _this.onItemLongClick(it, layoutPosition)
@@ -53,7 +53,7 @@ abstract class MoreViewHolder<T : Any>(override val containerView: View) : ViewH
     }
 
     fun addOnLongClickListener(view: View) {
-        clickListener?.let {
+        clickListener?.let { it ->
             val _this = it
             view.setOnLongClickListener {
                 _this.onItemLongClick(view, layoutPosition)
