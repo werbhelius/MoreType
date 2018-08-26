@@ -1,5 +1,6 @@
 package com.werb.library
 
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.Adapter
 import android.view.LayoutInflater
@@ -8,16 +9,11 @@ import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import com.werb.library.action.DataAction
 import com.werb.library.action.MoreClickListener
+import com.werb.library.exception.ViewHolderInitErrorException
 import com.werb.library.extension.AlphaAnimation
 import com.werb.library.extension.AnimExtension
 import com.werb.library.extension.MoreAnimation
 import com.werb.library.link.*
-import android.support.v7.util.DiffUtil
-import android.util.Log
-import com.werb.library.exception.ViewHolderInitErrorException
-import com.werb.library.link.XDiffCallback
-import com.werb.library.scroll.IAdapterScrollMonitor
-import com.werb.library.scroll.IViewHolderScrollMonitor
 import java.lang.ref.SoftReference
 
 
@@ -25,7 +21,7 @@ import java.lang.ref.SoftReference
  * [MoreAdapter] build viewHolder with data
  * Created by wanbo on 2017/7/2.
  */
-class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, DataAction, IAdapterScrollMonitor {
+class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, DataAction {
 
     val list: MutableList<Any> = mutableListOf()
     private val linkManager: MoreLink by lazy { MoreLinkManager() }
@@ -36,13 +32,6 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
     private var lastAnimPosition = -1
     private var linearInterpolator = LinearInterpolator()
     private var recyclerViewSoft: SoftReference<RecyclerView>? = null
-
-    private var visibleHolders: MutableList<IViewHolderScrollMonitor>? = null
-    private val TAG = "ScrollMonitor"
-    //上次滑动方向
-    private var scrollUp:Boolean = true
-    //是否按滑动方向分发事件
-    private var direction = true
 
     @Suppress("UNCHECKED_CAST")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoreViewHolder<Any> {
@@ -223,85 +212,7 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
 
     override fun onViewAttachedToWindow(holder: MoreViewHolder<Any>) {
         super.onViewAttachedToWindow(holder)
-//        Log.d(TAG, "MoreAdapter onViewAttachedToWindow  ${holder.javaClass.simpleName} ")
         addAnimation(holder)
-        visibleHolders?.let {
-//            Log.d(TAG, "MoreAdapter onViewAttachedToWindow  ${holder.javaClass.simpleName}---scrollUp= $scrollUp ${it.contains(holder)}")
-            if (!it.contains(holder)) {
-                it.add(holder)
-                holder.onViewAttachedToWindow()
-            }
-        }
-    }
-
-    override fun onViewDetachedFromWindow(holder: MoreViewHolder<Any>) {
-        super.onViewDetachedFromWindow(holder)
-//        Log.d(TAG, "MoreAdapter onViewDetachedFromWindow  ${holder.javaClass.simpleName} ")
-        visibleHolders?.let {
-//            Log.d(TAG, "MoreAdapter onViewAttachedToWindow  ${holder.javaClass.simpleName} scrollUp= $scrollUp $it")
-            it.remove(holder)
-            holder.onViewDetachedFromWindow()
-        }
-    }
-
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-//        Log.d(TAG, "MoreAdapter onWindowFocusChanged ")
-        getVisibleHolders()?.let {
-//            Log.d(TAG, "MoreAdapter onWindowFocusChanged scrollUp= $scrollUp $it")
-            for (i in it.indices) {
-                it[i].onWindowFocusChanged(hasFocus)
-            }
-        }
-    }
-
-    override fun onPauseResume(onResume: Boolean) {
-//        Log.d(TAG, "MoreAdapter onPauseResume ")
-        getVisibleHolders()?.let {
-//            Log.d(TAG, "MoreAdapter onPauseResume $onResume scrollUp= $scrollUp ---$it")
-            for (i in it.indices) {
-                it[i].onPauseResume(onResume)
-            }
-        }
-    }
-
-    override fun onHolderScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-        if (dy != 0 && direction){
-            scrollUp = dy > 0
-        }
-//        Log.d(TAG, "MoreAdapter onHolderScrolled dy $dy")
-        getVisibleHolders()?.let {
-//            Log.d(TAG, "MoreAdapter onHolderScrolled visibleHolders scrollUp= $scrollUp $it")
-            for (i in it.indices) {
-                it[i].onScrolled(recyclerView, dx, dy)
-            }
-        }
-    }
-
-
-    override fun onHolderScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-//        Log.d(TAG, "MoreAdapter onHolderScrollStateChanged ")
-        getVisibleHolders()?.let {
-//            Log.d(TAG, "MoreAdapter onHolderScrollStateChanged scrollUp= $scrollUp $it")
-            for (i in it.indices) {
-                it[i].onScrollStateChanged(recyclerView, newState)
-            }
-        }
-    }
-
-    /** [scrollMonitor] open scroll monitor */
-    override fun scrollMonitor(monitor: Boolean, direction: Boolean): MoreAdapter {
-        if (monitor) {
-            visibleHolders = arrayListOf()
-            this.direction = direction
-        }
-        return this
-    }
-
-    fun getVisibleHolders(reverse: Boolean = true): MutableList<IViewHolderScrollMonitor>? {
-        if (visibleHolders == null || scrollUp || !reverse){
-            return visibleHolders
-        }
-        return visibleHolders!!.asReversed()
     }
 
     /** [renderWithAnimation] user default animation AlphaAnimation */
