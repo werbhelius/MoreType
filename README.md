@@ -21,17 +21,17 @@ Click icon download lastest sample
 
 ## Dependency
 ```gradle
-compile 'com.werb.moretype:moretype:0.2.5'
+compile 'com.werb.moretype:moretype:0.3.1'
 ```
 or
 ```gradle
-implementation 'com.werb.moretype:moretype:0.2.5'
+implementation 'com.werb.moretype:moretype:0.3.1'
 ```
 
 ## Update log
-#### [v0.2.5](https://github.com/Werb/MoreType/releases/tag/v0.2.5)
-* fix fix payloads judge error
-* update support lib version
+#### [v0.3.1](https://github.com/Werb/MoreType/releases/tag/v0.3.1)
+* bug fix
+* add MoreViewHolder initialize error ViewHolderInitErrorException
 
 ## Usage
 
