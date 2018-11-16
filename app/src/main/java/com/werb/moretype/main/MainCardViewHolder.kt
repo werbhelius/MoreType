@@ -3,6 +3,7 @@ package com.werb.moretype.main
 import android.app.Activity
 import android.view.View
 import com.werb.library.MoreViewHolder
+import com.werb.library.annotation.MoreInject
 import com.werb.library.link.LayoutID
 import com.werb.moretype.R
 import com.werb.moretype.anim.AnimActivity
@@ -22,8 +23,11 @@ import kotlinx.android.synthetic.main.item_view_main.*
 @LayoutID(R.layout.item_view_main)
 class MainCardViewHolder(containerView: View) : MoreViewHolder<MainCard>(containerView), LayoutContainer {
 
-    override fun bindData(data: MainCard, payloads: List<Any>) {
+    @MoreInject("someValue")
+    lateinit var someValue: String
 
+    override fun bindData(data: MainCard, payloads: List<Any>) {
+        println("-----------$someValue")
         card_playLoad.tag = false
 
         // user payloads we can update any view we want

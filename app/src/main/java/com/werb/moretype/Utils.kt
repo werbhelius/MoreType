@@ -1,6 +1,7 @@
 package com.werb.moretype
 
 import android.graphics.BitmapFactory
+import com.werb.library.MoreViewHolder
 import com.werb.moretype.multi.ImageSize
 import java.io.File
 import java.text.SimpleDateFormat
@@ -44,7 +45,7 @@ object Utils {
         return ImageSize(fixWidth, fixHeight)
     }
 
-    fun readImageSize(path: String): ImageSize?{
+    fun readImageSize(path: String): ImageSize? {
         val orFile = File(path)
         if (!orFile.exists()) {
             return null
@@ -52,7 +53,7 @@ object Utils {
         val options = BitmapFactory.Options()
         options.inJustDecodeBounds = true
         BitmapFactory.decodeFile(orFile.absolutePath, options)
-        return ImageSize(options.outWidth, options.outHeight )
+        return ImageSize(options.outWidth, options.outHeight)
     }
 
 }

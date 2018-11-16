@@ -12,6 +12,8 @@ import kotlinx.android.extensions.LayoutContainer
  */
 abstract class MoreViewHolder<T : Any>(override val containerView: View) : ViewHolder(containerView), LayoutContainer {
 
+    val injectValueMap = mutableMapOf<String, Any>()
+
     internal var clickListener: MoreClickListener? = null
 
     fun getItemView(): View = itemView

@@ -14,6 +14,7 @@ import com.werb.library.extension.AlphaAnimation
 import com.werb.library.extension.AnimExtension
 import com.werb.library.extension.MoreAnimation
 import com.werb.library.link.*
+import java.lang.ClassCastException
 import java.lang.ref.SoftReference
 
 
@@ -21,10 +22,10 @@ import java.lang.ref.SoftReference
  * [MoreAdapter] build viewHolder with data
  * Created by wanbo on 2017/7/2.
  */
-class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, DataAction {
+class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, DataAction, MoreOperation {
 
     val list: MutableList<Any> = mutableListOf()
-    private val linkManager: MoreLink by lazy { MoreLinkManager() }
+    private val linkManager: MoreLinkManager by lazy { MoreLinkManager() }
     private var animation: MoreAnimation? = null
     private var animDuration = 250L
     private var startAnimPosition = 0
@@ -44,10 +45,12 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         } catch (e: Exception) {
             e.printStackTrace()
             if (moreViewHolder == null) {
-                throw ViewHolderInitErrorException(viewHolderClass.simpleName, e.cause?.message ?: "")
+                throw ViewHolderInitErrorException(viewHolderClass.simpleName, e.cause?.message
+                    ?: "")
             }
         }
-        return moreViewHolder!!
+        injectValueInHolder(viewType, viewHolderClass, moreViewHolder!!)
+        return moreViewHolder
     }
 
     override fun onBindViewHolder(holder: MoreViewHolder<Any>, position: Int) {
@@ -267,8 +270,8 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         linkManager.register(registerItem)
     }
 
-    override fun register(clazz: Class<out MoreViewHolder<*>>, clickListener: MoreClickListener?) {
-        linkManager.register(clazz, clickListener)
+    override fun register(clazz: Class<out MoreViewHolder<*>>, clickListener: MoreClickListener?, injectValue: Map<String, Any>?) {
+        linkManager.register(clazz, clickListener, injectValue)
     }
 
     /** [multiRegister] multiRegister viewType like one2more case , user MultiLink to choose which one is we need */
@@ -286,4 +289,7 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
 
     /** [userSoleRegister] register sole global viewType */
     override fun userSoleRegister() = linkManager.userSoleRegister()
+
+    override fun injectValueInHolder(type: Int, clazz: Class<out MoreViewHolder<*>>, moreViewHolder: MoreViewHolder<Any>) = linkManager.injectValueInHolder(type, clazz, moreViewHolder)
+
 }

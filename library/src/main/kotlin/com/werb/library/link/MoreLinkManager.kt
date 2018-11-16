@@ -4,6 +4,7 @@ import android.support.v4.util.SparseArrayCompat
 import android.util.Log
 import com.werb.library.MoreViewHolder
 import com.werb.library.action.MoreClickListener
+import com.werb.library.annotation.MoreInject
 import com.werb.library.exception.ModelNotRegisterException
 import java.lang.reflect.ParameterizedType
 
@@ -14,7 +15,7 @@ import java.lang.reflect.ParameterizedType
  * layout id is unique key
  * Created by wanbo on 2017/7/5.
  */
-class MoreLinkManager : MoreLink {
+class MoreLinkManager : MoreLink, MoreOperation {
 
     private val TAG = "MoreType"
 
@@ -26,6 +27,8 @@ class MoreLinkManager : MoreLink {
 
     /** [modelTypeMap] save clickListener by layout id */
     private var clickListenerMap = SparseArrayCompat<MoreClickListener?>()
+
+    private var injectValueMap = SparseArrayCompat<Map<String, Any>>()
 
     /** [multiModelMap] save [MultiLink] by Data::class */
     private var multiModelMap = mutableMapOf<Class<*>, MultiLink<Any>>()
@@ -50,17 +53,19 @@ class MoreLinkManager : MoreLink {
             viewHolderMap.removeAt(index)
             modelTypeMap.removeAt(index)
             clickListenerMap.removeAt(index)
+            injectValueMap.removeAt(index)
             Log.w(TAG, "model repeated! $modelName.class will replace $oldViewTypeName to $newTypeName")
         }
         @Suppress("UNCHECKED_CAST")
         viewHolderMap.put(registerItem.layoutId, registerItem.clazzViewHolder)
         modelTypeMap.put(registerItem.layoutId, model)
         clickListenerMap.put(registerItem.layoutId, registerItem.clickListener)
+        injectValueMap.put(registerItem.layoutId, registerItem.injectValue)
     }
 
-    override fun register(clazz: Class<out MoreViewHolder<*>>, clickListener: MoreClickListener?) {
+    override fun register(clazz: Class<out MoreViewHolder<*>>, clickListener: MoreClickListener?, injectValue: Map<String, Any>?) {
         val layoutID = requestLayoutID(clazz)
-        register(RegisterItem(layoutID, clazz, clickListener))
+        register(RegisterItem(layoutID, clazz, clickListener, injectValue))
     }
 
     /**
@@ -150,6 +155,23 @@ class MoreLinkManager : MoreLink {
         }
     }
 
+    override fun injectValueInHolder(type: Int, clazz: Class<out MoreViewHolder<*>>, moreViewHolder: MoreViewHolder<Any>) {
+        val valueMap = injectValueMap[type] ?: return
+        if (valueMap.isEmpty()) return
+        valueMap.forEach { entry ->
+            val key = entry.key
+            val value = entry.value
+            clazz.declaredFields.forEach { field ->
+                val annotation = field.getAnnotation(MoreInject::class.java)
+                annotation?.also {
+                    if (key == it.key) {
+                        field.set(moreViewHolder, value)
+                    }
+                }
+            }
+        }
+    }
+
     @Suppress("UNCHECKED_CAST")
     private fun reflectClass(clazz: Class<*>): Class<Any> {
         val type = clazz.genericSuperclass as ParameterizedType
@@ -161,7 +183,8 @@ class MoreLinkManager : MoreLink {
         val layoutID = clazz.getAnnotation(LayoutID::class.java)
         layoutID?.let {
             return layoutID.layoutId
-        } ?: throw NullPointerException("ViewHolder class ${clazz.simpleName} has not register LayoutID in Annotation !")
+        }
+            ?: throw NullPointerException("ViewHolder class ${clazz.simpleName} has not register LayoutID in Annotation !")
     }
 
 }
