@@ -161,11 +161,12 @@ class MoreLinkManager : MoreLink, MoreOperation {
         valueMap.forEach { entry ->
             val key = entry.key
             val value = entry.value
-            clazz.declaredFields.forEach { field ->
+            clazz.declaredFields.forEach field@{ field ->
                 val annotation = field.getAnnotation(MoreInject::class.java)
                 annotation?.also {
                     if (key == it.key) {
                         field.set(moreViewHolder, value)
+                        return@field
                     }
                 }
             }
