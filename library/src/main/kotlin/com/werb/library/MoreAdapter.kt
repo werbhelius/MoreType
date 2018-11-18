@@ -96,9 +96,9 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         list.clear()
         list.addAll(newList)
         recyclerViewSoft?.get()?.apply {
-            val state = this.layoutManager.onSaveInstanceState()
+            val state = this.layoutManager?.onSaveInstanceState()
             diffResult.dispatchUpdatesTo(this@MoreAdapter)
-            this.layoutManager.onRestoreInstanceState(state)
+            this.layoutManager?.onRestoreInstanceState(state)
         } ?: run {
             diffResult.dispatchUpdatesTo(this@MoreAdapter)
         }
@@ -115,18 +115,18 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
             }
             list.addAll(position, data as Collection<Any>)
             recyclerViewSoft?.get()?.apply {
-                val state = this.layoutManager.onSaveInstanceState()
+                val state = this.layoutManager?.onSaveInstanceState()
                 notifyItemRangeInserted(position, data.size)
-                this.layoutManager.onRestoreInstanceState(state)
+                this.layoutManager?.onRestoreInstanceState(state)
             } ?: run {
                 notifyItemRangeInserted(position, data.size)
             }
         } else {
             list.add(data)
             recyclerViewSoft?.get()?.apply {
-                val state = this.layoutManager.onSaveInstanceState()
+                val state = this.layoutManager?.onSaveInstanceState()
                 notifyItemInserted(itemCount - 1)
-                this.layoutManager.onRestoreInstanceState(state)
+                this.layoutManager?.onRestoreInstanceState(state)
             } ?: run {
                 notifyItemInserted(itemCount - 1)
             }
@@ -138,18 +138,18 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         if (data is List<*>) {
             list.addAll(index, data as Collection<Any>)
             recyclerViewSoft?.get()?.apply {
-                val state = this.layoutManager.onSaveInstanceState()
+                val state = this.layoutManager?.onSaveInstanceState()
                 notifyItemRangeInserted(index, data.size)
-                this.layoutManager.onRestoreInstanceState(state)
+                this.layoutManager?.onRestoreInstanceState(state)
             } ?: run {
                 notifyItemRangeInserted(index, data.size)
             }
         } else {
             list.add(index, data)
             recyclerViewSoft?.get()?.apply {
-                val state = this.layoutManager.onSaveInstanceState()
+                val state = this.layoutManager?.onSaveInstanceState()
                 notifyItemInserted(index)
-                this.layoutManager.onRestoreInstanceState(state)
+                this.layoutManager?.onRestoreInstanceState(state)
             } ?: run {
                 notifyItemInserted(index)
             }
@@ -201,8 +201,8 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
 
     private fun restoreRecyclerView() {
         recyclerViewSoft?.get()?.apply {
-            val state = this.layoutManager.onSaveInstanceState()
-            this.layoutManager.onRestoreInstanceState(state)
+            val state = this.layoutManager?.onSaveInstanceState()
+            this.layoutManager?.onRestoreInstanceState(state)
         }
     }
 

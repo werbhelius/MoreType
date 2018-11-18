@@ -49,7 +49,7 @@ class MoreLinkManager : MoreLink, MoreOperation {
             val oldViewType = viewHolderMap[key]
             val modelName = model.simpleName
             val newTypeName = registerItem.clazzViewHolder.simpleName
-            val oldViewTypeName = oldViewType.simpleName
+            val oldViewTypeName = oldViewType?.simpleName
             viewHolderMap.removeAt(index)
             modelTypeMap.removeAt(index)
             clickListenerMap.removeAt(index)

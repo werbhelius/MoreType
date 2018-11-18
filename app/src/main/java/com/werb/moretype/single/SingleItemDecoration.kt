@@ -11,7 +11,7 @@ import android.support.v7.widget.GridLayoutManager.SpanSizeLookup
  */
 class SingleItemDecoration(val space: Int) : RecyclerView.ItemDecoration() {
 
-    override fun getItemOffsets(outRect: Rect?, view: View?, parent: RecyclerView?, state: RecyclerView.State?) {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         parent?.let {
             val position = parent.getChildLayoutPosition(view)
             if (position != 0) {
