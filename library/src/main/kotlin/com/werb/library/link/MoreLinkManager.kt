@@ -4,6 +4,7 @@ import android.support.v4.util.SparseArrayCompat
 import android.util.Log
 import com.werb.library.MoreViewHolder
 import com.werb.library.action.MoreClickListener
+import com.werb.library.annotation.LayoutID
 import com.werb.library.annotation.MoreInject
 import com.werb.library.exception.ModelNotRegisterException
 import java.lang.reflect.ParameterizedType

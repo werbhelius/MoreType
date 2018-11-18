@@ -4,7 +4,7 @@ import android.app.Activity
 import android.view.View
 import com.werb.library.MoreViewHolder
 import com.werb.library.annotation.MoreInject
-import com.werb.library.link.LayoutID
+import com.werb.library.annotation.LayoutID
 import com.werb.moretype.R
 import com.werb.moretype.anim.AnimActivity
 import com.werb.moretype.click.ItemClickActivity

@@ -14,7 +14,6 @@ import com.werb.library.extension.AlphaAnimation
 import com.werb.library.extension.AnimExtension
 import com.werb.library.extension.MoreAnimation
 import com.werb.library.link.*
-import java.lang.ClassCastException
 import java.lang.ref.SoftReference
 
 

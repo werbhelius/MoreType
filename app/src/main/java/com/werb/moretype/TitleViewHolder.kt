@@ -2,7 +2,7 @@ package com.werb.moretype
 
 import android.view.View
 import com.werb.library.MoreViewHolder
-import com.werb.library.link.LayoutID
+import com.werb.library.annotation.LayoutID
 import com.werb.moretype.main.MainCard
 import kotlinx.android.synthetic.main.item_view_title.view.*
 
