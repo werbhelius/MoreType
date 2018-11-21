@@ -29,11 +29,11 @@ I am not The first thought of this concept, I first saw the concept of practice,
 
 ## Dependency
 ```gradle
-compile 'com.werb.moretype:moretype:0.3.1'
+compile 'com.werb.moretype:moretype:$last_version'
 ```
 or
 ```gradle
-implementation 'com.werb.moretype:moretype:0.3.1'
+implementation 'com.werb.moretype:moretype:$last_version'
 ```
 
 ## Usage

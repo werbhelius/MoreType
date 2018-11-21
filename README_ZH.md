@@ -31,11 +31,11 @@ Click icon download lastest sample
 
 ## Dependency
 ```gradle
-compile 'com.werb.moretype:moretype:0.3.1'
+compile 'com.werb.moretype:moretype:$last_version'
 ```
 or
 ```gradle
-implementation 'com.werb.moretype:moretype:0.3.1'
+implementation 'com.werb.moretype:moretype:$last_version'
 ```
 
 ## Usage
