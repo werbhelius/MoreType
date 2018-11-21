@@ -79,6 +79,8 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         return this
     }
 
+    fun getRecyclerView(): RecyclerView? = recyclerViewSoft?.get()
+
     @Suppress("UNCHECKED_CAST")
     override fun refresh(index: Int, newData: Any, diffUtilClazz: Class<out XDiffCallback>) {
         val newList = mutableListOf<Any>()
