@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.item_view_main.*
 class MainCardViewHolder(containerView: View) : MoreViewHolder<MainCard>(containerView), LayoutContainer {
 
     @MoreInject("someValue")
-    lateinit var someValue: String
+    var someValue: String = ""
 
     override fun bindData(data: MainCard, payloads: List<Any>) {
         println("-----------$someValue")

@@ -165,7 +165,9 @@ class MoreLinkManager : MoreLink, MoreOperation {
                 val annotation = field.getAnnotation(MoreInject::class.java)
                 annotation?.also {
                     if (key == it.key) {
+                        field.isAccessible = true
                         field.set(moreViewHolder, value)
+                        field.isAccessible = false
                         return@field
                     }
                 }
