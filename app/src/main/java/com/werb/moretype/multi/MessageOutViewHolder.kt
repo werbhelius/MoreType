@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.item_view_multi_message_out.*
 /**
  * Created by wanbo on 2017/7/14.
  */
-class MessageOutViewHolder(containerView: View) : MoreViewHolder<Message>(containerView) {
+class MessageOutViewHolder(values: MutableMap<String, Any>, containerView: View) : MoreViewHolder<Message>(values, containerView) {
 
     override fun bindData(data: Message, payloads: List<Any>) {
 

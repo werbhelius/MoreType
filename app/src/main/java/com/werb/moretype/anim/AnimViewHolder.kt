@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.item_view_anim.*
 /**
  * Created by wanbo on 2017/7/15.
  */
-class AnimViewHolder(containerView: View) : MoreViewHolder<AnimType>(containerView) {
+class AnimViewHolder(values: MutableMap<String, Any>, containerView: View) : MoreViewHolder<AnimType>(values, containerView) {
 
     override fun bindData(data: AnimType, payloads: List<Any>) {
         title.text = data.title

@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         adapter.apply {
+            injectValueInAllHolder(mapOf("qqqqqq" to "1233333333"))
             register(MainCardViewHolder::class.java, playLoadClick, mapOf("someValue" to "123"))
             attachTo(more_list)
         }

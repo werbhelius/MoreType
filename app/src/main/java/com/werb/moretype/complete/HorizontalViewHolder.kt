@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.item_view_horizontal_list.*
 /**
  * Created by wanbo on 2017/7/15.
  */
-class HorizontalViewHolder(containerView: View) : MoreViewHolder<HorizontalData>(containerView) {
+class HorizontalViewHolder(values: MutableMap<String, Any>, containerView: View) : MoreViewHolder<HorizontalData>(values, containerView) {
 
     private val adapter: MoreAdapter by lazy {
         MoreAdapter().apply {

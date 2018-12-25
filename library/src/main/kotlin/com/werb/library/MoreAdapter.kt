@@ -25,32 +25,34 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
 
     val list: MutableList<Any> = mutableListOf()
     private val linkManager: MoreLinkManager by lazy { MoreLinkManager() }
+    private var allValuesInHolder = mapOf<String, Any>()
+
     private var animation: MoreAnimation? = null
     private var animDuration = 250L
     private var startAnimPosition = 0
     private var firstShow = false
     private var lastAnimPosition = -1
     private var linearInterpolator = LinearInterpolator()
+
     private var recyclerViewSoft: SoftReference<RecyclerView>? = null
     private var dataChange: ((Int) -> Unit)? = null
 
     @Suppress("UNCHECKED_CAST")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoreViewHolder<Any> {
         val viewHolderClass = createViewHolder(viewType)
-        val con = viewHolderClass.getConstructor(View::class.java)
+        val con = viewHolderClass.getConstructor(MutableMap::class.java, View::class.java)
         val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
         var moreViewHolder: MoreViewHolder<Any>? = null
         try {
-            moreViewHolder = con.newInstance(view) as MoreViewHolder<Any>
+            val map = allValuesInHolder.plus(linkManager.getinjectValueWithHolder(viewType))
+            moreViewHolder = con.newInstance(map, view) as MoreViewHolder<Any>
         } catch (e: Exception) {
             e.printStackTrace()
             if (moreViewHolder == null) {
-                throw ViewHolderInitErrorException(viewHolderClass.simpleName, e.cause?.message
-                    ?: "")
+                throw ViewHolderInitErrorException(viewHolderClass.simpleName)
             }
         }
-        injectValueInHolder(viewType, viewHolderClass, moreViewHolder!!)
-        return moreViewHolder
+        return moreViewHolder!!
     }
 
     override fun onBindViewHolder(holder: MoreViewHolder<Any>, position: Int) {
@@ -84,6 +86,10 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
 
     fun addDataChangeListener(change: (Int) -> Unit) {
         this.dataChange = change
+    }
+
+    fun injectValueInAllHolder(values: Map<String, Any>) {
+        this.allValuesInHolder = values
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -210,13 +216,6 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         notifyItemChanged(position)
     }
 
-    private fun restoreRecyclerView() {
-        recyclerViewSoft?.get()?.apply {
-            val state = this.layoutManager?.onSaveInstanceState()
-            this.layoutManager?.onRestoreInstanceState(state)
-        }
-    }
-
     override fun getItemCount(): Int = list.size
 
     override fun getItemViewType(position: Int): Int {
@@ -300,7 +299,5 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
 
     /** [userSoleRegister] register sole global viewType */
     override fun userSoleRegister() = linkManager.userSoleRegister()
-
-    override fun injectValueInHolder(type: Int, clazz: Class<out MoreViewHolder<*>>, moreViewHolder: MoreViewHolder<Any>) = linkManager.injectValueInHolder(type, clazz, moreViewHolder)
 
 }

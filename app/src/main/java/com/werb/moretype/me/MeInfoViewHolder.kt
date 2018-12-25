@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.item_view_about_me_info.*
 /**
  * Created by wanbo on 2017/7/15.
  */
-class MeInfoViewHolder(containerView: View) : MoreViewHolder<MeInfo>(containerView) {
+class MeInfoViewHolder(values: MutableMap<String, Any>, containerView: View) : MoreViewHolder<MeInfo>(values, containerView) {
 
     override fun bindData(data: MeInfo, payloads: List<Any>) {
         val context = containerView.context

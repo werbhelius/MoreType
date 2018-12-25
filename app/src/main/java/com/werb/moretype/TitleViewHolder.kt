@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_view_title.view.*
  */
 
 @LayoutID(R.layout.item_view_title)
-class TitleViewHolder(containerView: View) : MoreViewHolder<MainCard>(containerView) {
+class TitleViewHolder(values: MutableMap<String, Any>, containerView: View) : MoreViewHolder<MainCard>(values, containerView) {
 
     private val title = containerView.title
     private val desc = containerView.desc

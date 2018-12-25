@@ -10,7 +10,7 @@ import kotlinx.android.extensions.LayoutContainer
  * [MoreViewHolder] Base ViewHolder implement Action fun
  * Created by wanbo on 2017/7/2.
  */
-abstract class MoreViewHolder<T : Any>(override val containerView: View) : ViewHolder(containerView), LayoutContainer {
+abstract class MoreViewHolder<T : Any>(val values: MutableMap<String, Any> = mutableMapOf(), override val containerView: View) : ViewHolder(containerView), LayoutContainer {
 
     val injectValueMap = mutableMapOf<String, Any>()
 

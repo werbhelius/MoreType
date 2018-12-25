@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.item_view_about_me_thx.*
 /**
  * Created by wanbo on 2017/7/15.
  */
-class MeThanksViewHolder(containerView: View) : MoreViewHolder<MeThanks>(containerView) {
+class MeThanksViewHolder(values: MutableMap<String, Any>, containerView: View) : MoreViewHolder<MeThanks>(values, containerView) {
 
     override fun bindData(data: MeThanks, payloads: List<Any>) {
         name.text = data.name

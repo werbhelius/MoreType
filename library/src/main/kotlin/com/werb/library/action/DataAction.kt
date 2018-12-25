@@ -1,6 +1,5 @@
 package com.werb.library.action
 
-import android.support.v7.util.DiffUtil
 import com.werb.library.link.XDiffCallback
 
 
