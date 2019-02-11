@@ -87,6 +87,8 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         this.allValuesInHolder = values
     }
 
+    /*-------------------Data Start--------------------*/
+
     @Suppress("UNCHECKED_CAST")
     override fun refresh(index: Int, newData: Any, diffUtilClazz: Class<out XDiffCallback>) {
         val newList = mutableListOf<Any>()
@@ -205,6 +207,8 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         list.add(position, data)
         notifyItemChanged(position)
     }
+
+    /*-------------------Data End--------------------*/
 
     override fun getItemCount(): Int = list.size
 

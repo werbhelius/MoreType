@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.werb.library.MoreAdapter
 import com.werb.library.extension.*
 import com.werb.library.link.RegisterItem
