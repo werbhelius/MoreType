@@ -60,7 +60,7 @@ class SingleText {
 ```kotlin
 // Register layoutID here or Register with adapter in Activity
 @LayoutID(R.layout.item_view_single_type_one)
-class SingleTypeOneViewHolder(containerView: View) : MoreViewHolder<SingleText>(containerView) {
+class SingleTypeOneViewHolder(values: MutableMap<String, Any>, containerView: View) : MoreViewHolder<SingleText>(containerView) {
 
     override fun bindData(data: SingleText, payloads: List<Any>) {
         title.text = data.title

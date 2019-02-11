@@ -29,9 +29,9 @@ implementation 'com.werb.moretype:moretype:$last_version'
 ```
 
 ## Update log
-#### [v0.3.1](https://github.com/Werb/MoreType/releases/tag/v0.3.1)
+#### [v0.4.0](https://github.com/Werb/MoreType/releases/tag/v0.40)
 * bug fix
-* add MoreViewHolder initialize error ViewHolderInitErrorException
+* update MoreViewHolder Constructor
 
 ## Usage
 
@@ -55,7 +55,7 @@ class SingleText {
 ```kotlin
 // Register layoutID here or Register with adapter in Activity
 @LayoutID(R.layout.item_view_single_type_one)
-class SingleTypeOneViewHolder(containerView: View) : MoreViewHolder<SingleText>(containerView) {
+class SingleTypeOneViewHolder(values: MutableMap<String, Any>, containerView: View) : MoreViewHolder<SingleText>(containerView) {
 
     override fun bindData(data: SingleText, payloads: List<Any>) {
         title.text = data.title
