@@ -7,7 +7,7 @@ import com.werb.moretype.R
 /**
  * Created by wanbo on 2017/7/15.
  */
-class FootViewHolder(containerView: View) : MoreViewHolder<Footer>(containerView) {
+class FootViewHolder(values: MutableMap<String, Any>, containerView: View) : MoreViewHolder<Footer>(values, containerView) {
 
     override fun bindData(data: Footer, payloads: List<Any>) {
 

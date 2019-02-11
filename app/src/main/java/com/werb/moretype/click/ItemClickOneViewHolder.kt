@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.item_view_click_one.*
 /**
  * Created by wanbo on 2017/7/15.
  */
-class ItemClickOneViewHolder(containerView: View) : MoreViewHolder<ItemClick>(containerView) {
+class ItemClickOneViewHolder(values: MutableMap<String, Any>, containerView: View) : MoreViewHolder<ItemClick>(values, containerView) {
 
     override fun bindData(data: ItemClick, payloads: List<Any>) {
         title.text = data.title

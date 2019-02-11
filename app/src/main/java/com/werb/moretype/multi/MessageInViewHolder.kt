@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_view_multi_message_in.*
 /**
  * Created by wanbo on 2017/7/14.
  */
-class MessageInViewHolder(containerView: View) : MoreViewHolder<Message>(containerView) {
+class MessageInViewHolder(values: MutableMap<String, Any>, containerView: View) : MoreViewHolder<Message>(values, containerView) {
 
     override fun bindData(data: Message, payloads: List<Any>) {
         message_icon.setImageURI(data.icon)

@@ -155,24 +155,10 @@ class MoreLinkManager : MoreLink, MoreOperation {
         }
     }
 
-    override fun injectValueInHolder(type: Int, clazz: Class<out MoreViewHolder<*>>, moreViewHolder: MoreViewHolder<Any>) {
-        val valueMap = injectValueMap[type] ?: return
-        if (valueMap.isEmpty()) return
-        valueMap.forEach { entry ->
-            val key = entry.key
-            val value = entry.value
-            clazz.declaredFields.forEach field@{ field ->
-                val annotation = field.getAnnotation(MoreInject::class.java)
-                annotation?.also {
-                    if (key == it.key) {
-                        field.isAccessible = true
-                        field.set(moreViewHolder, value)
-                        field.isAccessible = false
-                        return@field
-                    }
-                }
-            }
-        }
+    fun getinjectValueWithHolder(type: Int): Map<String, Any> {
+        val valueMap = injectValueMap[type] ?: return mutableMapOf()
+        if (valueMap.isEmpty()) return mutableMapOf()
+        return valueMap
     }
 
     @Suppress("UNCHECKED_CAST")

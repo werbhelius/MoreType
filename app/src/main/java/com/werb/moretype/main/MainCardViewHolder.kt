@@ -21,13 +21,14 @@ import kotlinx.android.synthetic.main.item_view_main.*
  */
 
 @LayoutID(R.layout.item_view_main)
-class MainCardViewHolder(containerView: View) : MoreViewHolder<MainCard>(containerView), LayoutContainer {
+class MainCardViewHolder(values: MutableMap<String, Any>, containerView: View) : MoreViewHolder<MainCard>(values, containerView), LayoutContainer {
 
-    @MoreInject("someValue")
-    var someValue: String = ""
+    private var someValue = values["someValue"]
+    private var qqqq = values["qqqqqq"]
 
     override fun bindData(data: MainCard, payloads: List<Any>) {
         println("-----------$someValue")
+        println("-----------$qqqq")
         card_playLoad.tag = false
 
         // user payloads we can update any view we want

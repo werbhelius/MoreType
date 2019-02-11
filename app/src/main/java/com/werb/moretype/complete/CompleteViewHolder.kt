@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_view_complete.*
 /**
  * Created by wanbo on 2017/7/15.
  */
-class CompleteViewHolder(containerView: View) : MoreViewHolder<Complete>(containerView) {
+class CompleteViewHolder(values: MutableMap<String, Any>, containerView: View) : MoreViewHolder<Complete>(values, containerView) {
 
     override fun bindData(data: Complete, payloads: List<Any>) {
         icon.setImageURI(data.icon)

@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_view_single_type_two.*
  */
 
 @LayoutID(R.layout.item_view_single_type_two)
-class SingleTypeTwoViewHolder(containerView: View) : MoreViewHolder<SingleImage>(containerView) {
+class SingleTypeTwoViewHolder(values: MutableMap<String, Any>, containerView: View) : MoreViewHolder<SingleImage>(values, containerView) {
 
     override fun bindData(data: SingleImage, payloads: List<Any>) {
         title.text = data.title

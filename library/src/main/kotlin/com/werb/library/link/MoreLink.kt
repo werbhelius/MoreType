@@ -33,5 +33,4 @@ internal interface MoreOperation {
     /** [bindClickListener]  bindClickListener with holder */
     fun bindClickListener(holder: MoreViewHolder<*>): MoreClickListener?
 
-    fun injectValueInHolder(type: Int, clazz: Class<out MoreViewHolder<*>>, moreViewHolder: MoreViewHolder<Any>)
 }
