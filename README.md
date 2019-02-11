@@ -29,7 +29,7 @@ implementation 'com.werb.moretype:moretype:$last_version'
 ```
 
 ## Update log
-#### [v0.4.0](https://github.com/Werb/MoreType/releases/tag/v0.40)
+#### [v0.4.0](https://github.com/Werb/MoreType/releases/tag/v0.4.0)
 * bug fix
 * update MoreViewHolder Constructor
 
