@@ -68,10 +68,6 @@ class SingleTypeOneViewHolder(values: MutableMap<String, Any>, containerView: Vi
 
 }
 ```
-* Compared with the 0.1.8 version removed `MoreViewType` using` MoreViewHolder` instead, regressing `RecyclerView` binding data in the first way
-* Only need to achieve the data class can be identified corresponding to the introduction of the layout of the advance to the registered part, you can more flexible to build the list
-* Android studio 3.0 version automatically depends on the `kotlin-android-extensions`, while` kotlin1.1.4-3` integrated `LayoutContainer`, in` ViewHolder` use `View` can be used directly by` id`, as above code Show more concise
-* **But it should be noted that if this approach is used, then it means that `Layout` has been determined. Please make sure that the` Layout` and `ViewHolder`**
 
 ### Step 3. `register` and `attach` to `recyclerview` in Any where you build list, like:
 
@@ -104,15 +100,6 @@ class SingleRegisterActivity: AppCompatActivity() {
 
 }
 ```
-
-* 0.2.0 version import the `RegisterItem`, in the 0.2.0 version of all registered (including one2more) are` RegisterItem` as the basic model
-```kotlin
-data class RegisterItem(val layoutId: Int, val clazzViewHolder: Class<out MoreViewHolder<*>>, var clickListener: MoreClickListener? = null)
-```
-* The three parameters are **Layout（布局）** ， **clazzViewHolder（ViewHolder 类）**， **clickListener（点击事件）**
-* Click event as optional
-* 0.2.3 version import the `@LayoutID( val layoutID: Int )`, you can use it in singler Register
-
 
 Upon completion of these three steps, a list based on the [Data Driven View] has been completed.
 
@@ -201,6 +188,15 @@ class MyApp: Application() {
 ```
 
 and we can use it in any where with `adapter.userSoleRegister()`
+
+### inject Value In ViewHolder
+```kotlin
+    adapter.apply {
+        injectValueInAllHolder(mapOf("qqqqqq" to "1233333333")) // inject in All Holder
+        register(MainCardViewHolder::class.java, playLoadClick, mapOf("someValue" to "123")) // inject in single holder
+        attachTo(more_list)
+    }
+```
 
 ## Thanks
 [MultiType](https://github.com/drakeet/MultiType)

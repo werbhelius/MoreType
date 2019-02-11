@@ -71,11 +71,6 @@ class SingleTypeOneViewHolder(values: MutableMap<String, Any>, containerView: Vi
 }
 ```
 
-* 相比 0.1.8 版本移除了 `MoreViewType` 使用 `MoreViewHolder` 替代，回归 `RecyclerView` 绑定数据最初的方式
-* 仅仅需要实现泛型确定相对应的数据类即可，关于布局的引入提前到了注册的部分，可以更加灵活的构建列表
-* Android studio 3.0 版本自动依赖了 `kotlin-android-extensions`，同时 `kotlin1.1.4-3` 集成了 `LayoutContainer`，在 `ViewHolder` 中使用 `View` 可以直接通过 `id` 使用，如上代码所示，更加简洁
-* **但需要注意的是，如果采用这样的方式，那么就意味着 `Layout` 已经确定，请确保在注册时声明的 `Layout` 和 `ViewHolder` 中 `Layout` 的一致性**
-
 ### Step 3. 在使用 `RecyclerView` 的地方，声明 `MoreAdapter()`对象，`register` 需要的 `ViewHolder`，同时和 `RecyclerView` 绑定
 
 ```kotlin
@@ -107,13 +102,6 @@ class SingleRegisterActivity: AppCompatActivity() {
 
 }
 ```
-* 0.2.0 版本引入了 `RegisterItem`，在 0.2.0 版本中一切注册（包括 one2more ）都以 `RegisterItem` 为基本模型
-```kotlin
-data class RegisterItem(val layoutId: Int, val clazzViewHolder: Class<out MoreViewHolder<*>>, var clickListener: MoreClickListener? = null)
-```
-* 三个参数分别是 **Layout（布局）** ， **clazzViewHolder（ViewHolder 类）**， **clickListener（点击事件）**
-* 点击事件为可选参数
-* 0.2.3 版本引入了 `@LayoutID( val layoutID: Int )` 在单一模型注册绑定的时候，你可以使用此方法
 
 完成这三步，一个根据【数据驱动视图】的列表就已经构建完成。
 
@@ -204,6 +192,15 @@ class MyApp: Application() {
 ```
 
 通过 `adapter.userSoleRegister()` 调用使用全局 ViewHolder
+
+### 向 ViewHolder 中传递数据
+```kotlin
+    adapter.apply {
+        injectValueInAllHolder(mapOf("qqqqqq" to "1233333333")) // inject in All Holder
+        register(MainCardViewHolder::class.java, playLoadClick, mapOf("someValue" to "123")) // inject in single holder
+        attachTo(more_list)
+    }
+```
 
 ## Thanks
 [MultiType](https://github.com/drakeet/MultiType)
