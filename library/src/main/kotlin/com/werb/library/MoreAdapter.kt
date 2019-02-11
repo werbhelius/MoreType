@@ -31,7 +31,6 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
     private var lastAnimPosition = -1
     private var linearInterpolator = LinearInterpolator()
     private var recyclerViewSoft: SoftReference<androidx.recyclerview.widget.RecyclerView>? = null
-    private var dataChange: ((Int) -> Unit)? = null
 
     @Suppress("UNCHECKED_CAST")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoreViewHolder<Any> {
@@ -81,10 +80,6 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
 
     fun getRecyclerView(): androidx.recyclerview.widget.RecyclerView? = recyclerViewSoft?.get()
 
-    fun addDataChangeListener(change: (Int) -> Unit) {
-        this.dataChange = change
-    }
-
     @Suppress("UNCHECKED_CAST")
     override fun refresh(index: Int, newData: Any, diffUtilClazz: Class<out XDiffCallback>) {
         val newList = mutableListOf<Any>()
@@ -107,7 +102,6 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         } ?: run {
             diffResult.dispatchUpdatesTo(this@MoreAdapter)
         }
-        dataChange?.invoke(itemCount)
     }
 
     override fun getDataIndex(data: Any): Int = list.indexOf(data)
@@ -137,7 +131,6 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
                 notifyItemInserted(itemCount - 1)
             }
         }
-        dataChange?.invoke(itemCount)
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -161,7 +154,6 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
                 notifyItemInserted(index)
             }
         }
-        dataChange?.invoke(itemCount)
     }
 
     override fun getData(position: Int): Any = list[position]
@@ -171,7 +163,6 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
             list.clear()
             notifyDataSetChanged()
         }
-        dataChange?.invoke(itemCount)
     }
 
     override fun removeAllNotRefresh() {
@@ -184,7 +175,6 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
             val index = list.indexOf(data)
             removeData(index)
         }
-        dataChange?.invoke(itemCount)
     }
 
     override fun removeData(position: Int) {
