@@ -47,12 +47,4 @@ repositories {
 buildscript {
 }
 
-apply plugin: 'com.novoda.bintray-release'
-publish {
-    userOrg = 'werbhelius'
-    groupId = 'com.werb.moretype'
-    artifactId = 'moretype'
-    publishVersion = '0.4.0'
-    desc = 'New method to build data in RecyclerView with Kotlin!'
-    website = 'https://github.com/Werb/MoreType'
-}
+apply from: './bintray.gradle'
