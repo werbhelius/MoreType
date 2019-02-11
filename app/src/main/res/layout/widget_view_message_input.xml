@@ -57,7 +57,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp">
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/input_send_layout"
             android:layout_width="match_parent"
             android:layout_height="25dp"

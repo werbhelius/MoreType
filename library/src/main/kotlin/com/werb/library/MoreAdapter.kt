@@ -1,12 +1,11 @@
 package com.werb.library
 
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.RecyclerView.Adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.werb.library.action.DataAction
 import com.werb.library.action.MoreClickListener
 import com.werb.library.exception.ViewHolderInitErrorException
@@ -31,7 +30,7 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
     private var firstShow = false
     private var lastAnimPosition = -1
     private var linearInterpolator = LinearInterpolator()
-    private var recyclerViewSoft: SoftReference<RecyclerView>? = null
+    private var recyclerViewSoft: SoftReference<androidx.recyclerview.widget.RecyclerView>? = null
     private var dataChange: ((Int) -> Unit)? = null
 
     @Suppress("UNCHECKED_CAST")
@@ -74,13 +73,13 @@ class MoreAdapter : Adapter<MoreViewHolder<Any>>(), MoreLink, AnimExtension, Dat
         holder.unBindData()
     }
 
-    fun attachTo(view: RecyclerView): MoreLink {
+    fun attachTo(view: androidx.recyclerview.widget.RecyclerView): MoreLink {
         view.adapter = this
         recyclerViewSoft = SoftReference(view)
         return this
     }
 
-    fun getRecyclerView(): RecyclerView? = recyclerViewSoft?.get()
+    fun getRecyclerView(): androidx.recyclerview.widget.RecyclerView? = recyclerViewSoft?.get()
 
     fun addDataChangeListener(change: (Int) -> Unit) {
         this.dataChange = change

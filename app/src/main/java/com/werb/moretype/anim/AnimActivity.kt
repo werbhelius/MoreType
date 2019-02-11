@@ -3,12 +3,11 @@ package com.werb.moretype.anim
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.CompoundButton
+import androidx.appcompat.app.AppCompatActivity
 import com.werb.library.MoreAdapter
 import com.werb.library.extension.*
 import com.werb.library.link.RegisterItem
@@ -32,7 +31,7 @@ class AnimActivity : AppCompatActivity() {
         toolbar.setNavigationIcon(R.mipmap.ic_close_white_24dp)
         toolbar.setNavigationOnClickListener { finish() }
 
-        anim_list.layoutManager = LinearLayoutManager(this)
+        anim_list.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         adapter.apply {
             register(RegisterItem(R.layout.item_view_title, TitleViewHolder::class.java))
             register(RegisterItem(R.layout.item_view_anim, AnimViewHolder::class.java))

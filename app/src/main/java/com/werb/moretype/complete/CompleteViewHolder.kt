@@ -1,13 +1,12 @@
 package com.werb.moretype.complete
 
-import android.content.Context
-import android.support.v7.widget.AppCompatTextView
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatTextView
 import com.facebook.drawee.view.SimpleDraweeView
 import com.werb.library.MoreViewHolder
 import com.werb.moretype.R

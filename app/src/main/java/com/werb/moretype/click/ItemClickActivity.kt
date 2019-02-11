@@ -4,16 +4,15 @@ import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.werb.library.MoreAdapter
 import com.werb.library.action.MoreClickListener
-import com.werb.library.link.RegisterItem
 import com.werb.library.link.MultiLink
+import com.werb.library.link.RegisterItem
 import com.werb.moretype.R
 import com.werb.moretype.TitleViewHolder
 import com.werb.moretype.data.DataServer
@@ -34,7 +33,7 @@ class ItemClickActivity : AppCompatActivity() {
         toolbar.setNavigationIcon(R.mipmap.ic_close_white_24dp)
         toolbar.setNavigationOnClickListener { finish() }
 
-        item_click_list.layoutManager = LinearLayoutManager(this)
+        item_click_list.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         item_click_list.adapter = adapter
         adapter.apply {
             register(RegisterItem(R.layout.item_view_title, TitleViewHolder::class.java))

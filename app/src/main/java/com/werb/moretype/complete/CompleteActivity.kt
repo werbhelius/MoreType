@@ -3,9 +3,8 @@ package com.werb.moretype.complete
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.werb.library.MoreAdapter
 import com.werb.library.link.RegisterItem
 import com.werb.moretype.R
@@ -30,7 +29,7 @@ class CompleteActivity : AppCompatActivity() {
         toolbar.setNavigationIcon(R.mipmap.ic_close_white_24dp)
         toolbar.setNavigationOnClickListener { finish() }
 
-        complete_list.layoutManager = LinearLayoutManager(this)
+        complete_list.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         adapter.apply {
             userSoleRegister()
             register(RegisterItem(R.layout.item_view_title, TitleViewHolder::class.java))

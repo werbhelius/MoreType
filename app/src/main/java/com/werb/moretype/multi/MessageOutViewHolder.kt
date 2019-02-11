@@ -1,10 +1,10 @@
 package com.werb.moretype.multi
 
 import android.net.Uri
-import android.support.v7.widget.AppCompatTextView
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
+import androidx.appcompat.widget.AppCompatTextView
 import com.facebook.drawee.view.SimpleDraweeView
 import com.werb.library.MoreViewHolder
 import com.werb.moretype.R

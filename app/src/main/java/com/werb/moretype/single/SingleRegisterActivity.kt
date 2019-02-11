@@ -3,15 +3,13 @@ package com.werb.moretype.single
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.werb.library.MoreAdapter
 import com.werb.moretype.R
 import com.werb.moretype.TitleViewHolder
 import com.werb.moretype.data.DataServer
 import kotlinx.android.synthetic.main.activity_single_register.*
-import android.support.v7.widget.GridLayoutManager.SpanSizeLookup
-import android.support.v7.widget.GridLayoutManager
-import com.werb.library.link.RegisterItem
 
 
 /**
@@ -28,7 +26,7 @@ class SingleRegisterActivity : AppCompatActivity() {
         toolbar.setNavigationIcon(R.mipmap.ic_close_white_24dp)
         toolbar.setNavigationOnClickListener { finish() }
 
-        val gridLayoutManager = GridLayoutManager(this, 3)
+        val gridLayoutManager = androidx.recyclerview.widget.GridLayoutManager(this, 3)
         val spanSizeLookup = object : SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 val item = adapter.getData(position)

@@ -1,17 +1,14 @@
 package com.werb.moretype.single
 
 import android.graphics.Rect
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.support.v7.widget.GridLayoutManager.SpanSizeLookup
 
 /**
  * Created by wanbo on 2017/7/14.
  */
-class SingleItemDecoration(val space: Int) : RecyclerView.ItemDecoration() {
+class SingleItemDecoration(val space: Int) : androidx.recyclerview.widget.RecyclerView.ItemDecoration() {
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
         parent?.let {
             val position = parent.getChildLayoutPosition(view)
             if (position != 0) {

@@ -1,7 +1,7 @@
 package com.werb.library.link
 
-import android.support.v4.util.SparseArrayCompat
 import android.util.Log
+import androidx.collection.SparseArrayCompat
 import com.werb.library.MoreViewHolder
 import com.werb.library.action.MoreClickListener
 import com.werb.library.annotation.MoreInject

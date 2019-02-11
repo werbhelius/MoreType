@@ -3,10 +3,9 @@ package com.werb.moretype.diff
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.AdapterView
+import androidx.appcompat.app.AppCompatActivity
 import com.werb.library.MoreAdapter
 import com.werb.library.link.RegisterItem
 import com.werb.moretype.R
@@ -16,8 +15,6 @@ import com.werb.moretype.complete.CompleteViewHolder
 import com.werb.moretype.data.DataServer
 import com.werb.moretype.main.MainCard
 import kotlinx.android.synthetic.main.activity_diff.*
-import android.support.v7.widget.DefaultItemAnimator
-
 
 
 /**
@@ -35,7 +32,7 @@ class DiffDataActivity : AppCompatActivity() {
         toolbar.setNavigationIcon(R.mipmap.ic_close_white_24dp)
         toolbar.setNavigationOnClickListener { finish() }
 
-        diff_list.layoutManager = LinearLayoutManager(this)
+        diff_list.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         adapter.apply {
             userSoleRegister()
             register(RegisterItem(R.layout.item_view_title, TitleViewHolder::class.java))
@@ -46,7 +43,7 @@ class DiffDataActivity : AppCompatActivity() {
 
         adapter.loadData(MainCard("Diff Data", "Diff data when refresh and loadMore"))
         adapter.loadData(DataServer.getDiffData1())
-        (diff_list.itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
+        (diff_list.itemAnimator as androidx.recyclerview.widget.DefaultItemAnimator).supportsChangeAnimations = false
 
         //refresh
         refresh.setOnRefreshListener {

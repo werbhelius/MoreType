@@ -6,7 +6,7 @@
     android:background="@color/colorTextLight"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.v7.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/message_in_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,6 +1,6 @@
 package com.werb.library.link
 
-import android.support.v7.util.DiffUtil
+import androidx.recyclerview.widget.DiffUtil
 
 /**
  * Created by wanbo on 2017/12/19.

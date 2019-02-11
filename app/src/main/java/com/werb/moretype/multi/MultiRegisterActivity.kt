@@ -2,24 +2,24 @@ package com.werb.moretype.multi
 
 import android.Manifest
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.werb.library.MoreAdapter
 import com.werb.library.link.MultiLink
-import com.werb.moretype.R
-import com.werb.moretype.data.DataServer
-import com.werb.permissionschecker.PermissionChecker
-import kotlinx.android.synthetic.main.activity_multi_register.*
-import kotlinx.android.synthetic.main.widget_view_message_input.*
-import android.content.Intent
 import com.werb.library.link.RegisterItem
+import com.werb.moretype.R
 import com.werb.moretype.TitleViewHolder
 import com.werb.moretype.Utils
+import com.werb.moretype.data.DataServer
+import com.werb.permissionschecker.PermissionChecker
 import com.werb.pickphotoview.PickPhotoView
 import com.werb.pickphotoview.util.PickConfig
+import kotlinx.android.synthetic.main.activity_multi_register.*
+import kotlinx.android.synthetic.main.widget_view_message_input.*
 
 
 /**
@@ -37,8 +37,6 @@ class MultiRegisterActivity : AppCompatActivity() {
 
         // permission check
         permissionChecker = PermissionChecker(this)
-        permissionChecker?.setTitle(getString(R.string.check_info_title))
-        permissionChecker?.setMessage(getString(R.string.check_info_message))
 
         toolbar.setNavigationIcon(R.mipmap.ic_close_white_24dp)
         toolbar.setNavigationOnClickListener { finish() }
